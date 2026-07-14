@@ -9,44 +9,37 @@
 | Что здесь | Чего нет |
 |-----------|----------|
 | `CoronerChat Setup x.y.z.exe` в Releases | Исходный код приложения |
-| Changelog в notes релиза | Issues по разработке (по желанию) |
-| Wiki: установка и обновление | Полная OSS-лицензия на код |
+| Changelog в notes релиза | Полная OSS-лицензия на код |
+| Документация в [docs/wiki](docs/wiki/Home.md) | — |
 
-Исходники **не публикуются** в этом репо (приложение private). Репо нужно приложению для кнопки «Проверить обновления».
+Исходники **не публикуются** здесь (см. [SOURCE.md](SOURCE.md)). Репо нужно приложению для кнопки «Проверить обновления».
+
+## Документация
+
+- [Home](docs/wiki/Home.md)
+- [Install](docs/wiki/Install.md)
+- [Update](docs/wiki/Update.md)
+- [Platforms](docs/wiki/Platforms.md)
+- [FAQ](docs/wiki/FAQ.md)
+- [Releases](docs/wiki/Releases.md)
+
+Вкладка **Wiki** на GitHub активируется одним созданием первой страницы в UI; содержимое уже продублировано в `docs/wiki`.
 
 ## Скачать
 
 Актуальная сборка: [Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest)
 
-Файл вида `CoronerChat.Setup.x.y.z.exe` (или с пробелами в имени) — обычный NSIS-установщик. Папка данных **`CoronerChat-data`** при обновлении сохраняется.
-
 ## Обновление из приложения
 
 1. Настройки → Обновления  
-2. Репозиторий по умолчанию: `dorimeryt-alt/CoronerChat`  
+2. Репозиторий: `dorimeryt-alt/CoronerChat`  
 3. «Проверить» → «Скачать и установить»
-
-## Платформы
-
-- Twitch (чат, мод, рейды, категория/тайтл)
-- VK Video Live
-- Kick
-- YouTube Live
-- Rutube
-- DonationAlerts / MemeAlerts (донаты в ленту)
-- OBS Browser Source (`?overlay=1`, `?recap=1`)
 
 ## Ветки
 
-- `main` — описание feed
-- `releases/update-feed` — зеркало для update-канала
+- `main` — описание feed + docs  
+- `releases/update-feed` — зеркало
 
 ## Лицензия / код
 
-Бинарные релизы распространяются для установки CoronerChat.  
-**Исходный код в этот репозиторий не выкладывается.** Если понадобится отдельный OSS-репозиторий — это отдельное решение автора.
-
-
-## Документация
-
-Страницы: [docs/wiki](docs/wiki/Home.md) (Home, Install, Update, Platforms, FAQ, Releases).
+Бинарные релизы для установки CoronerChat. **Исходный код в этот репозиторий не выкладывается.**
