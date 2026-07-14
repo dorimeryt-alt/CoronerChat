@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Техническая документация — CoronerChat</title>
-  <meta name="description" content="Комплект программной документации CoronerChat по ГОСТ 19.xxx: описание программы, руководство оператора, сопровождение." />
+  <title>Technical Documentation — CoronerChat</title>
+  <meta name="description" content="Техническая документация CoronerChat по международным стандартам ISO/IEC/IEEE: архитектура, эксплуатация, ИБ, релизы." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -20,87 +20,114 @@
         <a href="../install.html">Install</a>
         <a href="../update.html">Update</a>
         <a href="../platforms.html">Platforms</a>
-        <a href="index.html" aria-current="page">Tech docs</a>
+        <a href="../guide.html">Guide</a>
+        <a href="../security.html">Security</a>
+        <a href="index.html" aria-current="page">Tech</a>
         <a href="../faq.html">FAQ</a>
       </nav>
     </header>
 
     <header class="page-hero">
-      <h1>Техническая документация</h1>
-      <p>Комплект программных документов изделия CoronerChat. Структура согласована с ЕСПД (ГОСТ 19) и практикой сопровождения IT-систем.</p>
+      <p class="section-label">Doc set · ISO/IEC</p>
+      <h1>Technical documentation</h1>
+      <p>Комплект программной документации CoronerChat. Структура и виды документов согласованы с международными стандартами системной и программной инженерии — не с ЕСПД/ГОСТ 19 как основным каркасом.</p>
+      <div class="badge-row">
+        <span class="badge ok">ISO/IEC/IEEE 15289</span>
+        <span class="badge ok">ISO/IEC 26514</span>
+        <span class="badge ok">ISO/IEC/IEEE 42010</span>
+        <span class="badge">ISO/IEC 12207</span>
+        <span class="badge">ISO/IEC 25010</span>
+      </div>
     </header>
 
-    <article class="prose">
-      <h2>Состав комплекта (ЕСПД)</h2>
-      <table class="data">
-        <thead>
-          <tr><th>Документ</th><th>Норматив / вид</th><th>Назначение</th><th>Файл</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Описание программы</td>
-            <td>ГОСТ 19.402-78; вид по ГОСТ 19.101-77</td>
-            <td>Архитектура, IDEF0/DFD/BPMN/UML, модули, внешние интерфейсы, состав функций</td>
-            <td><a href="../coronerchat-architecture-print.html">architecture-print.html</a></td>
-          </tr>
-          <tr>
-            <td>Руководство оператора</td>
-            <td>ГОСТ 19.505-79</td>
-            <td>Установка, настройка площадок, штатная эксплуатация, диагностика, ИБ</td>
-            <td><a href="../coronerchat-operation-print.html">operation-print.html</a></td>
-          </tr>
-          <tr>
-            <td>Политика обновлений</td>
-            <td>Сопровождение / release management</td>
-            <td>Канал GitHub Releases, Latest vs архив, skip-версия, публикация</td>
-            <td><a href="../updates-and-releases.md">updates-and-releases.md</a> · <a href="../update.html">UI</a></td>
-          </tr>
-          <tr>
-            <td>Локализация UI</td>
-            <td>Сопровождение i18n</td>
-            <td>Словари ru/en/ro/de/fi, персист uiLocale, API</td>
-            <td><a href="../i18n.md">i18n.md</a></td>
-          </tr>
-          <tr>
-            <td>Правовые сведения</td>
-            <td>Copyright / notices</td>
-            <td>Авторские права, атрибуция сторонних компонентов</td>
-            <td><a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/COPYRIGHT.md">COPYRIGHT</a> · <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/ATTRIBUTION.md">ATTRIBUTION</a></td>
-          </tr>
-        </tbody>
-      </table>
+    <section class="section" style="padding-top:0">
+      <p class="section-label">Information items</p>
+      <h2>Состав комплекта</h2>
+      <div class="doc-index-grid">
+        <a class="doc-tile" href="../coronerchat-architecture-print.html">
+          <strong>Software architecture description</strong>
+          <span>IDEF0 / DFD / BPMN / UML, модули, API, WebSocket, NFR — описание архитектуры изделия.</span>
+          <em>ISO/IEC/IEEE 42010 · 15289 SAD</em>
+        </a>
+        <a class="doc-tile" href="../coronerchat-operation-print.html">
+          <strong>Operator / user documentation</strong>
+          <span>Установка, площадки, эксплуатация, диагностика, ИБ, резервное копирование.</span>
+          <em>ISO/IEC 26514 · 15289 user docs</em>
+        </a>
+        <a class="doc-tile" href="../guide.html">
+          <strong>User Guide (web)</strong>
+          <span>Расширенное руководство оператора в стиле сайта — тот же контент, что в приложении, плюс разделы обновлений и ИБ.</span>
+          <em>ISO/IEC 26514</em>
+        </a>
+        <a class="doc-tile" href="../security.html">
+          <strong>Information security statement</strong>
+          <span>Позиция по ИБ: РФ (152-ФЗ, 149-ФЗ) + ISO/IEC 27001, GDPR, NIST, OWASP.</span>
+          <em>ISO/IEC 27001 · 29100</em>
+        </a>
+        <a class="doc-tile" href="../updates-and-releases.md">
+          <strong>Release &amp; update policy</strong>
+          <span>GitHub Latest, skip-версия, публикация Setup, legacy-теги.</span>
+          <em>ISO/IEC 12207 maintenance</em>
+        </a>
+        <a class="doc-tile" href="../i18n.md">
+          <strong>Localization notes</strong>
+          <span>Словари ru/en/ro/de/fi, uiLocale, API смены языка.</span>
+          <em>Product support item</em>
+        </a>
+      </div>
+    </section>
 
+    <section class="section">
+      <p class="section-label">Framework</p>
+      <h2>Нормативная рамка</h2>
+      <div class="feature-strip">
+        <div class="feature-cell"><strong>15289</strong><span>Виды information items жизненного цикла ПО и их содержание</span></div>
+        <div class="feature-cell"><strong>26514</strong><span>Требования к проектированию пользовательской документации</span></div>
+        <div class="feature-cell"><strong>42010</strong><span>Описание архитектуры: stakeholders, viewpoints, models</span></div>
+        <div class="feature-cell"><strong>12207</strong><span>Процессы жизненного цикла: поставка, сопровождение, релиз</span></div>
+        <div class="feature-cell"><strong>25010</strong><span>Качество: security, usability, reliability, maintainability</span></div>
+        <div class="feature-cell"><strong>27001 / 29100</strong><span>ISMS-контроли и privacy framework — см. Security</span></div>
+      </div>
       <div class="panel tip">
-        Печатные HTML рассчитаны на A4 (поля по ГОСТ 19.106-78). Откройте файл в браузере → Печать / PDF.
-        Сборка PDF из репозитория исходников: <code>npm run export:doc:architecture-pdf</code>, <code>npm run export:doc:operation-pdf</code>.
+        Печатные HTML рассчитаны на A4. Браузер → Печать / PDF.
+        Из исходников: <code>npm run export:doc:architecture-pdf</code>, <code>npm run export:doc:operation-pdf</code>.
       </div>
+    </section>
 
-      <h2>Анализ и актуализация</h2>
-      <ol>
-        <li><strong>Идентификация версии изделия</strong> — <code>package.json</code> / тег GitHub Latest.</li>
-        <li><strong>Трассировка требований → код</strong> — модули в п. архитектуры (providers, chat-app-server, web-ui).</li>
-        <li><strong>Изменение интерфейсов</strong> — синхронно обновлять таблицы маршрутов API и диаграммы.</li>
-        <li><strong>Эксплуатация</strong> — сверять руководство оператора с фактическими вкладками UI после релиза.</li>
-        <li><strong>Регрессия обновлений</strong> — проверять, что Latest не подменяется архивными тегами (см. 2.7.5+).</li>
-      </ol>
-
-      <h2>Краткий паспорт изделия</h2>
-      <ul>
-        <li><strong>Наименование:</strong> CoronerChat</li>
-        <li><strong>Назначение:</strong> мультиплатформенный клиент чата стримера (desktop Electron + локальный web UI)</li>
-        <li><strong>Платформы:</strong> Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts, MemeAlerts, OBS</li>
-        <li><strong>Канал поставки:</strong> <a href="https://github.com/dorimeryt-alt/CoronerChat/releases">GitHub Releases</a></li>
-        <li><strong>Пользовательская документация:</strong> <a href="../index.html">сайт</a> · <a href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a></li>
-      </ul>
-
-      <div class="cta-row" style="margin-top:28px">
-        <a class="btn btn-primary" href="../coronerchat-architecture-print.html">Открыть описание программы</a>
-        <a class="btn btn-ghost" href="../coronerchat-operation-print.html">Руководство оператора</a>
+    <section class="section">
+      <p class="section-label">Governance</p>
+      <h2>Актуализация комплекта</h2>
+      <div class="stage-grid">
+        <article class="stage-card">
+          <span class="stage-num">01</span>
+          <h3>Version identity</h3>
+          <p><code>package.json</code> / GitHub Latest — единый идентификатор релиза.</p>
+        </article>
+        <article class="stage-card">
+          <span class="stage-num">02</span>
+          <h3>Traceability</h3>
+          <p>Требования и модули: providers, chat-app-server, web-ui — в SAD.</p>
+        </article>
+        <article class="stage-card">
+          <span class="stage-num">03</span>
+          <h3>Interface sync</h3>
+          <p>При смене API/WS — обновить таблицы маршрутов и диаграммы.</p>
+        </article>
+        <article class="stage-card">
+          <span class="stage-num">04</span>
+          <h3>Ops review</h3>
+          <p>После релиза сверить User Guide и operation-print с вкладками UI.</p>
+        </article>
       </div>
-    </article>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../coronerchat-architecture-print.html">Architecture</a>
+        <a class="btn btn-ghost" href="../coronerchat-operation-print.html">Operator guide</a>
+        <a class="btn btn-ghost" href="../security.html">Security</a>
+      </div>
+    </section>
 
     <footer class="site-footer">
-      <a href="../index.html">← На главную</a> · © C0R0N3R · комплект по ГОСТ 19 / сопровождение IT
+      <a href="../index.html">← На главную</a> · © C0R0N3R · international software documentation set
     </footer>
   </div>
   <script src="../site.js"></script>
