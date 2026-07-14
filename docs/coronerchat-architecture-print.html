@@ -210,16 +210,16 @@
 
   <div class="doc-front">
     <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
-    <p class="doc-kind">Техническое описание</p>
+    <p class="doc-kind">Software Architecture Description</p>
     <p class="doc-gost-note">Information item: <strong>Software Architecture Description</strong>. Content and viewpoints aligned with <strong>ISO/IEC/IEEE 42010</strong> (architecture description) and <strong>ISO/IEC/IEEE 15289</strong> (life-cycle information items). User/operator documentation is published separately per <strong>ISO/IEC 26514</strong>. Print layout targets A4 for reproducible distribution.</p>
-    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong></p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.5</strong> (<code>package.json</code> / GitHub Latest)</span></p>
 
     <h2 class="doc-block-title">Аннотация</h2>
     <p class="doc-abstract-label">К программе (изделию)</p>
-    <p class="doc-abstract"><strong>CoronerChat</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов нескольких стриминговых и смежных сервисов (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live) в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея; авторизация на платформах по OAuth 2.0 (где применимо); доставка каталогов эмодзи и бейджей (в т.ч. через прокси HTTP изделия); интеграция с OBS WebSocket для телеметрии сцены; релей «now playing»; в десктопной сборке — оболочка на базе Electron и опциональное управление внешним компонентом фильтрации трафика (zapret). Изделие поставляется в виде исполняемых модулей Node.js и статических ресурсов UI, с опциональным установщиком Windows (NSIS).</p>
+    <p class="doc-abstract"><strong>CoronerChat 2.7.5</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея OBS; авторизация OAuth 2.0 (где применимо); каталоги эмодзи/бейджей (в т.ч. 7TV); OBS WebSocket; UX-пакет эфира (пресеты, алерты, goal/vote); локальная статистика сессий и достижения; локализация UI (ru/en/ro/de/fi); автообновление с GitHub Latest (<code>dorimeryt-alt/CoronerChat</code>); релей «now playing»; desktop Electron и опциональный zapret. Поставка: NSIS Setup / portable, каталог данных <code>CoronerChat-data</code>.</p>
     <p class="doc-abstract-label">К настоящему документу</p>
     <p class="doc-abstract">Настоящее техническое описание содержит сведения об архитектуре ПО «CoronerChat»: структурную модель в нотации IDEF0, контекстные и декомпозированные диаграммы потоков данных (DFD), описание взаимодействия с каждой внешней платформой и смежными HTTP-сервисами, перечень хранилищ данных, диаграммы процессов (BPMN) и последовательностей (UML), состав программных модулей, группы маршрутов HTTP и типы сообщений WebSocket, нефункциональные требования и словарь данных; в разделе 1 приведён <strong>перечень реализованных функций изделия</strong> (п. 1.5). Диаграммы, выполняемые средствами Mermaid в среде браузера, приведены для наглядности и сопровождения кода. Документ предназначен для разработчиков, системных аналитиков и лиц, ответственных за сопровождение комплекта программной документации. Эксплуатационная документация для оператора изложена в <code>docs/coronerchat-operation-print.html</code> и на сайте (<code>docs/guide.html</code>) в соответствии с ISO/IEC 26514.</p>
-    <p class="doc-keywords"><strong>Ключевые слова:</strong> программная документация; техническое описание; CoronerChat; архитектура; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK Video Live; Kick; DonationAlerts; MemeAlerts; YouTube Live; Node.js; Electron.</p>
+    <p class="doc-keywords"><strong>Ключевые слова:</strong> Software Architecture Description; ISO/IEC/IEEE 42010; CoronerChat 2.7.5; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK; Kick; YouTube; Rutube; DonationAlerts; MemeAlerts; i18n; auto-update; Electron; Node.js.</p>
 
     <h2 class="doc-block-title">Нормативные и справочные ссылки</h2>
     <ul class="compact">
@@ -251,7 +251,7 @@
     </table>
   </div>
 
-  <h1>CoronerChat — техническое описание архитектуры</h1>
+  <h1>CoronerChat — Software Architecture Description (v2.7.5)</h1>
   <div class="hint no-print">
     Открыть в браузере с сетью (Mermaid с CDN). Печать в PDF: Ctrl+P → «Сохранить как PDF». При обрезании диаграмм уменьшите масштаб страницы в предпросмотре.
   </div>
@@ -276,14 +276,14 @@
 
   <h2>1. Общие положения</h2>
   <h3>1.1. Назначение изделия</h3>
-  <p>Единый клиент для приёма, нормализации, буферизации и отображения чата с нескольких платформ (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live), а также вспомогательные функции: OAuth, прокси ассетов и каталогов эмодзи (в т.ч. 7TV), OBS WebSocket-телеметрия, релей now playing, опционально zapret на desktop, оверлей и планшетный режим через общий HTTP+WS сервер.</p>
+  <p>Единый клиент для приёма, нормализации, буферизации и отображения чата с нескольких платформ (Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts, MemeAlerts), а также: OAuth, прокси ассетов и каталогов эмодзи (7TV), OBS WebSocket, UX-пакет эфира, локальная статистика и достижения, локализация UI, автообновление с GitHub Latest, релей now playing, опционально zapret на desktop, оверлей и планшетный режим через общий HTTP+WS сервер.</p>
   <h3>1.2. Назначение документа</h3>
   <p>Формализация архитектуры для сопровождения, обучения и согласования изменений; договорённость о границах системы и внешних интерфейсах.</p>
   <h3>1.3. Область применения документа</h3>
   <p>Разработка, сопровождение и выпуск CoronerChat. Эксплуатация оператором — по <code>docs/coronerchat-operation-print.html</code> и <code>docs/guide.html</code> (ISO/IEC 26514).</p>
   <h3>1.4. Границы системы</h3>
   <p><strong>В составе ПО:</strong> процесс Node.js (<code>ChatAppServer</code>), встроенный web-ui, провайдеры в <code>src/providers/</code>, при desktop — оболочка Electron.</p>
-  <p><strong>Вне ПО:</strong> внешние платформы (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube, 7TV/CDN), OBS Studio, ОС, браузер пользователя при внешней авторизации, сеть и политики DPI (zapret).</p>
+  <p><strong>Вне ПО:</strong> внешние платформы (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube, Rutube, 7TV/CDN), OBS Studio, GitHub Releases (канал обновлений), ОС, браузер пользователя при внешней авторизации, сеть и политики DPI (zapret).</p>
 
   <h3>1.5. Перечень реализованных функций изделия</h3>
   <p>Ниже приведена <strong>характеристика реализованного функционала</strong> текущей версии CoronerChat: перечень не претендует на исчерпание всех пунктов UI, а фиксирует основные возможности, подтверждаемые кодом сервера и встроенного клиента.</p>
@@ -302,7 +302,8 @@
     <li><strong>Kick</strong>: приём сообщений чата по WebSocket при заданном канале и токене OAuth;</li>
     <li><strong>DonationAlerts</strong>: получение событий донатов по HTTP long-poll;</li>
     <li><strong>MemeAlerts</strong>: подключение к шлюзу по WebSocket с нормализацией JWT из OBS-ссылки; управление connect/disconnect из UI;</li>
-    <li><strong>YouTube Live</strong>: получение сообщений живого чата через YouTube Data API v3 (ключ API или OAuth Google).</li>
+    <li><strong>YouTube Live</strong>: получение сообщений живого чата через YouTube Data API v3 (ключ API или OAuth Google) либо browser-chat режим;</li>
+    <li><strong>Rutube</strong>: чтение чата эфира через публичный poll API; отправка — cookie-сессия (встроенное окно входа desktop); маршруты <code>/api/settings/rutube</code>, <code>/api/auth/rutube/*</code>;</li>
   </ul>
 
   <h4>1.5.3. Нормализация, буфер и доставка в интерфейс</h4>
@@ -344,6 +345,14 @@
     <li>расширенный <code>runtime.log</code> (HTTP, WebSocket, чат-пайплайн, авторизация, транспорты, исключения); маскирование секретов в логах;</li>
     <li>режим трассировки сессии (переменная окружения), метрики нагрузки и памяти в <code>state.debug</code>;</li>
     <li>ограничение размера буфера сообщений, единственный экземпляр desktop-приложения (single instance lock).</li>
+  </ul>
+
+  <h4>1.5.9. Эфир, статистика, локализация и обновления (2.7.x)</h4>
+  <ul class="compact">
+    <li><strong>UX-пакет «Эфир»</strong>: чеклист готовности, пресеты TW/Мульти/Полн., фокус-режим, favorites, keywords/цензор, soft-confirm, resend, song request, overlays <code>?alerts=1</code> / <code>?goal=1</code> / <code>?vote=1</code> / <code>?recap=1</code>;</li>
+    <li><strong>Статистика и достижения</strong>: локальная история эфиров, категории/игры, топы чата и донатов, полка достижений в приложении (не в OBS overlay);</li>
+    <li><strong>i18n</strong>: словари <code>src/server/i18n/locales/{ru,en,ro,de,fi}.json</code>, персист <code>uiLocale</code>, <code>POST /api/settings/locale</code>; applyI18nDom без сброса вложенных контролов (2.7.5);</li>
+    <li><strong>Автообновление</strong>: канал <code>dorimeryt-alt/CoronerChat</code>; <code>GET …/releases/latest</code>; установка Setup; skip-версия <code>POST /api/update/dismiss</code>; install <code>POST /api/update/install</code>; отсев legacy-тегов 2.25–2.35.</li>
   </ul>
 
   <h2>2. Структурная модель (IDEF0)</h2>
@@ -796,6 +805,29 @@ flowchart LR
   YT -->|liveChat poll| SRC -->|messages| A2 -->|chat.message| UI
   </div>
 
+  <h3>6.6a. Rutube</h3>
+  <p><strong>Назначение.</strong> Чтение чата эфира Rutube через публичный poll API; отправка сообщений — через cookie-сессию (встроенное окно входа desktop).</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>RutubeChatSource</td><td><code>src/providers/rutube/rutube-chat-source.js</code></td><td>Poll чата эфира, нормализация в единый формат.</td></tr>
+      <tr><td>Rutube HTTP</td><td><code>src/providers/rutube/rutube-http.js</code></td><td>HTTP-запросы к публичным API Rutube.</td></tr>
+      <tr><td>Rutube browser session</td><td><code>src/providers/rutube/rutube-chat-browser-source.js</code></td><td>Cookie-сессия для отправки (desktop).</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> HTTPS публичный API Rutube (poll); cookie-сессия страницы эфира для send.</p>
+  <p><strong>HTTP API изделия.</strong> <code>POST /api/settings/rutube</code>; <code>POST /api/auth/rutube/browser</code>, <code>POST /api/auth/rutube/refresh</code>.</p>
+  <p><strong>Состояние.</strong> <code>state.rutube</code> (URL эфира, статус подключения, признак cookie-сессии).</p>
+  <p class="doc-caption">Рисунок 6.6a — DFD-2: Rutube → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  RT[Rutube Live API]
+  SRC[rutube-chat-source]
+  A2[ChatAppServer A2]
+  UI[WebSocket клиенты]
+  RT -->|HTTP poll| SRC -->|messages| A2 -->|chat.message| UI
+  </div>
+
   <h3>6.7. Смежные сервисы отображения (7TV, каталоги Twitch/VK, прокси)</h3>
   <p><strong>Назначение.</strong> Не являются источниками текста чата, но обеспечивают каталоги эмодзи/бейджей и доставку бинарных ресурсов без CORS в браузере.</p>
   <table class="dfd">
@@ -826,6 +858,7 @@ flowchart TB
   DASRC[donation-alerts-source]
   MASRC[meme-alerts-source]
   YTSRC[youtube-live-source]
+  RTSRC[rutube-source]
   MERGE2[ChatAppServer A2 dedup buffer]
   TW -->|messages events| MERGE2
   VSRC -->|WS| MERGE2
@@ -833,6 +866,7 @@ flowchart TB
   DASRC -->|HTTP poll| MERGE2
   MASRC -->|WS| MERGE2
   YTSRC -->|API poll| MERGE2
+  RTSRC -->|HTTP poll| MERGE2
   MERGE2 -->|chat.message| OUT2[WebSocket клиенты]
   </div>
 
@@ -1056,16 +1090,19 @@ flowchart TB
     </tbody>
   </table>
 
-  <h2>12. Группы HTTP API (фрагмент)</h2>
-  <p class="doc-caption">Таблица 12 — Группы маршрутов <code>handleHttp</code></p>
+  <h2>12. Группы HTTP API (фрагмент, актуально для 2.7.5)</h2>
+  <p class="doc-caption">Таблица 12 — Группы маршрутов <code>handleHttp</code> / <code>handleApiRequest</code></p>
   <table class="dfd">
     <thead><tr><th>Группа</th><th>Примеры путей</th><th>Роль</th></tr></thead>
     <tbody>
-      <tr><td>Состояние</td><td><code>GET /api/state</code>, <code>GET /api/qr</code></td><td>Снимок для UI, QR при необходимости</td></tr>
-      <tr><td>OAuth</td><td><code>/api/auth/twitch/*</code>, <code>vk/*</code>, <code>kick/*</code>, <code>donation-alerts/*</code>, <code>youtube/*</code></td><td>Старт, poll, logout, callback где есть</td></tr>
-      <tr><td>Каталоги</td><td><code>/api/7tv/*</code>, <code>/api/twitch/badges</code>, <code>/api/twitch/emotes</code>, <code>/api/vk/catalog</code></td><td>Кэшируемые справочники</td></tr>
-      <tr><td>Прокси бинарей</td><td><code>/api/twitch/asset</code>, <code>/api/vk/asset</code></td><td>Обход CORS, единый Referrer</td></tr>
-      <tr><td>Настройки и действия</td><td><code>/api/settings/*</code>, модерация, debug</td><td>Персистенция и служебные операции</td></tr>
+      <tr><td>Состояние</td><td><code>GET /api/state</code>, <code>GET /api/qr</code></td><td>Снимок для UI, QR</td></tr>
+      <tr><td>OAuth / сессии</td><td><code>/api/auth/twitch/*</code>, <code>vk/*</code>, <code>kick/*</code>, <code>donation-alerts/*</code>, <code>youtube/*</code>, <code>rutube/*</code></td><td>Старт, poll, logout, callback, browser login</td></tr>
+      <tr><td>Донаты MA</td><td><code>POST /api/meme-alerts/connect|disconnect</code></td><td>JWT/OBS-ссылка MemeAlerts</td></tr>
+      <tr><td>Каталоги</td><td><code>/api/7tv/*</code>, <code>/api/twitch/badges|emotes|asset</code>, <code>/api/vk/catalog|asset</code></td><td>Кэш и прокси</td></tr>
+      <tr><td>Настройки</td><td><code>POST /api/settings/ui|locale|obs|youtube|kick|rutube|donation-filters|update|…</code></td><td>Персистенция, в т.ч. <code>uiLocale</code></td></tr>
+      <tr><td>Обновления</td><td><code>POST /api/update/check|install|dismiss</code>; <code>GET/POST /api/settings/update</code></td><td>GitHub Latest, Setup, skip-версия</td></tr>
+      <tr><td>OBS / deck</td><td><code>/api/obs/*</code>, <code>/api/deck/*</code></td><td>WebSocket OBS; LAN gated токеном</td></tr>
+      <tr><td>Модерация и шоу</td><td><code>/api/moderation/*</code>, poll/prediction/raid/clip/stream</td><td>Helix и локальные действия</td></tr>
     </tbody>
   </table>
 
@@ -1084,7 +1121,9 @@ flowchart TB
     <li><strong>state.vkTransport</strong>: реконнект и сеть VK WS (аналогично по смыслу полям «последний разрыв», ETA и т.д., без EventSub).</li>
     <li><strong>state.kick</strong>: выбранный канал и поля состояния клиента Kick (OAuth в <code>state.kickAuth</code> / ответах <code>/api/auth/kick/*</code>).</li>
     <li><strong>state.youtube</strong>: канал, API key, флаги OAuth для YouTube Live.</li>
-    <li><strong>state.memeAlerts</strong>, <strong>persistedState.memeAlertsToken</strong>: JWT/URL MemeAlerts, признак соединения, минимальная сумма фильтра.</li>
+    <li><strong>state.rutube</strong> / auth cookie session: URL эфира, статус чтения/отправки.</li>
+    <li><strong>state.memeAlerts</strong>, <strong>persistedState.memeAlertsToken</strong>: JWT/URL MemeAlerts, <code>tokenConfigured</code>, минимальная сумма фильтра.</li>
+    <li><strong>persistedState.uiLocale</strong>, <strong>dismissedUpdateVersions</strong>: язык UI и пропущенные версии апдейта.</li>
     <li><strong>persistedState.donationAlertsMinAmount</strong> (и связанные поля DA): фильтрация сумм донатов на стороне клиента настроек.</li>
     <li><strong>Redemption EventSub</strong>: поля <code>id</code>, <code>reward</code>, <code>user_input</code>, плоские <code>user_id</code> / <code>user_login</code> или вложенный <code>user</code> после poller.</li>
     <li><strong>Hype Train EventSub</strong>: фазы begin / progress / end, в сообщении <code>raw.hypeTrain</code> с <code>level</code>, <code>goal</code>, <code>total</code>.</li>
@@ -1092,13 +1131,13 @@ flowchart TB
   </ul>
 
   <h2>14a. Обновления изделия и локализация UI (сводка)</h2>
-  <p><strong>Канал обновлений.</strong> Десктопная сборка с версии 2.7.4+ использует публичный репозиторий GitHub <code>dorimeryt-alt/CoronerChat</code>. Проверка при запуске обращается к <code>GET /repos/…/releases/latest</code> (релиз, помеченный GitHub как Latest), а не к «максимальной» semver-метке среди архивных тегов (в т.ч. исторические 2.25–2.35). Установка: скачивание Setup.exe и запуск NSIS; каталог <code>CoronerChat-data</code> сохраняется. Оператор может пропустить конкретную версию (<code>dismissedUpdateVersions</code> в app-state).</p>
-  <p><strong>Локализация.</strong> Интерфейс поддерживает языки <code>ru</code>, <code>en</code>, <code>ro</code>, <code>de</code>, <code>fi</code> (словари <code>src/server/i18n/locales</code>, персист <code>uiLocale</code>). Подробнее: <code>docs/updates-and-releases.md</code>, <code>docs/i18n.md</code>.</p>
+  <p><strong>Канал обновлений (2.7.5).</strong> Репозиторий GitHub <code>dorimeryt-alt/CoronerChat</code> зашит в приложение. Проверка при запуске: <code>GET /repos/…/releases/latest</code> (релиз Latest), с отсевом legacy-тегов линии 2.25–2.35. API: <code>POST /api/update/check</code>, <code>/api/update/install</code> (скачивание Setup + NSIS), <code>/api/update/dismiss</code> (skip-версия в <code>dismissedUpdateVersions</code>); «напомнить позже» — только на сессию. Каталог <code>CoronerChat-data</code> при обновлении сохраняется.</p>
+  <p><strong>Локализация (2.7.5).</strong> Языки <code>ru</code>, <code>en</code>, <code>ro</code>, <code>de</code>, <code>fi</code> — словари <code>src/server/i18n/locales</code>, персист <code>uiLocale</code>, <code>POST /api/settings/locale</code>. Клиентский <code>applyI18nDom</code> не затирает узлы с вложенными контролами (фикс смены языка в 2.7.5). См. <code>docs/updates-and-releases.md</code>, <code>docs/i18n.md</code>, <code>docs/security.html</code>.</p>
 
   <h2>15. Заключение</h2>
-  <p>В документе приведена архитектура ПО «CoronerChat» в нотациях IDEF0, DFD, BPMN и UML sequence; в п. 1.5 зафиксирован перечень реализованного функционала изделия. Документ соответствует information item «Software Architecture Description» (ISO/IEC/IEEE 42010, ISO/IEC/IEEE 15289). Эксплуатация изделия оператором описана в <code>docs/coronerchat-operation-print.html</code> и <code>docs/guide.html</code> (ISO/IEC 26514). При изменении кода необходимо синхронно обновлять обозначения маршрутов, имён файлов и диаграммы.</p>
+  <p>Документ описывает архитектуру CoronerChat <strong>2.7.5</strong> (IDEF0, DFD, BPMN, UML); п. 1.5 фиксирует реализованный функционал, включая Rutube, UX-пакет, статистику/достижения, i18n и автообновление. Information item: Software Architecture Description (ISO/IEC/IEEE 42010, 15289). Эксплуатация — <code>docs/coronerchat-operation-print.html</code>, <code>docs/guide.html</code> (ISO/IEC 26514). При изменении кода синхронно обновляйте маршруты, имена модулей и диаграммы.</p>
 
-  <p class="meta" style="margin-top:1.5em;">Версия изделия: см. <code>package.json</code>. Печать: формат A4 (воспроизводимое распространение комплекта документации).</p>
+  <p class="meta" style="margin-top:1.5em;">Версия изделия: <strong>2.7.5</strong> (<code>package.json</code>). Печать: A4. Публикация: GitHub Pages <code>docs/</code>.</p>
 
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
