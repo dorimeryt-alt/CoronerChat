@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FAQ — CoronerChat</title>
+  <meta name="description" content="Частые вопросы: скачивание, версии, данные, исходники, языки." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,39 +20,76 @@
         <a href="install.html">Install</a>
         <a href="update.html">Update</a>
         <a href="platforms.html">Platforms</a>
+        <a href="guide.html">Guide</a>
+        <a href="security.html">Security</a>
+        <a href="tech/index.html">Tech</a>
         <a href="faq.html" aria-current="page">FAQ</a>
-        <a href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
       </nav>
     </header>
 
     <header class="page-hero">
+      <p class="section-label">Help desk</p>
       <h1>FAQ</h1>
-      <p>Коротко про скачивание, странные версии, данные и донат.</p>
+      <p>Коротко про скачивание, странные версии, данные и донат. Разверни карточку.</p>
     </header>
 
-    <article class="prose">
-      <h2>Где скачать последнюю версию?</h2>
-      <p><a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">github.com/dorimeryt-alt/CoronerChat/releases/latest</a></p>
+    <div class="faq-stack">
+      <details class="faq-item" open>
+        <summary>Где скачать последнюю версию?</summary>
+        <div class="faq-body">
+          <p><a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">github.com/dorimeryt-alt/CoronerChat/releases/latest</a></p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Почему предлагали 2.35.x вместо 2.7.x?</summary>
+        <div class="faq-body">
+          <p>В Releases лежит архив со старой нумерацией (2.25–2.35). Они выглядят «больше» по semver, но это не актуальная линия.</p>
+          <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Если сидишь на 2.7.4 — один раз поставь 2.7.5 вручную.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Пропали настройки после обновления?</summary>
+        <div class="faq-body">
+          <p>Проверь папку <strong>CoronerChat-data</strong> рядом с приложением. Её нельзя удалять при переустановке, если нужны токены и UI.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Имена файлов с точками вместо пробелов?</summary>
+        <div class="faq-body">
+          <p>Так GitHub иногда нормализует assets. CoronerChat ищет <code>.exe</code> с Setup и CoronerChat в имени — оба варианта ок.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>При смене языка «ломается» интерфейс?</summary>
+        <div class="faq-body">
+          <p>Исправлено в <strong>2.7.5</strong>: auto-i18n больше не затирает чекбоксы и вложенную разметку. Обновись до Latest.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Где исходный код?</summary>
+        <div class="faq-body">
+          <p>В этом репозитории — только установщики и документация. См. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SOURCE.md">SOURCE.md</a>.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Языки интерфейса?</summary>
+        <div class="faq-body">
+          <p>Настройки → Общие: русский, English, Română, Deutsch, Suomi.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Как поддержать автора?</summary>
+        <div class="faq-body">
+          <p><a href="https://www.donationalerts.com/r/coroner_of_autopsy">DonationAlerts</a> · Telegram <a href="https://t.me/coroner_of_autopsy">@coroner_of_autopsy</a></p>
+        </div>
+      </details>
+    </div>
 
-      <h2>Почему предлагали 2.35.x вместо 2.7.x?</h2>
-      <p>В Releases лежит архив со старой нумерацией (2.25–2.35). Они выглядят «больше» по semver, но это не актуальная линия.</p>
-      <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Если сидишь на 2.7.4 — один раз поставь 2.7.5 вручную с Releases.</p>
-
-      <h2>Пропали настройки после обновления?</h2>
-      <p>Проверь папку <strong>CoronerChat-data</strong> рядом с приложением. Её нельзя удалять при переустановке, если нужны токены и UI.</p>
-
-      <h2>Имена файлов с точками вместо пробелов?</h2>
-      <p>Так GitHub иногда нормализует assets. CoronerChat ищет <code>.exe</code> с Setup и CoronerChat в имени — оба варианта ок.</p>
-
-      <h2>Где исходный код?</h2>
-      <p>В этом репозитории — только установщики и документация. См. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SOURCE.md">SOURCE.md</a>.</p>
-
-      <h2>Как поддержать автора?</h2>
-      <p><a href="https://www.donationalerts.com/r/coroner_of_autopsy">donationalerts.com/r/coroner_of_autopsy</a> · Telegram <a href="https://t.me/coroner_of_autopsy">@coroner_of_autopsy</a></p>
-
-      <h2>Языки интерфейса</h2>
-      <p>Настройки → Общие: русский, English, Română, Deutsch, Suomi.</p>
-    </article>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="guide.html">User Guide</a>
+      <a class="btn btn-ghost" href="security.html">Security</a>
+      <a class="btn btn-ghost" href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
+    </div>
 
     <footer class="site-footer">
       <a href="index.html">← На главную</a> · © C0R0N3R
