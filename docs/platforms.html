@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Площадки — CoronerChat</title>
+  <meta name="description" content="Twitch, VK, Kick, YouTube, Rutube, DonationAlerts, MemeAlerts, OBS — подключение в CoronerChat." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,59 +20,83 @@
         <a href="install.html">Install</a>
         <a href="update.html">Update</a>
         <a href="platforms.html" aria-current="page">Platforms</a>
+        <a href="guide.html">Guide</a>
+        <a href="security.html">Security</a>
+        <a href="tech/index.html">Tech</a>
         <a href="faq.html">FAQ</a>
-        <a href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
       </nav>
     </header>
 
     <header class="page-hero">
+      <p class="section-label">Stage 03 · Inputs</p>
       <h1>Площадки</h1>
       <p>Все источники сходятся в одну ленту. Донаты — отдельная вкладка, overlay — в OBS.</p>
     </header>
 
-    <article class="prose">
+    <section class="section" style="padding-top:0">
+      <p class="section-label">Chat feeds</p>
       <h2>Чаты</h2>
-      <table class="data">
-        <thead><tr><th>Площадка</th><th>Что даёт</th><th>Как подключить</th></tr></thead>
-        <tbody>
-          <tr><td>Twitch</td><td>Чат, отправка, мод, рейды, категория/тайтл, Shared Chat</td><td>Device Flow / OAuth во вкладке Twitch</td></tr>
-          <tr><td>VK Video Live</td><td>Чат</td><td>OAuth VK во вкладке VK</td></tr>
-          <tr><td>Kick</td><td>Чат</td><td>Канал + OAuth при необходимости</td></tr>
-          <tr><td>YouTube Live</td><td>Чат</td><td>Google OAuth / Live URL (в РФ часто нужен VPN)</td></tr>
-          <tr><td>Rutube</td><td>Чат / live</td><td>URL стрима во вкладке Rutube</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Донаты</h2>
-      <table class="data">
-        <thead><tr><th>Сервис</th><th>Транспорт</th><th>Настройка</th></tr></thead>
-        <tbody>
-          <tr><td>DonationAlerts</td><td>OAuth + HTTP poll</td><td>Client ID/Secret → авторизация в браузере</td></tr>
-          <tr><td>MemeAlerts</td><td>Socket.IO + JWT</td><td>Скопируй «Ссылку для OBS» целиком (<code>?obsToken=</code>)</td></tr>
-        </tbody>
-      </table>
-
-      <div class="panel tip">
-        Фильтр чата <strong>«Донаты»</strong> показывает события и DonationAlerts, и MemeAlerts.
-        Мин. сумму и скрытие строк можно задать отдельно для каждого источника.
+      <div class="platform-grid">
+        <article class="plat-card">
+          <h3>Twitch</h3>
+          <p>Чат, отправка, мод, рейды, категория/тайтл, Shared Chat, 7TV. Device Flow / OAuth.</p>
+        </article>
+        <article class="plat-card">
+          <h3>VK Video Live</h3>
+          <p>Чат, реакции, reply. OAuth VK ID. Ответ: REPLY / ПКМ / клавиша R.</p>
+        </article>
+        <article class="plat-card">
+          <h3>Kick</h3>
+          <p>Чат + OAuth для отправки и бейджей. Счётчик KK в шапке.</p>
+        </article>
+        <article class="plat-card">
+          <h3>YouTube Live</h3>
+          <p>Google OAuth или API key / browser chat. В РФ часто нужен VPN.</p>
+        </article>
+        <article class="plat-card">
+          <h3>Rutube</h3>
+          <p>URL эфира → чтение poll API. Отправка — cookie-сессия через встроенный вход.</p>
+        </article>
       </div>
+    </section>
 
-      <h2>OBS</h2>
-      <ul>
-        <li>Browser Source → локальный URL приложения + <code>?overlay=1</code></li>
-        <li>Итоги эфира для зрителей: <code>?recap=1</code></li>
-        <li>Опционально: WebSocket telemetry OBS в настройках интеграций</li>
-      </ul>
+    <section class="section">
+      <p class="section-label">Coins</p>
+      <h2>Донаты</h2>
+      <div class="platform-grid">
+        <article class="plat-card">
+          <h3>DonationAlerts</h3>
+          <p>OAuth + HTTP poll. События в чате, центре событий и очереди алертов UX-пакета.</p>
+        </article>
+        <article class="plat-card">
+          <h3>MemeAlerts</h3>
+          <p>Socket.IO + JWT. Вставь целиком «Ссылку для OBS» с <code>?obsToken=</code>.</p>
+        </article>
+      </div>
+      <div class="panel tip">Фильтр ленты <strong>«Донаты»</strong> показывает и DA, и MA. Мин. сумму и скрытие строк можно задать отдельно.</div>
+    </section>
 
-      <h2>Ещё в кабинете</h2>
+    <section class="section">
+      <p class="section-label">Broadcast</p>
+      <h2>OBS и шоу</h2>
+      <div class="feature-strip">
+        <div class="feature-cell"><strong>Chat</strong><span><code>?overlay=1</code> — лента для зрителей</span></div>
+        <div class="feature-cell"><strong>Recap</strong><span><code>?recap=1</code> — итоги эфира</span></div>
+        <div class="feature-cell"><strong>Alerts</strong><span><code>?alerts=1</code> · goal · vote · music</span></div>
+        <div class="feature-cell"><strong>WebSocket</strong><span>Сцены, Start/Stop, телеметрия</span></div>
+      </div>
       <ul class="chip-row">
         <li>Эфир / пресеты</li>
         <li>Статистика</li>
         <li>Достижения</li>
-        <li>Event bus</li>
         <li>Ulanzi Deck</li>
+        <li>LAN / планшет</li>
       </ul>
-    </article>
+      <div class="cta-row" style="margin-top:24px">
+        <a class="btn btn-primary" href="guide.html">Открыть User Guide</a>
+        <a class="btn btn-ghost" href="security.html">Security</a>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <a href="index.html">← На главную</a> · © C0R0N3R
