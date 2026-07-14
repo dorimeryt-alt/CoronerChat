@@ -1,14 +1,75 @@
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Установка — CoronerChat</title>
-<style>body{font-family:Segoe UI,system-ui,sans-serif;max-width:720px;margin:40px auto;padding:0 16px;line-height:1.5;color:#122}a{color:#1565c0}h1{margin-top:0}</style></head>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Установка — CoronerChat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+</head>
 <body>
-<p><a href="index.html">← Документация</a></p>
-<h1>Установка</h1>
-<ol>
-  <li>Открой <a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Releases → Latest</a>.</li>
-  <li>Скачай <code>CoronerChat.Setup.x.y.z.exe</code>.</li>
-  <li>Запусти NSIS-установщик.</li>
-</ol>
-<p>Данные хранятся в <strong>CoronerChat-data</strong> рядом с приложением и сохраняются при обновлении.</p>
-<p>Windows 10/11 x64. Для чатов нужны аккаунты площадок; для overlay — OBS Browser Source.</p>
-</body></html>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="horizon" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="topnav">
+      <a class="brand-mark" href="index.html">Coroner<span>Chat</span></a>
+      <nav class="nav-links" aria-label="Разделы">
+        <a href="install.html" aria-current="page">Install</a>
+        <a href="update.html">Update</a>
+        <a href="platforms.html">Platforms</a>
+        <a href="faq.html">FAQ</a>
+        <a href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
+      </nav>
+    </header>
+
+    <header class="page-hero">
+      <h1>Установка</h1>
+      <p>Один Setup.exe — и кабинет оператора готов. Данные эфира живут отдельно от бинарника.</p>
+    </header>
+
+    <article class="prose">
+      <h2>Быстрый старт</h2>
+      <ol>
+        <li>Открой <a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Releases → Latest</a>.</li>
+        <li>Скачай файл установщика: <code>CoronerChat.Setup.x.y.z.exe</code> (GitHub может заменить пробелы на точки).</li>
+        <li>Запусти NSIS-мастер и следуй шагам.</li>
+        <li>После установки открой CoronerChat и подключи площадки во вкладках настроек.</li>
+      </ol>
+
+      <div class="panel tip">
+        <strong>CoronerChat-data</strong> — папка рядом с приложением: app-state, токены, логи, кэш. При обновлении NSIS она <em>сохраняется</em>. Не удаляй её, если не хочешь сбросить настройки.
+      </div>
+
+      <h2>Системные требования</h2>
+      <ul>
+        <li>Windows 10 / 11, x64</li>
+        <li>Сеть до Twitch / VK / Kick / YouTube / Rutube / DA / MemeAlerts (где нужно — VPN)</li>
+        <li>OBS Studio — для Browser Source overlay</li>
+      </ul>
+
+      <h2>Первый запуск</h2>
+      <ol>
+        <li>Настройки → язык интерфейса (ru / en / ro / de / fi).</li>
+        <li>Подключи Twitch (и другие площадки по необходимости).</li>
+        <li>Донаты: DonationAlerts (OAuth) и/или MemeAlerts (ссылка OBS с <code>?obsToken=</code>).</li>
+        <li>В OBS добавь Browser Source на локальный URL приложения с <code>?overlay=1</code>.</li>
+      </ol>
+
+      <h2>Portable vs Setup</h2>
+      <p>Ранние сборки (1.x) — один portable <code>.exe</code>. Актуальная линия — NSIS Setup. Оба варианта держат данные в <code>CoronerChat-data</code>.</p>
+
+      <div class="cta-row" style="margin-top:28px">
+        <a class="btn btn-primary" href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Скачать Latest</a>
+        <a class="btn btn-ghost" href="update.html">Про обновления</a>
+      </div>
+    </article>
+
+    <footer class="site-footer">
+      <a href="index.html">← На главную</a> · © C0R0N3R
+    </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
