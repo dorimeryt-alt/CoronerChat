@@ -1,14 +1,12 @@
-# Платформы
+# Площадки
 
 | Площадка | Роль |
 |----------|------|
-| Twitch | Чат, отправка, модерация, рейды, категория/тайтл, Shared Chat |
+| Twitch | Чат, мод, рейды |
 | VK Video Live | Чат |
 | Kick | Чат |
 | YouTube Live | Чат |
-| Rutube | Чат / live |
-| DonationAlerts | Донаты в ленту |
-| MemeAlerts | Донаты / события |
-| OBS | Browser Source overlay, telemetry WebSocket |
-
-Дополнительно в приложении: алерты, пресеты эфира, статистика и итоги эфира, достижения, Ulanzi Deck (отдельный плагин в релизе).
+| Rutube | Чат |
+| DonationAlerts | Донаты (OAuth) |
+| MemeAlerts | Донаты/стикеры (`?obsToken=` из OBS-ссылки) |
+| OBS | Browser Source, telemetry |
