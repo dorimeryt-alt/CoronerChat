@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoronerChat — руководство оператора (печать)</title>
+  <style>
+    :root {
+      --ink: #111;
+      --muted: #444;
+      --accent: #5b21b6;
+      --table-head: #e8e0f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.45;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 14mm 12mm 24mm;
+      background: #fff;
+      font-size: 10.5pt;
+    }
+    h1 { font-size: 1.45rem; margin: 0 0 0.35em; }
+    h2 {
+      font-size: 1.12rem;
+      margin: 1.35em 0 0.45em;
+      padding-bottom: 0.2em;
+      border-bottom: 2px solid var(--accent);
+      break-after: avoid;
+    }
+    p.meta { color: var(--muted); font-size: 0.88rem; margin: 0 0 1em; }
+    ul.compact, ol.compact { margin: 0.35em 0 0.75em 1.15em; }
+    code { font-size: 0.92em; background: #f0f0f0; padding: 0 0.25em; border-radius: 3px; }
+    .hint {
+      background: #f0f4ff;
+      border: 1px solid #c4d4ff;
+      padding: 0.6em 0.8em;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin: 0.75em 0;
+    }
+    table.dfd {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin: 0.6em 0 1em;
+    }
+    table.dfd th, table.dfd td {
+      border: 1px solid #999;
+      padding: 5px 7px;
+      vertical-align: top;
+    }
+    table.dfd th { background: var(--table-head); text-align: left; }
+    .toc { font-size: 0.88rem; margin: 0.5em 0 1em; }
+    .toc li { margin: 0.2em 0; }
+    .doc-front {
+      border: 1px solid #999;
+      padding: 10mm 8mm;
+      margin-bottom: 1.25em;
+      background: #fff;
+      break-inside: avoid;
+    }
+    .doc-front .doc-logo-wrap {
+      text-align: center;
+      margin: 0 0 5mm;
+      padding: 0;
+    }
+    .doc-front .doc-logo {
+      width: 16mm;
+      height: 16mm;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    .doc-front .doc-kind {
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 0.25em 0 0.15em;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .doc-front .doc-name {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0.15em 0 0.75em;
+    }
+    .doc-gost-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0 0 0.85em;
+      line-height: 1.35;
+    }
+    .doc-abstract-label {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin: 0.65em 0 0.25em;
+    }
+    .doc-keywords {
+      font-size: 0.84rem;
+      margin: 0.65em 0 0;
+      text-align: justify;
+    }
+    .doc-front h2.doc-block-title {
+      font-size: 0.95rem;
+      margin: 0.85em 0 0.35em;
+      padding: 0;
+      border: none;
+      color: var(--ink);
+    }
+    .doc-front .doc-abstract {
+      text-align: justify;
+      font-size: 0.88rem;
+      margin: 0 0 0.5em;
+    }
+    h3 {
+      font-size: 0.95rem;
+      margin: 0.85em 0 0.3em;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    h4 {
+      font-size: 0.9rem;
+      margin: 0.75em 0 0.25em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    @page { size: A4; margin: 11mm; }
+    @media print {
+      body { padding: 0; max-width: none; font-size: 10pt; }
+      .no-print { display: none !important; }
+      .doc-front, h2, table.dfd { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="doc-front">
+    <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
+    <p class="doc-kind">Руководство оператора</p>
+    <p class="doc-gost-note">Содержание разделов и аннотации — по ГОСТ 19.505-79 «ЕСПД. Руководство оператора. Требования к содержанию и оформлению»; классификация вида программного документа — по ГОСТ 19.101-77 «ЕСПД. Виды программ и программных документов»; требования к печатной копии — по ГОСТ 19.106-78 «ЕСПД. Требования к программным документам, выполненным печатным способом». Документ относится к эксплуатационной документации и используется на стадиях внедрения и эксплуатации в жизненном цикле ПО (ГОСТ 19.102-77 «ЕСПД. Стадии разработки» — применительно к поставке и сопровождению изделия).</p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong></p>
+
+    <h2 class="doc-block-title">Аннотация</h2>
+    <p class="doc-abstract-label">К программе (изделию)</p>
+    <p class="doc-abstract"><strong>CoronerChat</strong> — прикладное ПО для стримеров и модераторов: объединение чатов Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live в единую ленту; веб-интерфейс и оверлей для OBS; десктопная сборка на базе Electron для Windows. Настоящее руководство описывает действия оператора (пользователя изделия) по установке, настройке, штатной эксплуатации и первичной диагностике без доступа к исходному коду.</p>
+    <p class="doc-abstract-label">К настоящему документу</p>
+    <p class="doc-abstract">Документ содержит требования к среде исполнения, порядок установки и запуска, описание операций по платформам, <strong>полный перечень функций изделия, HTTP API и сохраняемых настроек интерфейса</strong> (п. 6), типовые неисправности (п. 7), <strong>требования к информационной безопасности с учётом законодательства РФ</strong> (п. 8), обслуживание и резервное копирование (п. 9). Архитектура и протоколы — в «Техническом описании» (<code>docs/coronerchat-architecture-print.html</code>).</p>
+    <p class="doc-keywords"><strong>Ключевые слова:</strong> эксплуатационная документация; руководство оператора; CoronerChat; информационная безопасность; персональные данные; 152-ФЗ; 149-ФЗ; OAuth 2.0; Electron; OBS; Twitch; VK Video Live; Kick; YouTube Live; DonationAlerts; MemeAlerts; обход DPI; zapret; ЕСПД.</p>
+
+    <h2 class="doc-block-title">Нормативные и справочные ссылки</h2>
+    <ul class="compact">
+      <li>ГОСТ 19.101-77 ЕСПД. Виды программ и программных документов.</li>
+      <li>ГОСТ 19.102-77 ЕСПД. Стадии разработки (в части отнесения документа к стадиям поставки и эксплуатации).</li>
+      <li>ГОСТ 19.106-78 ЕСПД. Требования к программным документам, выполненным печатным способом.</li>
+      <li>ГОСТ 19.505-79 ЕСПД. Руководство оператора. Требования к содержанию и оформлению.</li>
+      <li>ГОСТ 19.402-78 ЕСПД. Описание программы (связанный документ комплекта — техническое описание архитектуры).</li>
+      <li>Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных» (с учётом последующих изменений) — применительно к обработке сведений о пользователях чата и операторе.</li>
+      <li>Федеральный закон от 27.07.2006 № 149-ФЗ «Об информации, информационных технологиях и о защите информации».</li>
+      <li>Постановление Правительства РФ от 01.11.2012 № 1119 — утверждение требований к защите персональных данных при их обработке в информационных системах персональных данных (ориентир при организации учёта мер на стороне оператора-юрлица).</li>
+      <li>Приказ ФСТЭК России от 11.02.2013 № 17 (в редакции, действующей на дату эксплуатации) — модель угроз безопасности информации — как справочный материал для оценки рисков развёртывания.</li>
+      <li>Руководства операторов внешних платформ: Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube.</li>
+      <li>Файл конфигурации изделия: <code>package.json</code>; примеры переменных окружения: <code>.env.example</code>; исходная фиксация поведения API: <code>src/server/chat-app-server.js</code>, UI: <code>src/server/web-ui.js</code>.</li>
+    </ul>
+
+    <h2 class="doc-block-title">Термины и сокращения</h2>
+    <table class="dfd">
+      <thead><tr><th>Термин</th><th>Определение</th></tr></thead>
+      <tbody>
+        <tr><td>Оператор</td><td>Пользователь изделия, выполняющий установку, настройку и эксплуатацию CoronerChat на своём ПК.</td></tr>
+        <tr><td>Изделие</td><td>Программное обеспечение CoronerChat в поставляемой сборке (desktop или web).</td></tr>
+        <tr><td>Оверлей</td><td>Режим веб-интерфейса для вывода чата в OBS Browser Source без панелей управления.</td></tr>
+        <tr><td>OAuth 2.0</td><td>Протокол авторизации на стороне платформ (вход по кнопкам в интерфейсе изделия).</td></tr>
+        <tr><td>ПДн</td><td>Персональные данные — любая информация, относящаяся к прямо или косвенно определённому физическому лицу (в т.ч. ник и сообщения в чате при отсутствии анонимизации).</td></tr>
+        <tr><td>ИСПДН</td><td>Информационная система персональных данных — совокупность ПДн и технических средств их обработки; в корпоративном сценарии CoronerChat может входить в состав ИСПДн.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h1>CoronerChat — руководство оператора</h1>
+  <p class="meta">Печатная форма A4. Версия изделия: см. поле <code>version</code> в <code>package.json</code>.</p>
+
+  <h2>Содержание</h2>
+  <ol class="toc compact">
+    <li>Введение</li>
+    <li>Требования к техническим средствам и программной среде</li>
+    <li>Состав поставки, установка и обновление</li>
+    <li>Подготовка к работе</li>
+    <li>Описание операций (платформы, оверлей, now playing, переменные окружения — п. 5.14–5.15)</li>
+    <li>Полный перечень функций изделия, API и настроек интерфейса</li>
+    <li>Сообщения оператору и устранение типовых неисправностей</li>
+    <li>Информационная безопасность и защита данных (законодательство РФ)</li>
+    <li>Техническое обслуживание, резервное копирование и контроль работоспособности</li>
+  </ol>
+
+  <h2>1. Введение</h2>
+  <h3>1.1. Назначение документа</h3>
+  <p>Настоящее руководство оператора предназначено для обучения и повседневной эксплуатации ПО «CoronerChat» в штатных режимах. Документ не заменяет договор поставки, лицензионные соглашения сторонних сервисов и не описывает внутреннюю реализацию изделия.</p>
+  <h3>1.2. Область применения изделия</h3>
+  <p>Изделие применяется для приёма, нормализации и отображения сообщений чатов стриминговых и смежных сервисов, локального поиска по буферу сообщений, отправки сообщений и ряда действий модерации (в объёме, предоставляемом API платформ и правами учётной записи), вывода оверлея в OBS, опциональной интеграции с OBS WebSocket и сценариев «now playing».</p>
+
+  <h2>2. Требования к техническим средствам и программной среде</h2>
+  <ul class="compact">
+    <li><strong>Desktop (рекомендуемая поставка для Windows):</strong> 64-разрядная ОС Windows 10 или новее; доступ в Интернет для работы с внешними API и чатами; свободный TCP-порт на интерфейсе обратной связи (по умолчанию <code>3210</code>, настраивается). Отдельная установка Node.js для конечного пользователя не требуется — среда исполнения входит в сборку Electron.</li>
+    <li><strong>Web / разработка из исходников:</strong> установленный <strong>Node.js</strong> версии, совместимой с зависимостями проекта (см. <code>package.json</code> / документацию Node.js); ОС по усмотрению разработчика; сетевой доступ аналогично desktop.</li>
+    <li><strong>OBS Studio</strong> (при использовании Browser Source): актуальная стабильная сборка; в источнике указывается URL локального сервера изделия (см. п. 5.6).</li>
+    <li>Для опционального компонента фильтрации трафика (zapret / winws), вызываемого из desktop-версии: по умолчанию доступны только <strong>пользовательские команды</strong> запуска внешнего скрипта; встроенная загрузка bundle и запуск winws включаются переменной <code>CORONERCHAT_ZAPRET_BUILTIN=1</code> (Windows, UAC). Выполнять только при осознанной необходимости и в рамках законодательства.</li>
+  </ul>
+
+  <h2>3. Состав поставки, установка и обновление</h2>
+  <h3>3.1. Установщик Windows (NSIS)</h3>
+  <p>Запустите файл вида <code>CoronerChat Setup &lt;версия&gt;.exe</code>. Следуйте шагам мастера; при необходимости измените каталог установки. Ярлыки создаются по выбранным в мастере опциям. Деинсталляция — стандартными средствами Windows («Приложения и возможности»).</p>
+  <h3>3.2. Portable-сборка</h3>
+  <p>Файл <code>CoronerChat &lt;версия&gt;.exe</code> или каталог <code>win-unpacked</code> с <code>CoronerChat.exe</code>. Сохраняйте рядом с исполняемым файлом каталог данных <code>CoronerChat-data</code> (создаётся автоматически) — в нём хранятся настройки, состояние приложения, журналы и кэш.</p>
+  <h3>3.3. Обновление</h3>
+  <p>Установите новую версию поверх или замените portable-файлы, сохранив при необходимости каталог <code>CoronerChat-data</code>. После обновления рекомендуется один раз открыть изделие и проверить авторизации на платформах (при сбросе токенов выполните повторный вход).</p>
+  <p class="hint"><strong>Автообновление (2.7.4+).</strong> В настройках «Обновления» источник зашит: <code>dorimeryt-alt/CoronerChat</code>. При запуске изделие запрашивает GitHub Latest и предлагает Setup.exe. Не ориентируйтесь на архивные теги 2.25–2.35 как на «более новые», чем линия 2.7. Подробнее: <code>docs/updates-and-releases.md</code> и публичная страница обновлений на GitHub Pages / Wiki.</p>
+
+  <h2>4. Подготовка к работе</h2>
+  <ol class="compact">
+    <li>Убедитесь в наличии сетевого доступа к используемым платформам.</li>
+    <li>Запустите desktop-ярлык или <code>CoronerChat.exe</code> / выполните <code>npm run dev:web</code> (для режима разработки из исходников).</li>
+    <li>Дождитесь загрузки интерфейса. В консоли web-режима отображается фактический локальный URL и порт.</li>
+    <li>Включите нужные источники в настройках и выполните авторизацию для каждой платформы, с которой изделие будет работать под вашей учётной записью (OAuth 2.0 / вход через браузер — по подсказкам интерфейса).</li>
+    <li>Для <strong>Twitch</strong> при использовании отправки сообщений, модерации Helix и slash-команд задайте Client ID в настройках или через переменные окружения (см. <code>.env.example</code>, <code>README.md</code>) и пройдите авторизацию (в т.ч. Device Flow).</li>
+    <li>Для предварительной настройки OAuth-приложений (разработка, корпоративная поставка) допускается задание идентификаторов и секретов через переменные окружения — полный перечень см. п. 5.14 и файл <code>src/config.js</code>.</li>
+    <li>Укажите канал, трансляцию или идентификатор для каждого включённого источника (Twitch, VK Video Live, Kick, YouTube и др.) в соответствии с подсказками интерфейса.</li>
+  </ol>
+  <p class="hint">Порт по умолчанию — <strong>3210</strong> (переменные <code>CORONERCHAT_PORT</code> или устаревшее имя <code>CHATSHOW_PORT</code>). В <strong>web-режиме</strong> при занятости порта изделие может выбрать другой свободный порт автоматически. В <strong>desktop-режиме</strong> используется заданный порт; при повторном запуске ярлыка изделие переводит фокус на уже открытое окно и может подключаться к уже работающему локальному серверу на том же порту. Если порт занят <strong>другой независимой копией</strong> CoronerChat (например, установленная версия и сборка для разработки одновременно), интерфейс может соответствовать не той сборке — закройте лишнюю копию или задайте для второй другой <code>CORONERCHAT_PORT</code>. Если порт занят сторонним процессом, освободите порт или смените порт через переменную.</p>
+
+  <h2>5. Описание операций</h2>
+  <h3>5.1. Выбор канала и просмотр чата</h3>
+  <p>Для каждого подключённого источника задайте канал, URL трансляции или иной идентификатор в формате, ожидаемом платформой (подсказки — в интерфейсе изделия). Сообщения с разных платформ сводятся в одну ленту; обновление — по WebSocket. При прокрутке вверх автоскролл приостанавливается до возврата вниз (кнопка в интерфейсе).</p>
+  <h3>5.2. Сводная таблица возможностей по платформам</h3>
+  <p>Ниже — типовой состав функций по внешним источникам; после обновления изделия сверяйте фактические элементы интерфейса и <code>README.md</code>.</p>
+  <table class="dfd">
+    <thead><tr><th>Источник (в ленте)</th><th>Приём сообщений в общую ленту</th><th>Учётные данные</th><th>Отправка текста в чат платформы из UI</th><th>Примечание</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Twitch</strong></td><td>Да</td><td>Настройки Twitch: Client ID/Secret при необходимости; Device Flow; опционально env <code>TWITCH_USERNAME</code>, <code>TWITCH_OAUTH_TOKEN</code> для чтения IRC без Helix</td><td>Да</td><td>Модерация Helix, slash-команды, смена категории/названия стрима, события чата — п. 5.8</td></tr>
+      <tr><td><strong>VK Video Live</strong></td><td>Да</td><td>OAuth VK ID: Client ID/Secret; redirect <code>/api/auth/vk/callback</code> относительно URL открытого UI</td><td>Да</td><td>Отдельное поле ввода; ответ на сообщение; часть команд «/» — п. 5.9</td></tr>
+      <tr><td><strong>Kick</strong></td><td>Да</td><td>OAuth Kick (PKCE): Client ID/Secret; redirect <code>/api/auth/kick/callback</code>; scope с <code>chat:write</code></td><td>Да</td><td>Slug канала; дождаться подключения сокета — п. 5.10</td></tr>
+      <tr><td><strong>YouTube Live</strong></td><td>Да</td><td>Google OAuth: в desktop задайте <code>GOOGLE_OAUTH_CLIENT_ID</code>, <code>GOOGLE_OAUTH_CLIENT_SECRET</code>, redirect в консоли Google вида <code>http://127.0.0.1:&lt;порт&gt;/</code> (<code>GOOGLE_OAUTH_REDIRECT_PORT</code>, по умолчанию 45280); включить YouTube Data API v3</td><td>Да</td><td>Идентификатор трансляции / ссылка — п. 5.11</td></tr>
+      <tr><td><strong>DonationAlerts</strong></td><td>Да (донаты и связанные события)</td><td>OAuth: Client ID/Secret; redirect <code>/api/auth/donation-alerts/callback</code></td><td>Нет</td><td>Поток событий в ленту и центр уведомлений — п. 5.12</td></tr>
+      <tr><td><strong>MemeAlerts</strong></td><td>Да</td><td>Токен из ссылки OBS (<code>?obsToken=…</code>) или JWT; без OAuth того же типа, что у DonationAlerts</td><td>Нет</td><td>Socket.IO; фильтр мин. суммы; скрытие строк в чате — п. 5.13</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.3. Общие правила авторизации</h3>
+  <p>Для каждой платформы используйте свою вкладку или блок в настройках. При запросе изделия откройте ссылку в браузере, подтвердите доступ, вернитесь в UI. Redirect URI в кабинете разработчика внешнего сервиса должен совпадать с подсказкой изделия (для локального UI обычно <code>http://127.0.0.1:&lt;порт CoronerChat&gt;/…</code>). Не показывайте посторонним экраны с кодами входа и секретами.</p>
+
+  <h3>5.4. Отправка сообщений и модерация</h3>
+  <p>Отправка в чат доступна для <strong>Twitch, VK Video Live, Kick и YouTube Live</strong> (отдельные поля ввода или переключатель активного композера в UI). <strong>DonationAlerts</strong> и <strong>MemeAlerts</strong> поставляют в ленту уведомления о донатах и смежных событиях, а не двусторонний текстовый чат платформы. Модерация сообщений в объёме Helix и связанных API реализована преимущественно для <strong>Twitch</strong>; для других платформ ориентируйтесь на доступные кнопки у сообщения после авторизации. При смене прав OAuth выполните выход и повторный вход.</p>
+
+  <h3>5.5. Смена названия и категории трансляции</h3>
+  <p>Для <strong>Twitch</strong> — через интерфейс изделия при наличии прав (Helix). Для остальных платформ используйте кабинеты самих сервисов или возможности API, если они добавлены в вашей версии UI.</p>
+
+  <h3>5.6. Режим оверлея для OBS</h3>
+  <p>В Browser Source укажите URL вида <code>http://127.0.0.1:3210/?overlay=1</code>, подставив фактический порт, если он отличается от <code>3210</code>. Режим скрывает панели настроек и оптимизирует вёрстку под наложение на сцену. События отдельных источников (например, DonationAlerts / MemeAlerts) могут настраиваться фильтрами видимости в основном UI.</p>
+
+  <h3>5.7. Now playing и медиа-сессия Windows</h3>
+  <p>В настройках укажите HTTP bridge URL опроса «текущего трека» или используйте локальный режим считывания системной медиа-сессии Windows (если доступен в вашей сборке). Формат ответа bridge описан в <code>README.md</code> репозитория.</p>
+
+  <h3>5.8. Twitch — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Подключение канала:</strong> укажите имя канала (логин) в поле смены канала; для публичного чата допускается работа без полной авторизации (ограниченный функционал).</li>
+    <li><strong>Авторизация Helix:</strong> сохраните Client ID (и при необходимости Secret), нажмите вход, завершите Device Flow в браузере; дождитесь статуса «авторизован».</li>
+    <li><strong>Отправка и slash:</strong> поле ввода Twitch; команды «/» обрабатываются через Helix или нативный IRC по правилам изделия.</li>
+    <li><strong>Модерация:</strong> действия у сообщения при наличии прав модератора/стримера на выбранном канале.</li>
+    <li><strong>Метаданные стрима:</strong> смена названия и категории в блоке настроек Twitch.</li>
+    <li><strong>7TV и эмодзи:</strong> настройки Twitch / общие параметры кэша 7TV — см. <code>README.md</code> (переменные <code>CORONERCHAT_7TV_*</code> в п. 5.14).</li>
+  </ul>
+
+  <h3>5.9. VK Video Live — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Приложение VK ID:</strong> создайте приложение типа, допускающего OAuth для Live; в настройках CoronerChat укажите Client ID и Secret, затем запустите авторизацию — redirect должен указывать на тот же хост и порт, с которого открыт UI.</li>
+    <li><strong>Канал / трансляция:</strong> задайте идентификатор канала VK Video или трансляции в соответствии с полями интерфейса; дождитесь статуса подключения чата.</li>
+    <li><strong>Отправка:</strong> используйте поле ввода VK; доступен ответ на сообщение (reply) через UI.</li>
+    <li><strong>Команды:</strong> строки, начинающиеся с «/», могут обрабатываться как slash-команды VK (см. сообщения об ошибках при неподдерживаемой команде).</li>
+  </ul>
+
+  <h3>5.10. Kick — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Приложение Kick:</strong> зарегистрируйте OAuth-клиент; укажите Client ID и Secret; в настройках Kick на портале разрешите redirect URI вида <code>http://127.0.0.1:&lt;порт&gt;/api/auth/kick/callback</code> (или ваш фактический origin).</li>
+    <li><strong>Права:</strong> для отправки сообщений нужны области в т.ч. <code>chat:write</code> и успешный обмен кода по PKCE.</li>
+    <li><strong>Канал:</strong> укажите slug канала Kick; дождитесь зелёного статуса сокета чата перед отправкой.</li>
+    <li><strong>Отправка:</strong> отдельное поле ввода Kick; лимиты длины сообщения действуют со стороны API Kick.</li>
+  </ul>
+
+  <h3>5.11. YouTube Live — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Google Cloud:</strong> OAuth 2.0 Client (тип, допускающий loopback), включённый <strong>YouTube Data API v3</strong>; в <code>.env</code> для desktop — <code>GOOGLE_OAUTH_CLIENT_ID</code>, <code>GOOGLE_OAUTH_CLIENT_SECRET</code>; redirect URI в консоли Google — <code>http://127.0.0.1:&lt;GOOGLE_OAUTH_REDIRECT_PORT&gt;/</code> (по умолчанию порт 45280, см. подсказку в UI).</li>
+    <li><strong>Запуск входа:</strong> в desktop изделие откроет браузер и локальный приём redirect; при занятости порта задайте другой <code>GOOGLE_OAUTH_REDIRECT_PORT</code> и тот же URI в консоли Google.</li>
+    <li><strong>Трансляция:</strong> укажите идентификатор трансляции YouTube или ссылку в полях вкладки YouTube.</li>
+    <li><strong>Отправка:</strong> поле ввода YouTube после успешной авторизации и подключения live chat.</li>
+  </ul>
+
+  <h3>5.12. DonationAlerts — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Приложение DonationAlerts:</strong> Client ID и Secret; redirect <code>/api/auth/donation-alerts/callback</code> на origin вашего UI.</li>
+    <li><strong>Авторизация:</strong> кнопка входа во вкладке «Донаты»; после успеха события донатов попадают в ленту и в центр событий.</li>
+    <li><strong>Фильтры:</strong> при необходимости настройте отображение и связку с другими источниками во вкладке «Донаты».</li>
+  </ul>
+
+  <h3>5.13. MemeAlerts — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Токен:</strong> в личном кабинете MemeAlerts откройте «Ссылку для OBS»; скопируйте URL целиком — изделие извлечёт <code>obsToken</code> из query-параметра, либо вставьте JWT вручную.</li>
+    <li><strong>Подключение:</strong> кнопка сохранения токена во вкладке «Донаты»; статус подключения отображается в UI.</li>
+    <li><strong>Фильтрация:</strong> минимальная сумма доната (руб.); опция скрыть события MemeAlerts в текстовом чате; в оверлее донаты MemeAlerts могут быть скрыты по логике UI — проверьте настройки перед эфиром.</li>
+  </ul>
+
+  <h3>5.14. Переменные окружения (полный перечень по изделию)</h3>
+  <p>Значения задаются в системной среде процесса или в файле <code>.env</code> при запуске из исходников. Имена <code>CHATSHOW_*</code> поддерживаются для совместимости рядом с <code>CORONERCHAT_*</code>.</p>
+  <table class="dfd">
+    <thead><tr><th>Переменная</th><th>Назначение</th></tr></thead>
+    <tbody>
+      <tr><td><code>CORONERCHAT_HOST</code> / <code>CHATSHOW_HOST</code></td><td>Интерфейс привязки HTTP-сервера (по умолчанию <code>127.0.0.1</code> — только локальная машина; локальный API отдаёт debug-логи, экспорт настроек и управление OBS без отдельной аутентификации, поэтому LAN-доступ не включён по умолчанию. Для доступа с другого устройства в сети явно задайте <code>0.0.0.0</code> или конкретный LAN-адрес и по возможности настройте <code>CORONERCHAT_DECK_TOKEN</code>, см. §8.6).</td></tr>
+      <tr><td><code>CORONERCHAT_PORT</code> / <code>CHATSHOW_PORT</code></td><td>Порт HTTP UI (по умолчанию <code>3210</code>).</td></tr>
+      <tr><td><code>CORONERCHAT_DEFAULT_CHANNEL</code></td><td>Имя канала Twitch по умолчанию (или см. брендинг).</td></tr>
+      <tr><td><code>TWITCH_USERNAME</code>, <code>TWITCH_OAUTH_TOKEN</code></td><td>Резервная пара для чтения Twitch IRC без Device Flow.</td></tr>
+      <tr><td><code>TWITCH_CLIENT_ID</code>, <code>TWITCH_CLIENT_SECRET</code></td><td>Переопределение встроенного публичного OAuth-приложения Twitch (Device Flow / Helix). Необязательно — без переменной используется значение по умолчанию из <code>src/config.js</code>; тот же Client ID можно также ввести прямо в настройках интерфейса.</td></tr>
+      <tr><td><code>VKVIDEO_CLIENT_ID</code>, <code>VKVIDEO_CLIENT_SECRET</code></td><td>OAuth-приложение VK Video / VK ID для серверной части.</td></tr>
+      <tr><td><code>DONATIONALERTS_CLIENT_ID</code>, <code>DONATIONALERTS_CLIENT_SECRET</code></td><td>OAuth DonationAlerts.</td></tr>
+      <tr><td><code>GOOGLE_OAUTH_CLIENT_ID</code>, <code>GOOGLE_OAUTH_CLIENT_SECRET</code></td><td>OAuth Google для YouTube Data API.</td></tr>
+      <tr><td><code>GOOGLE_OAUTH_REDIRECT_PORT</code></td><td>Локальный порт loopback для redirect Google (по умолчанию <code>45280</code>).</td></tr>
+      <tr><td><code>KICK_CLIENT_ID</code>, <code>KICK_CLIENT_SECRET</code></td><td>OAuth Kick (PKCE).</td></tr>
+      <tr><td><code>CORONERCHAT_7TV_API_ORIGINS</code>, <code>CORONERCHAT_7TV_ASSET_ORIGINS</code>, <code>CORONERCHAT_7TV_DOH_ENDPOINTS</code></td><td>Дополнительные origin / DoH для 7TV (см. <code>README.md</code>).</td></tr>
+      <tr><td><code>CORONERCHAT_DEMO_ACTIVE</code>, <code>CORONERCHAT_DEMO_PORT</code></td><td>Демо-режим (разработка), при необходимости.</td></tr>
+      <tr><td><code>CORONERCHAT_ZAPRET_BUILTIN</code></td><td>При значении <code>1</code> на Windows включается встроенный путь запуска winws (скачивание zapret-win-bundle при первом запуске, возможен UAC). По умолчанию встроенный режим <strong>выключен</strong>; без явного <code>1</code> в переменной доступны только собственные команды запуска/останова в блоке Zapret (п. 5.15).</td></tr>
+      <tr><td><code>CORONERCHAT_DECK_TOKEN</code> / <code>CHATSHOW_DECK_TOKEN</code></td><td>Общий секрет для чувствительных HTTP-эндпоинтов (debug-логи, экспорт/импорт настроек, управление OBS, <code>/api/deck/*</code> для Stream Deck/Ulanzi) при обращении не с локальной машины — заголовок <code>X-CoronerChat-Deck-Token</code>. С <code>127.0.0.1</code> эти эндпоинты всегда доступны без токена; пусто — доступ с других устройств сети к ним запрещён (403).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.15. Обход DPI (Zapret / winws)</h3>
+  <ul class="compact">
+    <li><strong>Где в интерфейсе:</strong> настройки (иконка шестерёнки) → вкладка <strong>«Общие»</strong> → блок <strong>«Zapret / обход DPI»</strong> (расположен после секции «Платформы»). Отдельной вкладки «Zapret» в текущей версии изделия нет.</li>
+    <li><strong>Режим по умолчанию:</strong> встроенный компонент winws из поставки CoronerChat <strong>выключен</strong>. Доступны сохранение <strong>своих команд</strong> запуска и остановки внешнего zapret (PowerShell-скрипт в кавычках или строка для cmd), кнопки «Запустить сейчас» и «Остановить», чекбокс автозапуска при старте приложения. Автозапуск выполняется только если есть что запускать (заполнена своя команда или включён встроенный режим см. ниже).</li>
+    <li><strong>Включение встроенного winws:</strong> перед запуском CoronerChat задайте переменную окружения <code>CORONERCHAT_ZAPRET_BUILTIN=1</code> (только Windows); возможна загрузка zapret-win-bundle при первом запуске и запрос повышения прав (UAC). Чекбоксы групп доменов в блоке Zapret и файл дополнительных хостов учитываются во встроенном режиме.</li>
+    <li><strong>Файл дополнительных доменов</strong> (комплект исходников поставки): <code>resources/zapret/extra-hosts.txt</code> — по одному FQDN в строке; строки, начинающиеся с <code>#</code>, игнорируются. В собранном приложении используется копия рядом с модулями (<code>zapret-builtin/extra-hosts.txt</code>).</li>
+    <li>Справочно по проекту zapret: репозиторий <strong>bol-van/zapret</strong> и смежные материалы; соблюдайте применимое законодательство при фильтрации трафика.</li>
+  </ul>
+
+  <h2>6. Полный перечень функций изделия, программных интерфейсов и настроек</h2>
+  <p>Ниже зафиксированы пользовательские возможности и программные интерфейсы по коду сервера (<code>src/server/chat-app-server.js</code>) и UI (<code>src/server/web-ui.js</code>). Точные тела запросов и побочные эффекты см. в исходных текстах и в техническом описании архитектуры.</p>
+
+  <h3>6.1. Вкладки панели настроек (Drawer)</h3>
+  <ul class="compact">
+    <li><strong>Общие:</strong> подключение каналов Twitch/VK; блок <strong>Zapret / обход DPI</strong>; медиа-ссылки; платформы; часть параметров отображения при первом открытии переносится на вкладку «Вид»; правила подсветки сообщений; авто-ответы; таймер «кухня» и оверлей; браузерные уведомления; экспорт/импорт переносимого пакета настроек.</li>
+    <li><strong>Twitch, VK, YouTube, Kick:</strong> Client ID/Secret где нужно, OAuth/Device Flow/Google/Kick PKCE, статусы, поля канала или ссылки на трансляцию.</li>
+    <li><strong>Донаты:</strong> DonationAlerts (OAuth); MemeAlerts (токен OBS/JWT); минимальные суммы; скрытие событий в чате/оверлее.</li>
+    <li><strong>Вид:</strong> тема, акцент, шрифты приложения/чата/оверлея/музыки, веса шрифта, варианты оверлея, фон, плотность, режим цветовой коррекции, медиа и ссылки в сообщениях, пороги «экономии» и анимаций, цифровые часы, сводка зрителей, телеметрия OBS, подсказка VK-композера, панель закрепов, роль-действия, центр модерации, маркеры платформ, режим прокрутки, профиль планшета, скрытие авторов, глоссарий упоминаний, баннеры предупреждений в шапке, онбординг.</li>
+    <li><strong>Интеграции:</strong> OBS (WebSocket URL/пароль, подключение, запуск OBS, URL оверлея, QR-планшет); now playing (bridge URL, media session, ручной ввод); relay 7TV; пакетный prefetch 7TV; прокси Electron для YouTube/Google в скрытых окнах (desktop); проверка обновлений. Управление zapret/winws — в блоке Zapret на вкладке «Общие» (п. 5.15).</li>
+    <li><strong>О приложении:</strong> справочные тексты и версия.</li>
+  </ul>
+
+  <h3>6.2. Главное окно: чат, шапка, вспомогательные панели</h3>
+  <ul class="compact">
+    <li>Единая лента с цветовой маркировкой источника; фильтр по платформе; поиск; экспорт и локальная очистка буфера.</li>
+    <li>Сводка зрителей, карточки статусов Twitch/VK/YouTube, DonationAlerts/MemeAlerts, права Helix.</li>
+    <li>Центр событий (event bus); телеметрия OBS в шапке; кухня / now playing / музыкальный оверлей.</li>
+    <li>Композеры Twitch, VK, Kick, YouTube; совместная отправка строки в Twitch и VK; ответы VK; подсказки slash и @.</li>
+    <li>Модерация у сообщения (Twitch), локальное скрытие, закреп (с проверкой прав), контекст пользователя (ПКМ/история), 7TV picker.</li>
+    <li>Карточки событий Twitch (channel points, hype train и др.) согласно фильтрам категорий в настройках вида.</li>
+  </ul>
+
+  <h3>6.3. Инструменты стримера (Twitch / OBS)</h3>
+  <ul class="compact">
+    <li>Опросы и предикты; рейд; клип; смена категории и названия стрима; поиск категории.</li>
+    <li>Управление эфиром/записью OBS, сценами, выходами, превью через WebSocket.</li>
+    <li>Центр модерации (настраиваемый набор быстрых действий через API изделия).</li>
+  </ul>
+
+  <h3>6.4. Now playing, кухня, 7TV, relay, обновления</h3>
+  <ul class="compact">
+    <li>Опрос внешнего bridge, ручное обновление трека, локальная media session Windows (в поддерживаемой сборке).</li>
+    <li>Таймер «кухня» с оверлеем и опциональной отбивкой в чат.</li>
+    <li>Каталоги и прокси эмодзи/бейджей 7TV и платформ; relay и DoH-настройки; прогрев кэша.</li>
+    <li>Параметры и проверка обновлений приложения (если предусмотрено каналом поставки).</li>
+  </ul>
+
+  <h3>6.5. Диагностика и перенос</h3>
+  <ul class="compact">
+    <li>Экспорт/импорт настроек — файл содержит токены, обращаться как с конфиденциальным носителем.</li>
+    <li>Серверный и клиентский журналы, открытие каталога логов (в desktop при поддержке ОС).</li>
+    <li>Контекст пользователя для разборов модерации.</li>
+  </ul>
+
+  <h3>6.6. Сводная таблица групп HTTP API (обработчик <code>handleApiRequest</code>)</h3>
+  <table class="dfd">
+    <thead><tr><th>Группа</th><th>Маршруты (метод)</th></tr></thead>
+    <tbody>
+      <tr><td>Служебные страницы</td><td>GET <code>/</code>, <code>/health</code>, <code>/assets/logo.jpg</code>; GET <code>/ws</code> возвращает подсказку (основной канал чата UI — WebSocket upgrade на путь <code>/ws</code> того же хоста и порта)</td></tr>
+      <tr><td>Состояние и QR</td><td>GET <code>/api/state</code>; GET <code>/api/qr?text=…</code></td></tr>
+      <tr><td>Авторизация Twitch</td><td>POST <code>/api/auth/twitch/client-id|start|poll|logout</code></td></tr>
+      <tr><td>Авторизация VK</td><td>POST <code>…/vk/config|start|poll|logout|browser|implicit-token|start-implicit</code>; GET <code>…/vk/callback</code></td></tr>
+      <tr><td>YouTube (Google)</td><td>POST <code>/api/auth/youtube/google|logout</code></td></tr>
+      <tr><td>DonationAlerts</td><td>POST <code>…/donation-alerts/config|start|poll|logout</code>; GET <code>…/callback</code></td></tr>
+      <tr><td>Kick</td><td>POST <code>…/kick/config|start|poll|logout</code>; GET <code>…/kick/callback</code></td></tr>
+      <tr><td>MemeAlerts</td><td>POST <code>/api/meme-alerts/connect|disconnect</code></td></tr>
+      <tr><td>Каталоги и ассеты</td><td>GET <code>/api/7tv/catalog|health|global-emote|asset|prefetched-asset</code>, GET/POST prefetch; GET <code>/api/twitch/badges|chatters|asset|emotes</code>; GET <code>/api/vk/catalog|asset</code></td></tr>
+      <tr><td>Настройки (чтение)</td><td>GET <code>/api/settings/obs|relay|zapret|update</code></td></tr>
+      <tr><td>Настройки (запись)</td><td>POST <code>/api/settings/ui|obs|now-playing|youtube|kick|donation-filters|relay|zapret|update</code>; POST transfer <code>export|import</code></td></tr>
+      <tr><td>OBS WebSocket</td><td>POST <code>/api/obs/launch|connect|disconnect|stream/start|stop|record/start|stop|output|scene/program</code>; GET <code>/api/obs/outputs|scenes|preview</code></td></tr>
+      <tr><td>Now playing / кухня</td><td>GET/POST <code>/api/now-playing</code>, POST <code>…/manual|refresh</code>; POST <code>/api/kitchen</code></td></tr>
+      <tr><td>Модерация и чат</td><td>POST <code>/api/channel|chat/send|chat/clear-local|platforms/enable</code>; POST <code>/api/moderation/delete-message|timeout-user|ban-user|unban-user</code>; GET/POST <code>/api/moderation/center</code>; POST <code>/api/admin/pin-message</code></td></tr>
+      <tr><td>Twitch-расширения</td><td>POST <code>/api/poll/create|end</code>, <code>/api/prediction/lock|create|resolve|cancel</code>, <code>/api/raid/start|cancel</code>, <code>/api/twitch/clip</code>, <code>/api/stream/category|title</code>; GET <code>/api/stream/category-search</code></td></tr>
+      <tr><td>Zapret</td><td>POST <code>/api/zapret/start|stop</code></td></tr>
+      <tr><td>Обновления</td><td>POST <code>/api/update/check</code></td></tr>
+      <tr><td>Диагностика</td><td>GET <code>/api/debug/logs</code>; POST <code>…/clear|open</code>; POST <code>/api/debug/client-log</code>; GET <code>/api/user-context</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.7. Параметры, сохраняемые через <code>POST /api/settings/ui</code> (основной профиль desktop)</h3>
+  <p>Часть полей дублируется в планшетном профиле (<code>tabletUi</code>). Названия ниже — как в теле JSON запроса.</p>
+  <p class="meta" style="font-size:0.82rem;"><code>chatFontScale</code>, <code>appUiScale</code>, <code>overlayFontScale</code>, <code>musicOverlayFontScale</code>, <code>chatFontWeight</code>, <code>overlayFontWeight</code>, <code>musicOverlayFontWeight</code>, <code>overlayFontFamily</code>, <code>overlayVariant</code>, <code>overlayFrameStyle</code>, <code>musicOverlayLayout</code>, <code>musicOverlayFontFamily</code>, <code>musicOverlayVariant</code>, <code>musicOverlayFrameStyle</code>, <code>appStylePreset</code>, <code>appFontFamily</code>, <code>appTheme</code>, <code>appAccent</code>, <code>appMessageDensity</code>, <code>appColorVisionMode</code>, <code>appChatBackgroundColor</code>, <code>overlayBackgroundColor</code>, <code>musicOverlayBackgroundColor</code>, <code>showLinkedMediaInApp</code>, <code>showLinkedMediaInOverlay</code>, <code>showLinksInOverlay</code>, <code>overlayLinkPlaceholder</code>, <code>boldChatText</code>, <code>forceEconomyMode</code>, <code>highLoadAppCpuPercent</code>, <code>highLoadSystemCpuPercent</code>, <code>highLoadAppMemoryMb</code>, <code>highLoadSystemMemoryPercent</code>, <code>animatedInlineBudgetNormal</code>, <code>animatedInlineBudgetEconomy</code>, <code>overlayAdaptiveAnimationsEnabled</code>, <code>overlayAnimatedInlineBudget</code>, <code>showDigitalClock</code>, <code>showTopStreamSummary</code>, <code>showObsTelemetryBar</code>, <code>showVkComposerNote</code>, <code>showPinnedPanel</code>, <code>showRoleActions</code>, <code>showModerationCenter</code>, <code>showMessagePlatformIcons</code>, <code>messagePlatformMarkerMode</code>, <code>chatScrollMode</code>, <code>showComposerPlatformIcons</code>, <code>showSummaryPlatformIcons</code>, <code>onboardingCompleted</code>, <code>hiddenTwitchAuthors</code>, <code>hiddenVkAuthors</code>, <code>mentionGlossary</code>, <code>dismissedUpdateNoticeVersions</code>, <code>headerAlertRedChatError</code>, <code>headerAlertRedPollReauth</code>, <code>headerAlertRedWsDown</code>, <code>headerAlertYellowTwitchScope</code>, <code>headerAlertYellowPollScope</code>, <code>headerAlertYellowObs</code>, <code>headerAlertYellowVkStream</code>, а также вложенный объект <code>tabletUi</code> с аналогами для планшетного режима.</p>
+
+  <h2>7. Сообщения оператору и устранение типовых неисправностей</h2>
+  <table class="dfd">
+    <thead><tr><th>Симптом</th><th>Возможные действия</th></tr></thead>
+    <tbody>
+      <tr><td>Страница не открывается по ожидаемому порту</td><td>Проверьте консоль запуска на фактический порт; задайте <code>CORONERCHAT_PORT</code>; закройте конфликтующий процесс.</td></tr>
+      <tr><td>Нет сообщений чата</td><td>Проверьте сеть, имя канала, статус стрима; для закрытых режимов — авторизацию.</td></tr>
+      <tr><td>Ошибки OAuth / истёк токен</td><td>Выполните выход и повторную авторизацию в интерфейсе изделия.</td></tr>
+      <tr><td>Оверлей OBS пустой</td><td>Убедитесь, что URL содержит актуальный порт и параметр <code>?overlay=1</code>; обновите источник после перезапуска изделия.</td></tr>
+      <tr><td>Kick: «авторизуйся OAuth» или чат не подключён</td><td>Проверьте Client ID/Secret и redirect; scopes; slug канала; сеть; дождитесь статуса сокета.</td></tr>
+      <tr><td>YouTube: ошибка Google OAuth / порт занят</td><td>Согласуйте <code>GOOGLE_OAUTH_REDIRECT_PORT</code> и redirect URI в Google Cloud; включите YouTube Data API v3.</td></tr>
+      <tr><td>MemeAlerts не подключается</td><td>Проверьте полный URL OBS с <code>obsToken</code> или корректность JWT; статус во вкладке «Донаты».</td></tr>
+      <tr><td>DonationAlerts: ошибка OAuth</td><td>Redirect URI в кабинете DA должен совпадать с <code>…/api/auth/donation-alerts/callback</code> на вашем origin.</td></tr>
+      <tr><td>VK: ошибка redirect или сессии</td><td>Origin UI и зарегистрированный redirect VK ID должны совпадать по схеме, хосту и порту.</td></tr>
+      <tr><td>Интерфейс «не той» версии / пропали новые пункты настроек</td><td>На порту <code>3210</code> может отвечать уже запущенная другая копия CoronerChat. Закройте лишний процесс или запустите вторую копию с другим <code>CORONERCHAT_PORT</code>.</td></tr>
+      <tr><td>Zapret: кнопка запуска неактивна, встроенный режим недоступен</td><td>По умолчанию нужны свои команды в блоке Zapret (<strong>Общие</strong>) или включите встроенный путь: <code>CORONERCHAT_ZAPRET_BUILTIN=1</code> перед запуском изделия (Windows).</td></tr>
+    </tbody>
+  </table>
+  <p>Расширенная диагностика — в файле <code>runtime.log</code> в каталоге данных изделия; чувствительные поля в журнале маскируются.</p>
+
+  <h2>8. Информационная безопасность и защита данных (ориентиры по законодательству РФ)</h2>
+  <p class="meta"><strong>Важно:</strong> настоящий раздел описывает типовые риски и меры в связке с изделием CoronerChat и <strong>не заменяет</strong> юридическую консультацию, внутренние акты оператора-организации, локальный регламент по персональным данным или заключение по принадлежности к КИИ.</p>
+
+  <h3>8.1. Нормативная база и место изделия</h3>
+  <p>Эксплуатация изделия на территории РФ сопряжена с обработкой <strong>информации ограниченного доступа</strong> (OAuth-токены, секреты клиентов, ключи MemeAlerts) и, как правило, с обработкой <strong>персональных данных</strong> третьих лиц (участники чата: ники, тексты сообщений, иногда идентификаторы учётных записей платформ). Ключевые ориентиры:</p>
+  <ul class="compact">
+    <li><strong>152-ФЗ</strong> — определение ПДн, правовые основания и требования к оператору ПДн, сведения о трансграничной передаче, права субъектов, обеспечение безопасности ПДн.</li>
+    <li><strong>149-ФЗ</strong> — общие требования к защите информации в ИС и ответственность за нарушение порядка обработки.</li>
+    <li><strong>ПП РФ № 1119</strong> (в актуальной редакции) — типовые требования к мерам защиты при обработке ПДн в информационных системах персональных данных (ИСПДн); применимость зависит от того, признаётся ли развёртывание CoronerChat ИСПДн у юридического лица.</li>
+    <li><strong>Приказ ФСТЭК № 17</strong> — модель угроз и базовый язык для оценки рисков НСД, внедрения вредоносного ПО, утечки по каналам связи и т.п.</li>
+    <li><strong>ГОСТ Р ИСО/МЭК 27001</strong> (рекомендательно) — системное управление информационной безопасностью при внедрении изделия в ИТ-ландшафт организации.</li>
+  </ul>
+
+  <h3>8.2. Роли и зона ответственности</h3>
+  <ul class="compact">
+    <li><strong>Владелец ПК / локальный администратор:</strong> установка ОС и обновлений, антивирус, учётные записи Windows, межсетевой экран, физический доступ к машине, резервное копирование каталога данных.</li>
+    <li><strong>Оператор-стример (пользователь изделия):</strong> настройка CoronerChat, авторизации на внешних платформах, решение о трансляции/записи чата, передача экспорта настроек, реакция на инциденты утечки токена.</li>
+    <li><strong>Организация-работодатель (при корпоративном использовании):</strong> локальный акт о ПДн, назначение ответственного, учёт ИСПДн при необходимости, согласования с ИБ и юридической службой.</li>
+  </ul>
+
+  <h3>8.3. Активы и носители информации в изделии</h3>
+  <table class="dfd">
+    <thead><tr><th>Актив</th><th>Содержание / риск</th><th>Рекомендуемые меры</th></tr></thead>
+    <tbody>
+      <tr><td><code>app-state</code> и смежные JSON</td><td>Токены OAuth, настройки UI, списки скрытых авторов, глоссарий, закрепы</td><td>Шифрование тома ОС (BitLocker), ограничение доступа к профилю, запрет копирования на съёмные носители без шифрования</td></tr>
+      <tr><td><code>runtime.log</code></td><td>Диагностика; секреты маскируются, но остаётся контекст событий</td><td>Ротация и выборочная выгрузка; удаление перед передачей ПК в ремонт</td></tr>
+      <tr><td>Экспорт настроек</td><td>Полный дамп конфигурации, включая секреты</td><td>Хранить только в зашифрованном архиве; не отправлять в открытом виде</td></tr>
+      <tr><td>Кэш 7TV и медиа</td><td>Изображения эмодзи, метаданные каналов</td><td>Очищать при утилизации ПК; не считать «анонимным» при привязке к аккаунту</td></tr>
+      <tr><td>Оперативная память и сеть</td><td>Сообщения чата, ответы API</td><td>Не оставлять сессию без присмотра; блокировка рабочей станции по Win+L</td></tr>
+    </tbody>
+  </table>
+
+  <h3>8.4. Персональные данные (152-ФЗ): состав и минимизация</h3>
+  <p>Тексты сообщений чата, отображаемые ники и сопутствующие идентификаторы пользователей платформ могут квалифицироваться как ПДн при отсутствии безусловной анонимизации. Рекомендуется:</p>
+  <ul class="compact">
+    <li>Зафиксировать <strong>цель обработки</strong> (ведение эфира, модерация, архив стрима) и <strong>правовое основание</strong> (согласие, договор, законный интерес — по решению юриста организации).</li>
+    <li>Применять <strong>минимизацию</strong>: не включать лишние платформы; не экспортировать полные логи публично; ограничить время хранения резервных копий <code>CoronerChat-data</code>.</li>
+    <li>Для трансграничной передачи (Twitch, Google, Kick и др.) — оценить требования <strong>ст. 12 152-ФЗ</strong> и политики платформ; документировать факт передачи в локальном регламенте.</li>
+    <li>Обеспечить возможность <strong>блокировки</strong> обработки и удаления локальных данных при прекращении использования (удаление каталога данных и деинсталляция).</li>
+  </ul>
+
+  <h3>8.5. Модель угроз (сжато, по духу документов ФСТЭК)</h3>
+  <table class="dfd">
+    <thead><tr><th>Угроза</th><th>Проявление для CoronerChat</th><th>Меры</th></tr></thead>
+    <tbody>
+      <tr><td>НСД локально</td><td>Доступ постороннего к открытому UI на ПК стримера</td><td>Блокировка сессии ОС; отдельная учётная запись Windows; не хранить пароль OBS в открытом виде рядом с ПК</td></tr>
+      <tr><td>НСД по сети</td><td><code>CORONERCHAT_HOST=0.0.0.0</code> в ЛВС без фильтрации</td><td>По умолчанию привязка уже к <code>127.0.0.1</code>; при осознанном расширении до <code>0.0.0.0</code> — чувствительные эндпоинты (debug, экспорт/импорт настроек, OBS) с недоверенных адресов требуют <code>CORONERCHAT_DECK_TOKEN</code> (403 без него, п. 5.14, 8.6); дополнительно — сегментация VLAN + ACL, HTTPS-терминирование только при доверенной обратной прокси-конфигурации (не входит в изделие)</td></tr>
+      <tr><td>Вредоносное ПО</td><td>Кража <code>app-state</code>, перехват буфера обмена с токенами</td><td>Антивирус с актуальными базами; контроль автозагрузки; запрет неподписанных инсталляторов</td></tr>
+      <tr><td>Утечка по каналу поддержки</td><td>Отправка <code>runtime.log</code> или экспорта без редактирования</td><td>Ручная вырезка секретов; отдельный защищённый канал передачи</td></tr>
+      <tr><td>Ошибка прав модерации</td><td>Случайный бан/таймаут зрителя</td><td>Разграничить учётные записи «стример» и «модератор»; использовать тестовый канал</td></tr>
+      <tr><td>Компрометация OAuth</td><td>Утечка refresh-токена</td><td>Немедленный «Выйти» на всех сервисах изделия; отзыв приложения в кабинетах Twitch/VK/Google и смена секретов</td></tr>
+    </tbody>
+  </table>
+
+  <h3>8.6. Технические меры на стороне изделия и среды</h3>
+  <ul class="compact">
+    <li>Изделие использует <strong>TLS при обращении к внешним HTTPS API</strong> платформ; локальное хранилище состояния на диске не шифрует изделие самостоятельно — защита обеспечивается средствами ОС и организационными мерами.</li>
+    <li>Заголовки ответов HTML/JSON для API настроены с <code>Cache-Control: no-store</code> — снижение риска кэширования секретов промежуточными прокси (при корректной конфигурации браузера).</li>
+    <li>Журнал <code>runtime.log</code> применяет <strong>маскирование</strong> секретов — не полагаться на маскирование как на единственную защиту при публикации логов.</li>
+    <li>По умолчанию HTTP-сервер привязан к <code>127.0.0.1</code> (см. п. 5.14). Чувствительные и разрушающие маршруты (debug-логи, экспорт/импорт настроек, управление OBS, <code>/api/deck/*</code>) дополнительно проверяют источник запроса: с localhost — всегда разрешено, с другого адреса сети — только с корректным заголовком <code>X-CoronerChat-Deck-Token</code>, иначе 403/503.</li>
+    <li>Компонент <strong>zapret/winws</strong> при включении затрагивает сетевой стек ОС целиком; ошибочная конфигурация может нарушить доступность других приложений и создать новые векторы атаки — включать только уполномоченным персоналом и с отдельным локальным регламентом.</li>
+  </ul>
+
+  <h3>8.7. Организационные меры</h3>
+  <ul class="compact">
+    <li>Утвердить <strong>политику паролей</strong> для OBS WebSocket и для учётных записей платформ.</li>
+    <li>Вести <strong>учёт носителей</strong> с резервными копиями <code>CoronerChat-data</code>.</li>
+    <li>При увольнении сотрудника — <strong>очистка</strong> авторизаций в изделии и смена паролей связанных сервисов.</li>
+    <li>Привязать использование CoronerChat к <strong>инструкции по ИБ</strong> организации (если применимо).</li>
+  </ul>
+
+  <h3>8.8. Инциденты информационной безопасности</h3>
+  <p>При подозрении на компрометацию токенов или несанкционированный доступ: немедленно выполнить выход из всех интеграций в UI, удалить/заменить скомпрометированные OAuth-приложения в кабинетах платформ, сменить пароль OBS, проверить целостность исполняемых файлов изделия, при необходимости уведомить пользователей чата и <strong>уполномоченный орган по 152-ФЗ</strong> (для юридических лиц — в порядке, установленном локальными актами и законом).</p>
+
+  <h3>8.9. Соответствие требованиям при обработке ПДн в ИСПДн</h3>
+  <p>Если эксплуатация CoronerChat признаётся созданием ИСПДн, оператору-организации следует дополнительно: классифицировать ИСПДн по уровню защищённости, выполнить модель угроз по методике регулятора, внедрить организационные и технические меры по ПП № 1119, обеспечить учёт обращений субъектов ПДн. Изделие поставляется как прикладное ПО общего назначения и <strong>не сертифицирует</strong> автоматически развёртывание на конкретном уровне защищённости.</p>
+
+  <h2>9. Техническое обслуживание, резервное копирование и контроль работоспособности</h2>
+  <ul class="compact">
+    <li><strong>Резервное копирование:</strong> периодически копируйте каталог <code>CoronerChat-data</code> (portable / win-unpacked) или пользовательский профиль, указанный в документации к сборке, для сохранения настроек и истории состояния.</li>
+    <li><strong>Журналы:</strong> при обращении в поддержку приложите фрагмент <code>runtime.log</code> за период воспроизведения проблемы, удалив из скриншотов и вложений чувствительные данные вручную.</li>
+    <li><strong>Контроль на поставляемой сборке:</strong> в составе изделия может быть доступна встроенная smoke-проверка (см. <code>README.md</code>, ключ <code>--run-release-tests</code> для исполняемого файла).</li>
+    <li><strong>Сопровождение:</strong> изменения в программе сопровождаются обновлением комплекта документации; актуальность настоящего руководства проверяйте по версии в <code>package.json</code> и сопутствующим файлам в каталоге <code>docs/</code>.</li>
+  </ul>
+
+  <p class="meta" style="margin-top:1.5em;">Печать: формат A4, поля — по ГОСТ 19.106-78 и локальным требованиям организации. Техническое описание программы: <code>docs/coronerchat-architecture-print.html</code>.</p>
+</body>
+</html>
