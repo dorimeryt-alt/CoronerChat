@@ -211,23 +211,24 @@
   <div class="doc-front">
     <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
     <p class="doc-kind">Техническое описание</p>
-    <p class="doc-gost-note">Содержание разделов и аннотации — по ГОСТ 19.402-78 «ЕСПД. Описание программы. Требования к содержанию и оформлению»; классификация вида программного документа — по ГОСТ 19.101-77 «ЕСПД. Виды программ и программных документов»; требования к печатной копии — по ГОСТ 19.106-78 «ЕСПД. Требования к программным документам, выполненным печатным способом».</p>
+    <p class="doc-gost-note">Information item: <strong>Software Architecture Description</strong>. Content and viewpoints aligned with <strong>ISO/IEC/IEEE 42010</strong> (architecture description) and <strong>ISO/IEC/IEEE 15289</strong> (life-cycle information items). User/operator documentation is published separately per <strong>ISO/IEC 26514</strong>. Print layout targets A4 for reproducible distribution.</p>
     <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong></p>
 
     <h2 class="doc-block-title">Аннотация</h2>
     <p class="doc-abstract-label">К программе (изделию)</p>
     <p class="doc-abstract"><strong>CoronerChat</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов нескольких стриминговых и смежных сервисов (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live) в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея; авторизация на платформах по OAuth 2.0 (где применимо); доставка каталогов эмодзи и бейджей (в т.ч. через прокси HTTP изделия); интеграция с OBS WebSocket для телеметрии сцены; релей «now playing»; в десктопной сборке — оболочка на базе Electron и опциональное управление внешним компонентом фильтрации трафика (zapret). Изделие поставляется в виде исполняемых модулей Node.js и статических ресурсов UI, с опциональным установщиком Windows (NSIS).</p>
     <p class="doc-abstract-label">К настоящему документу</p>
-    <p class="doc-abstract">Настоящее техническое описание содержит сведения об архитектуре ПО «CoronerChat»: структурную модель в нотации IDEF0, контекстные и декомпозированные диаграммы потоков данных (DFD), описание взаимодействия с каждой внешней платформой и смежными HTTP-сервисами, перечень хранилищ данных, диаграммы процессов (BPMN) и последовательностей (UML), состав программных модулей, группы маршрутов HTTP и типы сообщений WebSocket, нефункциональные требования и словарь данных; в разделе 1 приведён <strong>перечень реализованных функций изделия</strong> (п. 1.5). Диаграммы, выполняемые средствами Mermaid в среде браузера, приведены для наглядности и сопровождения кода. Документ предназначен для разработчиков, системных аналитиков и лиц, ответственных за сопровождение комплекта программной документации. Эксплуатационная документация для оператора изложена в руководстве оператора (<code>docs/coronerchat-operation-print.html</code>, ГОСТ 19.505-79).</p>
+    <p class="doc-abstract">Настоящее техническое описание содержит сведения об архитектуре ПО «CoronerChat»: структурную модель в нотации IDEF0, контекстные и декомпозированные диаграммы потоков данных (DFD), описание взаимодействия с каждой внешней платформой и смежными HTTP-сервисами, перечень хранилищ данных, диаграммы процессов (BPMN) и последовательностей (UML), состав программных модулей, группы маршрутов HTTP и типы сообщений WebSocket, нефункциональные требования и словарь данных; в разделе 1 приведён <strong>перечень реализованных функций изделия</strong> (п. 1.5). Диаграммы, выполняемые средствами Mermaid в среде браузера, приведены для наглядности и сопровождения кода. Документ предназначен для разработчиков, системных аналитиков и лиц, ответственных за сопровождение комплекта программной документации. Эксплуатационная документация для оператора изложена в <code>docs/coronerchat-operation-print.html</code> и на сайте (<code>docs/guide.html</code>) в соответствии с ISO/IEC 26514.</p>
     <p class="doc-keywords"><strong>Ключевые слова:</strong> программная документация; техническое описание; CoronerChat; архитектура; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK Video Live; Kick; DonationAlerts; MemeAlerts; YouTube Live; Node.js; Electron.</p>
 
     <h2 class="doc-block-title">Нормативные и справочные ссылки</h2>
     <ul class="compact">
-      <li>ГОСТ 19.101-77 ЕСПД. Виды программ и программных документов.</li>
-      <li>ГОСТ 19.402-78 ЕСПД. Описание программы. Требования к содержанию и оформлению.</li>
-      <li>ГОСТ 19.106-78 ЕСПД. Требования к программным документам, выполненным печатным способом.</li>
-      <li>ГОСТ 19.505-79 ЕСПД. Руководство оператора. Требования к содержанию и оформлению (связанный документ комплекта: <code>docs/coronerchat-operation-print.html</code>).</li>
-      <li>ГОСТ 19.201-78 ЕСПД. Техническое задание. Требования к содержанию и оформлению (применимо к ссылкам на границы изделия).</li>
+      <li>ISO/IEC/IEEE 42010 — Systems and software engineering — Architecture description.</li>
+      <li>ISO/IEC/IEEE 15289 — Content of life-cycle information items (software documentation).</li>
+      <li>ISO/IEC 26514 — Requirements for designers and developers of user documentation.</li>
+      <li>ISO/IEC 12207 — Software life cycle processes (supply, operation, maintenance).</li>
+      <li>ISO/IEC 25010 — Systems and software Quality Requirements and Evaluation (SQuaRE).</li>
+      <li>ISO/IEC 27001 / 27002 — Information security management (controls mapping; see Security statement).</li>
       <li>ECMA-262 (JavaScript), WHATWG HTML Living Standard, WebSocket Protocol RFC 6455.</li>
       <li>Спецификации внешних систем: Twitch IRC / EventSub / Helix, VK Video Live API, Kick Chat, DonationAlerts, MemeAlerts, YouTube Data API / Google OAuth 2.0, 7TV (по используемым в коде конечным точкам).</li>
       <li>Исходный код изделия: каталоги <code>src/server/</code>, <code>src/providers/</code>, <code>src/electron/</code>, <code>package.json</code>.</li>
@@ -279,7 +280,7 @@
   <h3>1.2. Назначение документа</h3>
   <p>Формализация архитектуры для сопровождения, обучения и согласования изменений; договорённость о границах системы и внешних интерфейсах.</p>
   <h3>1.3. Область применения документа</h3>
-  <p>Разработка, сопровождение и выпуск CoronerChat. Эксплуатация оператором — по <code>docs/coronerchat-operation-print.html</code> (ГОСТ 19.505-79).</p>
+  <p>Разработка, сопровождение и выпуск CoronerChat. Эксплуатация оператором — по <code>docs/coronerchat-operation-print.html</code> и <code>docs/guide.html</code> (ISO/IEC 26514).</p>
   <h3>1.4. Границы системы</h3>
   <p><strong>В составе ПО:</strong> процесс Node.js (<code>ChatAppServer</code>), встроенный web-ui, провайдеры в <code>src/providers/</code>, при desktop — оболочка Electron.</p>
   <p><strong>Вне ПО:</strong> внешние платформы (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube, 7TV/CDN), OBS Studio, ОС, браузер пользователя при внешней авторизации, сеть и политики DPI (zapret).</p>
@@ -1095,9 +1096,9 @@ flowchart TB
   <p><strong>Локализация.</strong> Интерфейс поддерживает языки <code>ru</code>, <code>en</code>, <code>ro</code>, <code>de</code>, <code>fi</code> (словари <code>src/server/i18n/locales</code>, персист <code>uiLocale</code>). Подробнее: <code>docs/updates-and-releases.md</code>, <code>docs/i18n.md</code>.</p>
 
   <h2>15. Заключение</h2>
-  <p>В документе приведена архитектура ПО «CoronerChat» в нотациях IDEF0, DFD, BPMN и UML sequence; в п. 1.5 зафиксирован перечень реализованного функционала изделия; выполнены требования к документу «Описание программы» по ГОСТ 19.402-78 в части аннотации (включая аннотацию к программе и к документу), ключевых слов, ссылок на нормативные документы, терминов и основного технического текста; вид документа согласован с перечнем по ГОСТ 19.101-77. Эксплуатация изделия оператором описана в отдельном руководстве оператора (ГОСТ 19.505-79, файл <code>docs/coronerchat-operation-print.html</code>). При изменении кода необходимо синхронно обновлять обозначения маршрутов, имён файлов и диаграммы.</p>
+  <p>В документе приведена архитектура ПО «CoronerChat» в нотациях IDEF0, DFD, BPMN и UML sequence; в п. 1.5 зафиксирован перечень реализованного функционала изделия. Документ соответствует information item «Software Architecture Description» (ISO/IEC/IEEE 42010, ISO/IEC/IEEE 15289). Эксплуатация изделия оператором описана в <code>docs/coronerchat-operation-print.html</code> и <code>docs/guide.html</code> (ISO/IEC 26514). При изменении кода необходимо синхронно обновлять обозначения маршрутов, имён файлов и диаграммы.</p>
 
-  <p class="meta" style="margin-top:1.5em;">Версия изделия: см. <code>package.json</code>. Печать: формат A4, поля согласовать с требованиями к печатным программным документам (ГОСТ 19.106-78).</p>
+  <p class="meta" style="margin-top:1.5em;">Версия изделия: см. <code>package.json</code>. Печать: формат A4 (воспроизводимое распространение комплекта документации).</p>
 
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
