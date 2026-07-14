@@ -2,17 +2,16 @@
 
 Локальный каталог технической и операторской документации.
 
-| Документ | Назначение |
-|----------|------------|
-| [coronerchat-architecture-print.html](coronerchat-architecture-print.html) | Техническое описание архитектуры (IDEF0, DFD, модули) |
-| [coronerchat-operation-print.html](coronerchat-operation-print.html) | Руководство оператора (площадки, OAuth, API) |
-| [updates-and-releases.md](updates-and-releases.md) | Проверка обновлений, GitHub Releases, версии |
-| [i18n.md](i18n.md) | Локализации UI (ru/en/ro/de/fi) |
-| [public/](public/) | Публичные страницы для Wiki / GitHub Pages |
+| Документ | Норматив / роль | Назначение |
+|----------|-----------------|------------|
+| [tech/index.html](tech/index.html) | Реестр комплекта | Публичный указатель техдокументации |
+| [coronerchat-architecture-print.html](coronerchat-architecture-print.html) | ГОСТ 19.402-78 | Описание программы (архитектура, диаграммы) |
+| [coronerchat-operation-print.html](coronerchat-operation-print.html) | ГОСТ 19.505-79 | Руководство оператора |
+| [updates-and-releases.md](updates-and-releases.md) | Сопровождение | Проверка обновлений, GitHub Releases |
+| [i18n.md](i18n.md) | Сопровождение | Локализации UI |
+| [index.html](index.html) | Пользовательский сайт | Neon Arcade лендинг + гайды |
 
-Публичный feed обновлений: [dorimeryt-alt/CoronerChat](https://github.com/dorimeryt-alt/CoronerChat).
-
-Сборка PDF (если настроено):
+Публикация: GitHub Pages `https://dorimeryt-alt.github.io/CoronerChat/` · Wiki · Releases.
 
 ```bash
 npm run export:doc:architecture-pdf
