@@ -140,13 +140,13 @@
 
   <div class="doc-front">
     <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
-    <p class="doc-kind">Руководство оператора</p>
+    <p class="doc-kind">Operator / User Documentation</p>
     <p class="doc-gost-note">Information item: <strong>User / Operator Documentation</strong>. Structure and content aligned with <strong>ISO/IEC 26514</strong> and <strong>ISO/IEC/IEEE 15289</strong>. Life-cycle placement: operation and maintenance processes per <strong>ISO/IEC 12207</strong>. Information security controls mapped to <strong>ISO/IEC 27001/27002</strong>, privacy framework <strong>ISO/IEC 29100</strong>, and applicable Russian Federation law (152-FZ, 149-FZ). Print layout targets A4.</p>
-    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong></p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.5</strong></span></p>
 
     <h2 class="doc-block-title">Аннотация</h2>
     <p class="doc-abstract-label">К программе (изделию)</p>
-    <p class="doc-abstract"><strong>CoronerChat</strong> — прикладное ПО для стримеров и модераторов: объединение чатов Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live в единую ленту; веб-интерфейс и оверлей для OBS; десктопная сборка на базе Electron для Windows. Настоящее руководство описывает действия оператора (пользователя изделия) по установке, настройке, штатной эксплуатации и первичной диагностике без доступа к исходному коду.</p>
+    <p class="doc-abstract"><strong>CoronerChat 2.7.5</strong> — прикладное ПО для стримеров и модераторов: единая лента Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts; веб-UI и OBS overlay; UX-пакет эфира; статистика и достижения; локализация ru/en/ro/de/fi; автообновление с GitHub Latest; desktop Electron (Windows). Настоящее руководство описывает установку, настройку, штатную эксплуатацию и первичную диагностику без доступа к исходному коду. Расширенный web User Guide: <code>docs/guide.html</code>.</p>
     <p class="doc-abstract-label">К настоящему документу</p>
     <p class="doc-abstract">Документ содержит требования к среде исполнения, порядок установки и запуска, описание операций по платформам, <strong>полный перечень функций изделия, HTTP API и сохраняемых настроек интерфейса</strong> (п. 6), типовые неисправности (п. 7), <strong>информационную безопасность: международные стандарты и законодательство РФ</strong> (п. 8), обслуживание и резервное копирование (п. 9). Архитектура и протоколы — в Software Architecture Description (<code>docs/coronerchat-architecture-print.html</code>). Публичная web-версия руководства: <code>docs/guide.html</code>.</p>
     <p class="doc-keywords"><strong>Ключевые слова:</strong> user documentation; operator guide; CoronerChat; information security; personal data; 152-FZ; GDPR; ISO/IEC 27001; OAuth 2.0; Electron; OBS; Twitch; VK Video Live; Kick; YouTube Live; DonationAlerts; MemeAlerts.</p>
@@ -182,8 +182,8 @@
     </table>
   </div>
 
-  <h1>CoronerChat — руководство оператора</h1>
-  <p class="meta">Печатная форма A4. Версия изделия: см. поле <code>version</code> в <code>package.json</code>.</p>
+  <h1>CoronerChat — руководство оператора (v2.7.5)</h1>
+  <p class="meta">Печатная форма A4. Версия изделия: <strong>2.7.5</strong> (<code>package.json</code> / GitHub Latest). ISO/IEC 26514.</p>
 
   <h2>Содержание</h2>
   <ol class="toc compact">
@@ -202,7 +202,7 @@
   <h3>1.1. Назначение документа</h3>
   <p>Настоящее руководство оператора предназначено для обучения и повседневной эксплуатации ПО «CoronerChat» в штатных режимах. Документ не заменяет договор поставки, лицензионные соглашения сторонних сервисов и не описывает внутреннюю реализацию изделия.</p>
   <h3>1.2. Область применения изделия</h3>
-  <p>Изделие применяется для приёма, нормализации и отображения сообщений чатов стриминговых и смежных сервисов, локального поиска по буферу сообщений, отправки сообщений и ряда действий модерации (в объёме, предоставляемом API платформ и правами учётной записи), вывода оверлея в OBS, опциональной интеграции с OBS WebSocket и сценариев «now playing».</p>
+  <p>Изделие применяется для приёма, нормализации и отображения сообщений чатов стриминговых и смежных сервисов (включая Rutube), локального поиска по буферу, отправки сообщений и модерации (в объёме API платформ), вывода оверлея в OBS, UX-пакета эфира, локальной статистики/достижений, смены языка UI, автообновления с GitHub, опциональной интеграции OBS WebSocket и сценариев «now playing».</p>
 
   <h2>2. Требования к техническим средствам и программной среде</h2>
   <ul class="compact">
@@ -218,8 +218,8 @@
   <h3>3.2. Portable-сборка</h3>
   <p>Файл <code>CoronerChat &lt;версия&gt;.exe</code> или каталог <code>win-unpacked</code> с <code>CoronerChat.exe</code>. Сохраняйте рядом с исполняемым файлом каталог данных <code>CoronerChat-data</code> (создаётся автоматически) — в нём хранятся настройки, состояние приложения, журналы и кэш.</p>
   <h3>3.3. Обновление</h3>
-  <p>Установите новую версию поверх или замените portable-файлы, сохранив при необходимости каталог <code>CoronerChat-data</code>. После обновления рекомендуется один раз открыть изделие и проверить авторизации на платформах (при сбросе токенов выполните повторный вход).</p>
-  <p class="hint"><strong>Автообновление (2.7.4+).</strong> В настройках «Обновления» источник зашит: <code>dorimeryt-alt/CoronerChat</code>. При запуске изделие запрашивает GitHub Latest и предлагает Setup.exe. Не ориентируйтесь на архивные теги 2.25–2.35 как на «более новые», чем линия 2.7. Подробнее: <code>docs/updates-and-releases.md</code> и публичная страница обновлений на GitHub Pages / Wiki.</p>
+  <p>Установите новую версию поверх (NSIS) или замените portable-файлы, сохранив каталог <code>CoronerChat-data</code>. После обновления при необходимости повторите OAuth на площадках.</p>
+  <p class="hint"><strong>Автообновление (2.7.5).</strong> Канал зашит: <code>dorimeryt-alt/CoronerChat</code>. При запуске изделие запрашивает GitHub <strong>Latest</strong> (не архивные теги 2.25–2.35). Вкладки «Обновления»: проверить / скачать и установить Setup / пропустить версию / напомнить позже. API: <code>/api/update/check|install|dismiss</code>. Подробнее: <code>docs/updates-and-releases.md</code>, страница сайта <code>docs/update.html</code>.</p>
 
   <h2>4. Подготовка к работе</h2>
   <ol class="compact">
@@ -245,8 +245,9 @@
       <tr><td><strong>VK Video Live</strong></td><td>Да</td><td>OAuth VK ID: Client ID/Secret; redirect <code>/api/auth/vk/callback</code> относительно URL открытого UI</td><td>Да</td><td>Отдельное поле ввода; ответ на сообщение; часть команд «/» — п. 5.9</td></tr>
       <tr><td><strong>Kick</strong></td><td>Да</td><td>OAuth Kick (PKCE): Client ID/Secret; redirect <code>/api/auth/kick/callback</code>; scope с <code>chat:write</code></td><td>Да</td><td>Slug канала; дождаться подключения сокета — п. 5.10</td></tr>
       <tr><td><strong>YouTube Live</strong></td><td>Да</td><td>Google OAuth: в desktop задайте <code>GOOGLE_OAUTH_CLIENT_ID</code>, <code>GOOGLE_OAUTH_CLIENT_SECRET</code>, redirect в консоли Google вида <code>http://127.0.0.1:&lt;порт&gt;/</code> (<code>GOOGLE_OAUTH_REDIRECT_PORT</code>, по умолчанию 45280); включить YouTube Data API v3</td><td>Да</td><td>Идентификатор трансляции / ссылка — п. 5.11</td></tr>
+      <tr><td><strong>Rutube</strong></td><td>Да</td><td>Cookie-сессия через встроенное окно входа (desktop); чтение чата — без сессии</td><td>Да (после входа)</td><td>URL эфира <code>rutube.ru/live/…</code> — п. 5.13a</td></tr>
       <tr><td><strong>DonationAlerts</strong></td><td>Да (донаты и связанные события)</td><td>OAuth: Client ID/Secret; redirect <code>/api/auth/donation-alerts/callback</code></td><td>Нет</td><td>Поток событий в ленту и центр уведомлений — п. 5.12</td></tr>
-      <tr><td><strong>MemeAlerts</strong></td><td>Да</td><td>Токен из ссылки OBS (<code>?obsToken=…</code>) или JWT; без OAuth того же типа, что у DonationAlerts</td><td>Нет</td><td>Socket.IO; фильтр мин. суммы; скрытие строк в чате — п. 5.13</td></tr>
+      <tr><td><strong>MemeAlerts</strong></td><td>Да</td><td>Токен из ссылки OBS (<code>?obsToken=…</code>) или JWT; без OAuth того же типа, что у DonationAlerts</td><td>Нет</td><td>Socket.IO; фильтр мин. суммы; фильтр ленты «Донаты» включает DA+MA — п. 5.13</td></tr>
     </tbody>
   </table>
 
@@ -254,13 +255,13 @@
   <p>Для каждой платформы используйте свою вкладку или блок в настройках. При запросе изделия откройте ссылку в браузере, подтвердите доступ, вернитесь в UI. Redirect URI в кабинете разработчика внешнего сервиса должен совпадать с подсказкой изделия (для локального UI обычно <code>http://127.0.0.1:&lt;порт CoronerChat&gt;/…</code>). Не показывайте посторонним экраны с кодами входа и секретами.</p>
 
   <h3>5.4. Отправка сообщений и модерация</h3>
-  <p>Отправка в чат доступна для <strong>Twitch, VK Video Live, Kick и YouTube Live</strong> (отдельные поля ввода или переключатель активного композера в UI). <strong>DonationAlerts</strong> и <strong>MemeAlerts</strong> поставляют в ленту уведомления о донатах и смежных событиях, а не двусторонний текстовый чат платформы. Модерация сообщений в объёме Helix и связанных API реализована преимущественно для <strong>Twitch</strong>; для других платформ ориентируйтесь на доступные кнопки у сообщения после авторизации. При смене прав OAuth выполните выход и повторный вход.</p>
+  <p>Отправка в чат доступна для <strong>Twitch, VK Video Live, Kick, YouTube Live и Rutube</strong> (после cookie-входа). <strong>DonationAlerts</strong> и <strong>MemeAlerts</strong> поставляют в ленту уведомления о донатах, а не двусторонний текстовый чат. Модерация Helix — преимущественно <strong>Twitch</strong>.</p>
 
   <h3>5.5. Смена названия и категории трансляции</h3>
   <p>Для <strong>Twitch</strong> — через интерфейс изделия при наличии прав (Helix). Для остальных платформ используйте кабинеты самих сервисов или возможности API, если они добавлены в вашей версии UI.</p>
 
   <h3>5.6. Режим оверлея для OBS</h3>
-  <p>В Browser Source укажите URL вида <code>http://127.0.0.1:3210/?overlay=1</code>, подставив фактический порт, если он отличается от <code>3210</code>. Режим скрывает панели настроек и оптимизирует вёрстку под наложение на сцену. События отдельных источников (например, DonationAlerts / MemeAlerts) могут настраиваться фильтрами видимости в основном UI.</p>
+  <p>В Browser Source укажите URL вида <code>http://127.0.0.1:3210/?overlay=1</code> (подставьте фактический порт). Дополнительно: <code>?musicOverlay=1</code>, <code>?alerts=1</code>, <code>?goal=1</code>, <code>?vote=1</code>, <code>?recap=1</code> (итоги эфира), <code>?modview=1</code> (LAN для модеров). В UX-пакете есть «Копировать все OBS URL».</p>
 
   <h3>5.7. Now playing и медиа-сессия Windows</h3>
   <p>В настройках укажите HTTP bridge URL опроса «текущего трека» или используйте локальный режим считывания системной медиа-сессии Windows (если доступен в вашей сборке). Формат ответа bridge описан в <code>README.md</code> репозитория.</p>
@@ -309,8 +310,21 @@
   <h3>5.13. MemeAlerts — порядок работы</h3>
   <ul class="compact">
     <li><strong>Токен:</strong> в личном кабинете MemeAlerts откройте «Ссылку для OBS»; скопируйте URL целиком — изделие извлечёт <code>obsToken</code> из query-параметра, либо вставьте JWT вручную.</li>
-    <li><strong>Подключение:</strong> кнопка сохранения токена во вкладке «Донаты»; статус подключения отображается в UI.</li>
-    <li><strong>Фильтрация:</strong> минимальная сумма доната (руб.); опция скрыть события MemeAlerts в текстовом чате; в оверлее донаты MemeAlerts могут быть скрыты по логике UI — проверьте настройки перед эфиром.</li>
+    <li><strong>Подключение:</strong> кнопка сохранения токена во вкладке «Донаты»; статус опирается на наличие токена (<code>tokenConfigured</code>) и состояние сокета.</li>
+    <li><strong>Фильтрация:</strong> минимальная сумма; скрытие строк MA; фильтр ленты <strong>«Донаты»</strong> показывает события и DonationAlerts, и MemeAlerts.</li>
+  </ul>
+
+  <h3>5.13a. Rutube — порядок работы</h3>
+  <ul class="compact">
+    <li><strong>Чтение чата:</strong> вкладка Rutube → URL эфира вида <code>rutube.ru/live/video/…</code> → «Подключить». Сообщения поступают через публичный poll API.</li>
+    <li><strong>Отправка:</strong> «Встроенное окно входа» (desktop) для cookie-сессии; затем статус сессии и поле ввода. API: <code>POST /api/settings/rutube</code>, <code>/api/auth/rutube/browser|refresh</code>.</li>
+  </ul>
+
+  <h3>5.13b. Язык интерфейса (i18n)</h3>
+  <ul class="compact">
+    <li><strong>Настройки → Общие:</strong> выбор <code>ru</code> / <code>en</code> / <code>ro</code> / <code>de</code> / <code>fi</code>.</li>
+    <li>Сохранение: <code>POST /api/settings/locale</code>, персист <code>uiLocale</code>.</li>
+    <li>С версии <strong>2.7.5</strong> смена языка не сбрасывает чекбоксы и вложенную разметку контролов.</li>
   </ul>
 
   <h3>5.14. Переменные окружения (полный перечень по изделию)</h3>
@@ -347,14 +361,17 @@
   <h2>6. Полный перечень функций изделия, программных интерфейсов и настроек</h2>
   <p>Ниже зафиксированы пользовательские возможности и программные интерфейсы по коду сервера (<code>src/server/chat-app-server.js</code>) и UI (<code>src/server/web-ui.js</code>). Точные тела запросов и побочные эффекты см. в исходных текстах и в техническом описании архитектуры.</p>
 
-  <h3>6.1. Вкладки панели настроек (Drawer)</h3>
+  <h3>6.1. Вкладки панели настроек (Drawer) — 2.7.5</h3>
   <ul class="compact">
-    <li><strong>Общие:</strong> подключение каналов Twitch/VK; блок <strong>Zapret / обход DPI</strong>; медиа-ссылки; платформы; часть параметров отображения при первом открытии переносится на вкладку «Вид»; правила подсветки сообщений; авто-ответы; таймер «кухня» и оверлей; браузерные уведомления; экспорт/импорт переносимого пакета настроек.</li>
-    <li><strong>Twitch, VK, YouTube, Kick:</strong> Client ID/Secret где нужно, OAuth/Device Flow/Google/Kick PKCE, статусы, поля канала или ссылки на трансляцию.</li>
-    <li><strong>Донаты:</strong> DonationAlerts (OAuth); MemeAlerts (токен OBS/JWT); минимальные суммы; скрытие событий в чате/оверлее.</li>
-    <li><strong>Вид:</strong> тема, акцент, шрифты приложения/чата/оверлея/музыки, веса шрифта, варианты оверлея, фон, плотность, режим цветовой коррекции, медиа и ссылки в сообщениях, пороги «экономии» и анимаций, цифровые часы, сводка зрителей, телеметрия OBS, подсказка VK-композера, панель закрепов, роль-действия, центр модерации, маркеры платформ, режим прокрутки, профиль планшета, скрытие авторов, глоссарий упоминаний, баннеры предупреждений в шапке, онбординг.</li>
-    <li><strong>Интеграции:</strong> OBS (WebSocket URL/пароль, подключение, запуск OBS, URL оверлея, QR-планшет); now playing (bridge URL, media session, ручной ввод); relay 7TV; пакетный prefetch 7TV; прокси Electron для YouTube/Google в скрытых окнах (desktop); проверка обновлений. Управление zapret/winws — в блоке Zapret на вкладке «Общие» (п. 5.15).</li>
-    <li><strong>О приложении:</strong> справочные тексты и версия.</li>
+    <li><strong>Общие:</strong> язык UI (i18n); подключение каналов; блок Zapret; правила подсветки; авто-ответы; уведомления; экспорт/импорт настроек.</li>
+    <li><strong>Twitch, VK, YouTube, Kick, Rutube:</strong> OAuth/сессии, каналы/URL эфира, статусы.</li>
+    <li><strong>Донаты:</strong> DonationAlerts (OAuth); MemeAlerts (OBS JWT); мин. суммы; скрытие; общий фильтр «Донаты» в ленте.</li>
+    <li><strong>Эфир:</strong> UX-пакет — чеклист, пресеты, алерты/goal/vote, favorites, keywords, resend, song request, soft-confirm, Safe mode.</li>
+    <li><strong>Статистика / Достижения:</strong> история эфиров, категории/игры, топы чата и донатов, полка ачивок (только в приложении).</li>
+    <li><strong>Вид:</strong> пресеты оформления (в т.ч. Arcade), шрифты, оверлеи, плотность, планшет, скрытые авторы.</li>
+    <li><strong>Интеграции:</strong> OBS WebSocket, now playing, 7TV relay/prefetch, LAN/QR планшет, deck.</li>
+    <li><strong>Обновления:</strong> проверка GitHub Latest, установка Setup, skip-версия.</li>
+    <li><strong>О приложении:</strong> версия, User Guide (long-read), помощник настройки, поддержка автора.</li>
   </ul>
 
   <h3>6.2. Главное окно: чат, шапка, вспомогательные панели</h3>
@@ -362,7 +379,7 @@
     <li>Единая лента с цветовой маркировкой источника; фильтр по платформе; поиск; экспорт и локальная очистка буфера.</li>
     <li>Сводка зрителей, карточки статусов Twitch/VK/YouTube, DonationAlerts/MemeAlerts, права Helix.</li>
     <li>Центр событий (event bus); телеметрия OBS в шапке; кухня / now playing / музыкальный оверлей.</li>
-    <li>Композеры Twitch, VK, Kick, YouTube; совместная отправка строки в Twitch и VK; ответы VK; подсказки slash и @.</li>
+    <li>Композеры Twitch, VK, Kick, YouTube, Rutube; совместная отправка строки в Twitch и VK; ответы VK; подсказки slash и @.</li>
     <li>Модерация у сообщения (Twitch), локальное скрытие, закреп (с проверкой прав), контекст пользователя (ПКМ/история), 7TV picker.</li>
     <li>Карточки событий Twitch (channel points, hype train и др.) согласно фильтрам категорий в настройках вида.</li>
   </ul>
@@ -374,12 +391,12 @@
     <li>Центр модерации (настраиваемый набор быстрых действий через API изделия).</li>
   </ul>
 
-  <h3>6.4. Now playing, кухня, 7TV, relay, обновления</h3>
+  <h3>6.4. Now playing, кухня, 7TV, relay, обновления, статистика</h3>
   <ul class="compact">
-    <li>Опрос внешнего bridge, ручное обновление трека, локальная media session Windows (в поддерживаемой сборке).</li>
-    <li>Таймер «кухня» с оверлеем и опциональной отбивкой в чат.</li>
-    <li>Каталоги и прокси эмодзи/бейджей 7TV и платформ; relay и DoH-настройки; прогрев кэша.</li>
-    <li>Параметры и проверка обновлений приложения (если предусмотрено каналом поставки).</li>
+    <li>Опрос внешнего bridge, ручное обновление трека, локальная media session Windows.</li>
+    <li>Таймер «кухня» с оверлеем; каталоги 7TV; relay и prefetch.</li>
+    <li>Автообновление с GitHub Latest (check / install / dismiss) — п. 3.3.</li>
+    <li>Локальная статистика эфиров и достижения; публичный recap <code>?recap=1</code>.</li>
   </ul>
 
   <h3>6.5. Диагностика и перенос</h3>
@@ -399,17 +416,18 @@
       <tr><td>Авторизация VK</td><td>POST <code>…/vk/config|start|poll|logout|browser|implicit-token|start-implicit</code>; GET <code>…/vk/callback</code></td></tr>
       <tr><td>YouTube (Google)</td><td>POST <code>/api/auth/youtube/google|logout</code></td></tr>
       <tr><td>DonationAlerts</td><td>POST <code>…/donation-alerts/config|start|poll|logout</code>; GET <code>…/callback</code></td></tr>
-      <tr><td>Kick</td><td>POST <code>…/kick/config|start|poll|logout</code>; GET <code>…/kick/callback</code></td></tr>
+      <tr><td>Kick</td><td>POST <code>…/kick/config|start|poll|logout|browser</code>; GET <code>…/kick/callback</code></td></tr>
+      <tr><td>Rutube</td><td>POST <code>/api/settings/rutube</code>; POST <code>/api/auth/rutube/browser|refresh</code></td></tr>
       <tr><td>MemeAlerts</td><td>POST <code>/api/meme-alerts/connect|disconnect</code></td></tr>
       <tr><td>Каталоги и ассеты</td><td>GET <code>/api/7tv/catalog|health|global-emote|asset|prefetched-asset</code>, GET/POST prefetch; GET <code>/api/twitch/badges|chatters|asset|emotes</code>; GET <code>/api/vk/catalog|asset</code></td></tr>
       <tr><td>Настройки (чтение)</td><td>GET <code>/api/settings/obs|relay|zapret|update</code></td></tr>
-      <tr><td>Настройки (запись)</td><td>POST <code>/api/settings/ui|obs|now-playing|youtube|kick|donation-filters|relay|zapret|update</code>; POST transfer <code>export|import</code></td></tr>
-      <tr><td>OBS WebSocket</td><td>POST <code>/api/obs/launch|connect|disconnect|stream/start|stop|record/start|stop|output|scene/program</code>; GET <code>/api/obs/outputs|scenes|preview</code></td></tr>
+      <tr><td>Настройки (запись)</td><td>POST <code>/api/settings/ui|locale|obs|now-playing|youtube|kick|rutube|donation-filters|relay|zapret|update</code>; POST transfer <code>export|import</code></td></tr>
+      <tr><td>OBS WebSocket</td><td>POST <code>/api/obs/launch|connect|disconnect|stream/start|stop|record/start|stop|output|scene/program</code>; GET <code>/api/obs/outputs|scenes|preview</code> (+ mixer/mute/studio-mode по сборке)</td></tr>
       <tr><td>Now playing / кухня</td><td>GET/POST <code>/api/now-playing</code>, POST <code>…/manual|refresh</code>; POST <code>/api/kitchen</code></td></tr>
       <tr><td>Модерация и чат</td><td>POST <code>/api/channel|chat/send|chat/clear-local|platforms/enable</code>; POST <code>/api/moderation/delete-message|timeout-user|ban-user|unban-user</code>; GET/POST <code>/api/moderation/center</code>; POST <code>/api/admin/pin-message</code></td></tr>
       <tr><td>Twitch-расширения</td><td>POST <code>/api/poll/create|end</code>, <code>/api/prediction/lock|create|resolve|cancel</code>, <code>/api/raid/start|cancel</code>, <code>/api/twitch/clip</code>, <code>/api/stream/category|title</code>; GET <code>/api/stream/category-search</code></td></tr>
       <tr><td>Zapret</td><td>POST <code>/api/zapret/start|stop</code></td></tr>
-      <tr><td>Обновления</td><td>POST <code>/api/update/check</code></td></tr>
+      <tr><td>Обновления</td><td>POST <code>/api/update/check|install|dismiss</code></td></tr>
       <tr><td>Диагностика</td><td>GET <code>/api/debug/logs</code>; POST <code>…/clear|open</code>; POST <code>/api/debug/client-log</code>; GET <code>/api/user-context</code></td></tr>
     </tbody>
   </table>
@@ -428,9 +446,12 @@
       <tr><td>Оверлей OBS пустой</td><td>Убедитесь, что URL содержит актуальный порт и параметр <code>?overlay=1</code>; обновите источник после перезапуска изделия.</td></tr>
       <tr><td>Kick: «авторизуйся OAuth» или чат не подключён</td><td>Проверьте Client ID/Secret и redirect; scopes; slug канала; сеть; дождитесь статуса сокета.</td></tr>
       <tr><td>YouTube: ошибка Google OAuth / порт занят</td><td>Согласуйте <code>GOOGLE_OAUTH_REDIRECT_PORT</code> и redirect URI в Google Cloud; включите YouTube Data API v3.</td></tr>
-      <tr><td>MemeAlerts не подключается</td><td>Проверьте полный URL OBS с <code>obsToken</code> или корректность JWT; статус во вкладке «Донаты».</td></tr>
+      <tr><td>MemeAlerts не подключается</td><td>Проверьте полный URL OBS с <code>obsToken</code> или корректность JWT; статус во вкладке «Донаты». Фильтр ленты «Донаты» показывает и DA, и MA.</td></tr>
       <tr><td>DonationAlerts: ошибка OAuth</td><td>Redirect URI в кабинете DA должен совпадать с <code>…/api/auth/donation-alerts/callback</code> на вашем origin.</td></tr>
       <tr><td>VK: ошибка redirect или сессии</td><td>Origin UI и зарегистрированный redirect VK ID должны совпадать по схеме, хосту и порту.</td></tr>
+      <tr><td>Rutube: чат читается, отправка не работает</td><td>Выполните «Встроенное окно входа» во вкладке Rutube (cookie-сессия). Чтение работает без сессии; отправка — только после входа.</td></tr>
+      <tr><td>После смены языка «отвалились» чекбоксы / UI</td><td>Исправлено в <strong>2.7.5</strong> (applyI18nDom). Установите Latest с GitHub; при 2.7.4 и ниже — обновитесь вручную.</td></tr>
+      <tr><td>Предлагают обновиться на 2.35.x вместо 2.7.x</td><td>Архивные теги. С 2.7.5 канал читает GitHub <strong>Latest</strong>. Один раз поставьте 2.7.5+ с Releases.</td></tr>
       <tr><td>Интерфейс «не той» версии / пропали новые пункты настроек</td><td>На порту <code>3210</code> может отвечать уже запущенная другая копия CoronerChat. Закройте лишний процесс или запустите вторую копию с другим <code>CORONERCHAT_PORT</code>.</td></tr>
       <tr><td>Zapret: кнопка запуска неактивна, встроенный режим недоступен</td><td>По умолчанию нужны свои команды в блоке Zapret (<strong>Общие</strong>) или включите встроенный путь: <code>CORONERCHAT_ZAPRET_BUILTIN=1</code> перед запуском изделия (Windows).</td></tr>
     </tbody>
