@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Обновления — CoronerChat</title>
+  <meta name="description" content="Автообновление CoronerChat с GitHub Latest, пропуск версии, ручная установка." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -19,46 +20,67 @@
         <a href="install.html">Install</a>
         <a href="update.html" aria-current="page">Update</a>
         <a href="platforms.html">Platforms</a>
+        <a href="guide.html">Guide</a>
+        <a href="security.html">Security</a>
+        <a href="tech/index.html">Tech</a>
         <a href="faq.html">FAQ</a>
-        <a href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
       </nav>
     </header>
 
     <header class="page-hero">
+      <p class="section-label">Stage 02 · Patch</p>
       <h1>Обновления</h1>
-      <p>Канал зашит в приложение: <code>dorimeryt-alt/CoronerChat</code>. Проверка при каждом запуске.</p>
+      <p>Канал зашит: <code>dorimeryt-alt/CoronerChat</code>. Проверка при каждом запуске — без лишних настроек.</p>
     </header>
 
-    <article class="prose">
-      <h2>Из приложения (рекомендуется)</h2>
-      <ol>
-        <li>Настройки → <strong>Обновления</strong> — или баннер на главном экране.</li>
-        <li>«Проверить сейчас» / автопроверка при старте (галочка включена по умолчанию).</li>
-        <li><strong>Скачать и установить</strong> — качается Setup во временную папку и запускается NSIS.</li>
-        <li>Либо <strong>Пропустить эту версию</strong> (больше не показывать её) / <strong>Напомнить позже</strong> (только до перезапуска).</li>
-      </ol>
+    <div class="stage-grid">
+      <article class="stage-card">
+        <span class="stage-num">01 · Check</span>
+        <h3>Баннер или вкладка</h3>
+        <p>При старте — баннер на главном экране. Или ⚙ → <strong>Обновления</strong> → «Проверить сейчас».</p>
+      </article>
+      <article class="stage-card">
+        <span class="stage-num">02 · Install</span>
+        <h3>Скачать и установить</h3>
+        <p>Setup качается во временную папку и запускает NSIS. После мастера — перезапуск CoronerChat.</p>
+      </article>
+      <article class="stage-card">
+        <span class="stage-num">03 · Skip</span>
+        <h3>Пропустить версию</h3>
+        <p>«Пропустить эту версию» — больше не показывать её. «Напомнить позже» — только до перезапуска.</p>
+      </article>
+      <article class="stage-card">
+        <span class="stage-num">04 · Manual</span>
+        <h3>Вручную с GitHub</h3>
+        <p>Скачай Setup с <a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Releases</a> и поставь поверх. Data-папка останется.</p>
+      </article>
+    </div>
 
-      <div class="panel tip">
-        С версии <strong>2.7.5</strong> приложение берёт релиз, помеченный на GitHub как <strong>Latest</strong>.
-        Архивные теги вроде <code>2.35.1</code> больше не перебивают линию <code>2.7.x</code>.
+    <section class="section">
+      <p class="section-label">Latest lock</p>
+      <h2>Почему не 2.35.x</h2>
+      <p class="lead">С 2.7.5 приложение читает GitHub <strong>Latest</strong> и отсекает legacy-архив (2.25–2.35), который ломал semver-сравнение.</p>
+      <div class="badge-row">
+        <span class="badge ok">Latest feed</span>
+        <span class="badge">stable by default</span>
+        <span class="badge warn">legacy tags ignored</span>
       </div>
+      <div class="panel tip">Сидишь на 2.7.4 и видишь странный апдейт? Один раз поставь <strong>2.7.5+</strong> вручную с Releases — дальше канал будет чистым.</div>
+    </section>
 
-      <h2>Вручную</h2>
-      <p>Скачай Setup с <a href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Releases</a> и установи поверх. Папка <code>CoronerChat-data</code> останется.</p>
-
+    <section class="section">
+      <p class="section-label">Channels</p>
       <h2>Каналы релизов</h2>
-      <ul>
-        <li><strong>Только стабильные</strong> — GitHub Latest (по умолчанию).</li>
-        <li><strong>Включая prerelease</strong> — если нужно ловить тестовые теги.</li>
-      </ul>
-
-      <h2>Публикация (для сборщиков)</h2>
-      <div class="panel">
-        <code>npm run pack:win:installer</code><br />
-        <code>npm run release:github</code>
+      <div class="feature-strip">
+        <div class="feature-cell"><strong>Stable</strong><span>Только GitHub Latest (по умолчанию)</span></div>
+        <div class="feature-cell"><strong>Prerelease</strong><span>Опция «включая prerelease» в настройках</span></div>
+        <div class="feature-cell"><strong>Data safe</strong><span>CoronerChat-data не трогается установщиком</span></div>
       </div>
-      <p>Notes берутся из changelog в <code>build/installer.nsh</code>.</p>
-    </article>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/dorimeryt-alt/CoronerChat/releases/latest">Открыть Latest</a>
+        <a class="btn btn-ghost" href="faq.html">FAQ</a>
+      </div>
+    </section>
 
     <footer class="site-footer">
       <a href="index.html">← На главную</a> · © C0R0N3R
