@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoronerChat — техническое описание архитектуры ПО (печать)</title>
+  <style>
+    :root {
+      --ink: #111;
+      --muted: #444;
+      --line: #222;
+      --box-bg: #f7f7f7;
+      --accent: #5b21b6;
+      --table-head: #e8e0f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.45;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 14mm 12mm 24mm;
+      background: #fff;
+      font-size: 10.5pt;
+    }
+    h1 { font-size: 1.45rem; margin: 0 0 0.35em; }
+    h2 {
+      font-size: 1.12rem;
+      margin: 1.35em 0 0.45em;
+      padding-bottom: 0.2em;
+      border-bottom: 2px solid var(--accent);
+      break-after: avoid;
+    }
+    p.meta { color: var(--muted); font-size: 0.88rem; margin: 0 0 1em; }
+    ul.compact, ol.compact { margin: 0.35em 0 0.75em 1.15em; }
+    code { font-size: 0.92em; background: #f0f0f0; padding: 0 0.25em; border-radius: 3px; }
+    .hint {
+      background: #f0f4ff;
+      border: 1px solid #c4d4ff;
+      padding: 0.6em 0.8em;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin: 0.75em 0;
+    }
+    .diagram {
+      margin: 0.85em 0 1.1em;
+      padding: 8px;
+      border: 1px solid #bbb;
+      border-radius: 8px;
+      background: #fafafa;
+      overflow: auto;
+    }
+    .mermaid { text-align: center; }
+    table.dfd {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin: 0.6em 0 1em;
+    }
+    table.dfd th, table.dfd td {
+      border: 1px solid #999;
+      padding: 5px 7px;
+      vertical-align: top;
+    }
+    table.dfd th { background: var(--table-head); text-align: left; }
+    .idef0-wrap { margin: 0.85em 0; break-inside: avoid; page-break-inside: avoid; }
+    .idef0-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.35em; }
+    .idef0 {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+      line-height: 0;
+    }
+    .idef0-canvas {
+      width: 100%;
+      max-width: 620px;
+      height: auto;
+      display: block;
+      border: 1px solid #888;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+    .idef0-fo {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      font-size: 8.5px;
+      line-height: 1.22;
+      color: #111;
+      box-sizing: border-box;
+      padding: 3px 5px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .idef0-fo--in {
+      text-align: right;
+      justify-content: flex-end;
+      padding-right: 7px;
+    }
+    .idef0-fo--out {
+      text-align: left;
+      justify-content: flex-start;
+      padding-left: 7px;
+    }
+    .idef0-fo--core { font-weight: 700; font-size: 9.5px; line-height: 1.2; }
+    .idef0-fo code { font-size: 8.2px; background: #e8e8ec; padding: 0 0.2em; border-radius: 2px; }
+    .toc { font-size: 0.88rem; margin: 0.5em 0 1em; }
+    .toc li { margin: 0.2em 0; }
+    .doc-front {
+      border: 1px solid #999;
+      padding: 10mm 8mm;
+      margin-bottom: 1.25em;
+      background: #fff;
+      break-inside: avoid;
+    }
+    .doc-front .doc-logo-wrap {
+      text-align: center;
+      margin: 0 0 5mm;
+      padding: 0;
+    }
+    .doc-front .doc-logo {
+      width: 16mm;
+      height: 16mm;
+      object-fit: contain;
+      vertical-align: middle;
+    }
+    .doc-front .doc-kind {
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin: 0.25em 0 0.15em;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .doc-front .doc-name {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0.15em 0 0.75em;
+    }
+    .doc-gost-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0 0 0.85em;
+      line-height: 1.35;
+    }
+    .doc-abstract-label {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin: 0.65em 0 0.25em;
+    }
+    .doc-keywords {
+      font-size: 0.84rem;
+      margin: 0.65em 0 0;
+      text-align: justify;
+    }
+    .doc-front h2.doc-block-title {
+      font-size: 0.95rem;
+      margin: 0.85em 0 0.35em;
+      padding: 0;
+      border: none;
+      color: var(--ink);
+    }
+    .doc-front .doc-abstract {
+      text-align: justify;
+      font-size: 0.88rem;
+      margin: 0 0 0.5em;
+    }
+    .doc-caption {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0.15em 0 0.45em;
+      text-align: center;
+    }
+    h2 + h3 { margin-top: 0.5em; }
+    h3 {
+      font-size: 0.95rem;
+      margin: 0.85em 0 0.3em;
+      color: var(--ink);
+      font-weight: 700;
+    }
+    h4 {
+      font-size: 0.9rem;
+      margin: 0.75em 0 0.25em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    @page { size: A4; margin: 11mm; }
+    @media print {
+      body { padding: 0; max-width: none; font-size: 10pt; }
+      .no-print { display: none !important; }
+      .diagram, .idef0-wrap, .doc-front, h2, table.dfd { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;left:-9999px;overflow:hidden" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="idef0-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#222"></path>
+      </marker>
+    </defs>
+  </svg>
+
+  <div class="doc-front">
+    <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
+    <p class="doc-kind">Техническое описание</p>
+    <p class="doc-gost-note">Содержание разделов и аннотации — по ГОСТ 19.402-78 «ЕСПД. Описание программы. Требования к содержанию и оформлению»; классификация вида программного документа — по ГОСТ 19.101-77 «ЕСПД. Виды программ и программных документов»; требования к печатной копии — по ГОСТ 19.106-78 «ЕСПД. Требования к программным документам, выполненным печатным способом».</p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong></p>
+
+    <h2 class="doc-block-title">Аннотация</h2>
+    <p class="doc-abstract-label">К программе (изделию)</p>
+    <p class="doc-abstract"><strong>CoronerChat</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов нескольких стриминговых и смежных сервисов (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live) в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея; авторизация на платформах по OAuth 2.0 (где применимо); доставка каталогов эмодзи и бейджей (в т.ч. через прокси HTTP изделия); интеграция с OBS WebSocket для телеметрии сцены; релей «now playing»; в десктопной сборке — оболочка на базе Electron и опциональное управление внешним компонентом фильтрации трафика (zapret). Изделие поставляется в виде исполняемых модулей Node.js и статических ресурсов UI, с опциональным установщиком Windows (NSIS).</p>
+    <p class="doc-abstract-label">К настоящему документу</p>
+    <p class="doc-abstract">Настоящее техническое описание содержит сведения об архитектуре ПО «CoronerChat»: структурную модель в нотации IDEF0, контекстные и декомпозированные диаграммы потоков данных (DFD), описание взаимодействия с каждой внешней платформой и смежными HTTP-сервисами, перечень хранилищ данных, диаграммы процессов (BPMN) и последовательностей (UML), состав программных модулей, группы маршрутов HTTP и типы сообщений WebSocket, нефункциональные требования и словарь данных; в разделе 1 приведён <strong>перечень реализованных функций изделия</strong> (п. 1.5). Диаграммы, выполняемые средствами Mermaid в среде браузера, приведены для наглядности и сопровождения кода. Документ предназначен для разработчиков, системных аналитиков и лиц, ответственных за сопровождение комплекта программной документации. Эксплуатационная документация для оператора изложена в руководстве оператора (<code>docs/coronerchat-operation-print.html</code>, ГОСТ 19.505-79).</p>
+    <p class="doc-keywords"><strong>Ключевые слова:</strong> программная документация; техническое описание; CoronerChat; архитектура; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK Video Live; Kick; DonationAlerts; MemeAlerts; YouTube Live; Node.js; Electron.</p>
+
+    <h2 class="doc-block-title">Нормативные и справочные ссылки</h2>
+    <ul class="compact">
+      <li>ГОСТ 19.101-77 ЕСПД. Виды программ и программных документов.</li>
+      <li>ГОСТ 19.402-78 ЕСПД. Описание программы. Требования к содержанию и оформлению.</li>
+      <li>ГОСТ 19.106-78 ЕСПД. Требования к программным документам, выполненным печатным способом.</li>
+      <li>ГОСТ 19.505-79 ЕСПД. Руководство оператора. Требования к содержанию и оформлению (связанный документ комплекта: <code>docs/coronerchat-operation-print.html</code>).</li>
+      <li>ГОСТ 19.201-78 ЕСПД. Техническое задание. Требования к содержанию и оформлению (применимо к ссылкам на границы изделия).</li>
+      <li>ECMA-262 (JavaScript), WHATWG HTML Living Standard, WebSocket Protocol RFC 6455.</li>
+      <li>Спецификации внешних систем: Twitch IRC / EventSub / Helix, VK Video Live API, Kick Chat, DonationAlerts, MemeAlerts, YouTube Data API / Google OAuth 2.0, 7TV (по используемым в коде конечным точкам).</li>
+      <li>Исходный код изделия: каталоги <code>src/server/</code>, <code>src/providers/</code>, <code>src/electron/</code>, <code>package.json</code>.</li>
+    </ul>
+    <h2 class="doc-block-title">Термины, определения и сокращения</h2>
+    <table class="dfd">
+      <thead><tr><th>Термин / сокращ.</th><th>Определение</th></tr></thead>
+      <tbody>
+        <tr><td>ПО, изделие</td><td>Программное обеспечение CoronerChat — сервер чата и UI (веб и Electron).</td></tr>
+        <tr><td>DFD</td><td>Data Flow Diagram — диаграмма потоков данных.</td></tr>
+        <tr><td>ICOM</td><td>В IDEF0: Input, Control, Output, Mechanism — входы, управление, выходы, механизмы.</td></tr>
+        <tr><td>OAuth 2.0</td><td>Протокол делегирования доступа; используется для Twitch, VK, Kick, DonationAlerts, YouTube (Google).</td></tr>
+        <tr><td>WS</td><td>WebSocket — двунаправленный канал между браузером и <code>ChatAppServer</code> по пути <code>/ws</code>.</td></tr>
+        <tr><td>A1–A6</td><td>Декомпозиция контекстной функции A-0 по IDEF0 в настоящем документе.</td></tr>
+        <tr><td>Helix</td><td>REST API Twitch.</td></tr>
+        <tr><td>EventSub</td><td>Подсистема подписки на события Twitch (в т.ч. баллы канала, Hype Train).</td></tr>
+        <tr><td>DA</td><td>DonationAlerts.</td></tr>
+        <tr><td>MA</td><td>MemeAlerts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h1>CoronerChat — техническое описание архитектуры</h1>
+  <div class="hint no-print">
+    Открыть в браузере с сетью (Mermaid с CDN). Печать в PDF: Ctrl+P → «Сохранить как PDF». При обрезании диаграмм уменьшите масштаб страницы в предпросмотре.
+  </div>
+
+  <h2>Содержание</h2>
+  <ol class="toc compact">
+    <li>Общие положения; перечень реализованных функций (п. 1.5)</li>
+    <li>Структурная модель (IDEF0)</li>
+    <li>Состав программных модулей и соответствие процессам</li>
+    <li>Контекстная диаграмма потоков данных (DFD, уровень 0)</li>
+    <li>Диаграмма декомпозиции первого уровня (DFD-1)</li>
+    <li>Описание взаимодействия с внешними платформами (DFD-2 по каждой платформе)</li>
+    <li>Хранилища данных</li>
+    <li>Описание процессов (BPMN)</li>
+    <li>Диаграммы последовательности взаимодействия</li>
+    <li>Компоненты и развёртывание</li>
+    <li>События WebSocket и группы HTTP API</li>
+    <li>Нефункциональные требования</li>
+    <li>Словарь данных</li>
+    <li>Заключение</li>
+  </ol>
+
+  <h2>1. Общие положения</h2>
+  <h3>1.1. Назначение изделия</h3>
+  <p>Единый клиент для приёма, нормализации, буферизации и отображения чата с нескольких платформ (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube Live), а также вспомогательные функции: OAuth, прокси ассетов и каталогов эмодзи (в т.ч. 7TV), OBS WebSocket-телеметрия, релей now playing, опционально zapret на desktop, оверлей и планшетный режим через общий HTTP+WS сервер.</p>
+  <h3>1.2. Назначение документа</h3>
+  <p>Формализация архитектуры для сопровождения, обучения и согласования изменений; договорённость о границах системы и внешних интерфейсах.</p>
+  <h3>1.3. Область применения документа</h3>
+  <p>Разработка, сопровождение и выпуск CoronerChat. Эксплуатация оператором — по <code>docs/coronerchat-operation-print.html</code> (ГОСТ 19.505-79).</p>
+  <h3>1.4. Границы системы</h3>
+  <p><strong>В составе ПО:</strong> процесс Node.js (<code>ChatAppServer</code>), встроенный web-ui, провайдеры в <code>src/providers/</code>, при desktop — оболочка Electron.</p>
+  <p><strong>Вне ПО:</strong> внешние платформы (Twitch, VK Video Live, Kick, DonationAlerts, MemeAlerts, YouTube, 7TV/CDN), OBS Studio, ОС, браузер пользователя при внешней авторизации, сеть и политики DPI (zapret).</p>
+
+  <h3>1.5. Перечень реализованных функций изделия</h3>
+  <p>Ниже приведена <strong>характеристика реализованного функционала</strong> текущей версии CoronerChat: перечень не претендует на исчерпание всех пунктов UI, а фиксирует основные возможности, подтверждаемые кодом сервера и встроенного клиента.</p>
+
+  <h4>1.5.1. Режимы поставки и запуска</h4>
+  <ul class="compact">
+    <li>режим <strong>web</strong>: запуск ядра Node.js, встроенный web-ui по HTTP, WebSocket <code>/ws</code>;</li>
+    <li>режим <strong>desktop</strong>: оболочка Electron + Chromium, доступ к локальному серверу ядра;</li>
+    <li>сборки под Windows: переносимый исполняемый файл, распакованный каталог, установщик NSIS с сохранением пользовательских данных при обновлении (политика инсталлятора).</li>
+  </ul>
+
+  <h4>1.5.2. Приём и объединение чатов нескольких платформ</h4>
+  <ul class="compact">
+    <li><strong>Twitch</strong>: чтение чата по IRC (включая сценарии анонимного просмотра и чтения от имени авторизованного пользователя); параллельно — события <strong>баллов канала</strong> и <strong>Hype Train</strong> через EventSub; при ограничениях EventSub — опрос наград через Helix (poller); реконнект и диагностика транспорта в <code>state.twitchTransport</code>;</li>
+    <li><strong>VK Video Live</strong>: приём сообщений по WebSocket API; каталог и прокси бинарных ресурсов;</li>
+    <li><strong>Kick</strong>: приём сообщений чата по WebSocket при заданном канале и токене OAuth;</li>
+    <li><strong>DonationAlerts</strong>: получение событий донатов по HTTP long-poll;</li>
+    <li><strong>MemeAlerts</strong>: подключение к шлюзу по WebSocket с нормализацией JWT из OBS-ссылки; управление connect/disconnect из UI;</li>
+    <li><strong>YouTube Live</strong>: получение сообщений живого чата через YouTube Data API v3 (ключ API или OAuth Google).</li>
+  </ul>
+
+  <h4>1.5.3. Нормализация, буфер и доставка в интерфейс</h4>
+  <ul class="compact">
+    <li>единая точка слияния потоков в <code>ChatAppServer</code>: нормализация сообщений, дедупликация (в т.ч. redemption и hype), ограниченный буфер и история;</li>
+    <li>рассылка клиентам по WebSocket с типами <code>snapshot</code>, <code>state</code>, <code>chat.message</code>, <code>chat.moderation</code>, <code>chat.annotation</code> и др.;</li>
+    <li>встроенный <strong>web-ui</strong>: отображение объединённого чата, настроек, оверлея и планшетного режима, темы и масштабы отображения (см. <code>web-ui.js</code>).</li>
+  </ul>
+
+  <h4>1.5.4. OAuth 2.0 и локальное хранение учётных данных</h4>
+  <ul class="compact">
+    <li>потоки авторизации для <strong>Twitch</strong>, <strong>VK</strong> (включая сценарии с браузером и implicit), <strong>Kick</strong>, <strong>DonationAlerts</strong>, <strong>YouTube (Google)</strong> через маршруты <code>/api/auth/…</code>;</li>
+    <li>сохранение токенов и параметров сессии в каталоге данных приложения (<code>*-auth.json</code>, <code>app-state.json</code> и др.).</li>
+  </ul>
+
+  <h4>1.5.5. Действия в экосистеме Twitch (при наличии прав доступа токена)</h4>
+  <ul class="compact">
+    <li>отправка сообщений в чат через Helix <code>Send Chat Message</code>;</li>
+    <li>модерация: удаление сообщений, таймаут, бан — при наличии соответствующих прав и scopes;</li>
+    <li>изменение <strong>названия</strong> и <strong>категории</strong> трансляции для собственного канала;</li>
+    <li>поддержка ряда slash-команд из поля ввода (в т.ч. <code>/raid</code>, <code>/announce</code>, <code>/shoutout</code>, настройки скорости чата, shield mode и др. в объёме, реализованном сервером и API).</li>
+  </ul>
+
+  <h4>1.5.6. Прокси HTTP, каталоги эмодзи и бейджей</h4>
+  <ul class="compact">
+    <li>кэшируемые каталоги и выдача ресурсов <strong>7TV</strong>, <strong>Twitch</strong> (бейджи, эмодзи, клипы и вспомогательные запросы), <strong>VK</strong> (каталог, asset) — для снижения проблем CORS и единообразного Referrer;</li>
+    <li>prefetch и health-check для 7TV по маршрутам API изделия.</li>
+  </ul>
+
+  <h4>1.5.7. Интеграции в desktop-сборке</h4>
+  <ul class="compact">
+    <li>телеметрия <strong>OBS Studio</strong> через WebSocket плагина;</li>
+    <li>релей <strong>now playing</strong> от внешнего источника метаданных трека;</li>
+    <li>опциональный запуск внешнего компонента <strong>zapret</strong> для обхода ограничений DPI (конфигурируемый сценарий).</li>
+  </ul>
+
+  <h4>1.5.8. Диагностика, журналирование и устойчивость</h4>
+  <ul class="compact">
+    <li>расширенный <code>runtime.log</code> (HTTP, WebSocket, чат-пайплайн, авторизация, транспорты, исключения); маскирование секретов в логах;</li>
+    <li>режим трассировки сессии (переменная окружения), метрики нагрузки и памяти в <code>state.debug</code>;</li>
+    <li>ограничение размера буфера сообщений, единственный экземпляр desktop-приложения (single instance lock).</li>
+  </ul>
+
+  <h2>2. Структурная модель (IDEF0)</h2>
+  <p>Модель приведена в нотации IDEF0 (ICOM). Диаграммы выполнены в виде векторной графики SVG.</p>
+  <h3>2.1. Контекст деятельности A-0</h3>
+  <div class="idef0-wrap">
+    <div class="idef0-title">A-0. Агрегировать и показать мультиплатформенный чат и состояние стрима</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A-0">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A-0, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Политики платформ, настройки пользователя, лимиты API, правила модерации, конфиг zapret, лимиты RAM/CPU</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">OAuth-коды и токены, выбор каналов, команды чата и модерации, запросы UI, события OBS, сырой IRC/WS/HTTP от платформ</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A-0<br />CoronerChat: единый поток сообщений и состояния в UI и overlay</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">Сообщения и карточки событий в UI, WS-пакеты, логи, исходящие REST к платформам, команды zapret, релей трека</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Node.js, Electron+Chromium (desktop) или только Node (web), файлы CoronerChat-data, библиотека ws</div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <h3>2.2. Декомпозиция процессов A1–A6</h3>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A1. Приём событий от внешних чатов</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A1">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A1, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Токены, room id, reconnect policy, лимиты Kick/VK</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">Сетевые потоки: IRC PRIVMSG, EventSub WS, VK WS, Kick WS, HTTP long-poll DA/MemeAlerts, YouTube</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A1<br />Источники: twitch-irc-source, twitch-eventsub-*, vk-video-live-source, kick-chat-source, donation-alerts-source, meme-alerts-source, youtube-live-source</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">Нормализованные объекты «message» / статус соединения / redemption / hype</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Классы в <code>src/providers/</code></div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A2. Нормализация, дедупликация, буфер, модерация</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A2">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A2, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Размер буфера, dedup по id, правила IRC vs EventSub, списки банов VK</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">Сырые сообщения от A1, ответы API модерации</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A2<br />bufferAndBroadcastMessage, recordMessageHistory, consumeMatchingLocalEcho, dedup redemption/hype</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">messageBuffer, история, рассылка chat.message / chat.moderation / chat.annotation</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo"><code>ChatAppServer</code> методы вокруг строки ~3900–4700</div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A3. HTTP: UI, REST, статика, прокси ассетов</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A3">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A3, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Маршрутизация URL, JSON-схемы ответов, кэш каталогов 7TV/VK</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">GET/POST от рендерера, запросы ассетов эмодзи/бейджей</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A3<br />handleHttp: /api/state, /api/auth/*, /api/twitch/*, /api/vk/*, /api/kick/*, /api/settings/*, отдача HTML web-ui</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">JSON, файлы UI, бинарные прокси /api/twitch/asset, /api/vk/asset</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Node <code>http.createServer</code></div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A4. WebSocket: снимок, поток сообщений, отладка</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A4">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A4, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Протокол JSON-сообщений {type, payload}, path /ws</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">События ядра после A2, изменения state</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A4<br />WebSocketServer, broadcast, при connect — snapshot буфера</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">Потоки ко всем открытым вкладкам и overlay</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo"><code>ws</code> пакет, путь <code>/ws</code></div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A5. OBS, now playing, zapret (desktop)</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A5">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A5, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Настройки URL OBS, источник NP, флаг автозапуска zapret</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">Сцены/статус OBS, метаданные трека от внешнего плеера</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A5<br />ObsWebSocketTelemetryClient, NowPlayingRelay, ZapretManager.start</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">obs.telemetry, now-playing в WS; дочерние процессы фильтрации</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Внешний OBS, исполняемые файлы zapret, <code>src/server/</code> вспомогательные модули</div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <div class="idef0-wrap">
+    <div class="idef0-title">A6. Управление OAuth и сохранение сессий</div>
+    <div class="idef0" role="img" aria-label="IDEF0 A6">
+      <svg class="idef0-canvas" viewBox="0 0 580 262" xmlns="http://www.w3.org/2000/svg">
+        <title>IDEF0 A6, ICOM</title>
+        <text x="290" y="11" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">C</text>
+        <text x="10" y="92" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">I</text>
+        <text x="570" y="92" text-anchor="end" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">O</text>
+        <text x="290" y="258" text-anchor="middle" font-size="7" font-family="Segoe UI,system-ui,sans-serif" fill="#666">M</text>
+        <rect x="200" y="88" width="180" height="98" rx="4" fill="#f0f0f5" stroke="#222" stroke-width="2"></rect>
+        <line x1="290" y1="76" x2="290" y2="87" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="186" y1="137" x2="199" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="381" y1="137" x2="394" y2="137" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <line x1="290" y1="254" x2="290" y2="189" stroke="#222" stroke-width="1.8" marker-end="url(#idef0-arrow)"></line>
+        <foreignObject x="95" y="4" width="390" height="72">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo">Client id, redirect URI, scopes, срок жизни токена</div>
+        </foreignObject>
+        <foreignObject x="4" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--in">Коды авторизации, refresh, logout</div>
+        </foreignObject>
+        <foreignObject x="202" y="90" width="176" height="94">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--core">A6<br />TwitchAuth, VkAuth, KickAuth, DonationAlertsAuth, YouTube OAuth контроллер</div>
+        </foreignObject>
+        <foreignObject x="392" y="82" width="184" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo idef0-fo--out">Файлы токенов в CoronerChat-data, обновление state</div>
+        </foreignObject>
+        <foreignObject x="95" y="198" width="390" height="62">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="idef0-fo"><code>src/providers/*/…-auth.js</code>, <code>youtube-oauth.js</code></div>
+        </foreignObject>
+      </svg>
+    </div>
+  </div>
+
+  <h2>3. Состав программных модулей и соответствие процессам кодовой базе</h2>
+  <table class="dfd">
+    <thead><tr><th>Процесс</th><th>Главные артефакты</th><th>Назначение кратко</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td><code>twitch-irc-source.js</code>, <code>twitch-eventsub-channel-points.js</code>, <code>vk-video-live-source.js</code>, <code>kick-chat-source.js</code>, …</td><td>Подключение к внешним транспортам, реконнект, парсинг в события</td></tr>
+      <tr><td>A2</td><td><code>chat-app-server.js</code> (bufferAndBroadcastMessage, handleChannelPointsRedemption, handleHypeTrainEvent)</td><td>Единая точка входа сообщений в UI-поток</td></tr>
+      <tr><td>A3</td><td><code>chat-app-server.js</code> handleHttp</td><td>REST и отдача встроенного web-ui</td></tr>
+      <tr><td>A4</td><td><code>chat-app-server.js</code> wss.on("connection")</td><td>Подписка клиентов, snapshot</td></tr>
+      <tr><td>A5</td><td>ObsWebSocketTelemetryClient, NowPlayingRelay, ZapretManager</td><td>Внешние интеграции desktop</td></tr>
+      <tr><td>A6</td><td><code>*-auth.js</code>, сохранение в каталог данных</td><td>Идентичность пользователя на платформах</td></tr>
+      <tr><td>UI</td><td><code>web-ui.js</code> (встраивается сервером)</td><td>Рендер чата, настройки, overlay, WebSocket-клиент на <code>/ws</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Контекстная диаграмма потоков данных (DFD, уровень 0)</h2>
+  <p class="doc-caption">Рисунок 4 — Контекстная DFD: изделие «CoronerChat» и внешние сущности</p>
+  <div class="diagram mermaid">
+flowchart TB
+  subgraph EXT["Внешние сущности"]
+    U[Пользователь]
+    TW[Twitch]
+    VK[VK Video Live]
+    KI[Kick]
+    DA[DonationAlerts]
+    MA[MemeAlerts]
+    YT[YouTube Live]
+    S7[7TV и CDN эмодзи]
+    OB[OBS Studio]
+  end
+  P(("P0 Ядро CoronerChat"))
+  DS[(D Хранилище файлов)]
+  U <-->|HTTP REST WebSocket| P
+  P <-->|IRC EventSub Helix| TW
+  P <-->|WS API| VK
+  P <-->|WS OAuth| KI
+  P <-->|HTTP| DA
+  P <-->|WS token| MA
+  P <-->|чат| YT
+  P <-->|HTTP каталоги| S7
+  P <-->|WS телеметрия| OB
+  P <-->|read write| DS
+  </div>
+
+  <h2>5. Диаграмма декомпозиции первого уровня (DFD-1)</h2>
+  <p class="doc-caption">Рисунок 5 — DFD первого уровня: источники, ядро, HTTP, WebSocket, хранилища</p>
+  <div class="diagram mermaid">
+flowchart LR
+  subgraph Stores["Хранилища"]
+    D1[(app-state и persisted)]
+    D2[(OAuth токены json)]
+    D3[(буфер и история в RAM)]
+  end
+  P1[1 Источники]
+  P2[2 Ядро буфера]
+  P3[3 HTTP]
+  P4[4 WebSocket]
+  EXT[Twitch VK Kick DA MA YT]
+  UI[Браузер UI]
+  P1 -->|события| P2
+  P2 --> D3
+  P2 --> P4
+  P3 --> D1
+  P3 --> D2
+  P3 <-->|запросы| UI
+  P4 -->|push| UI
+  EXT <--> P1
+  </div>
+
+  <h2>6. Описание взаимодействия с внешними платформами (DFD, уровень 2)</h2>
+  <p>Все перечисленные ниже интеграции сходятся в единый процесс A2 — класс <code>ChatAppServer</code> (<code>src/server/chat-app-server.js</code>): нормализация сообщений, дедупликация, <code>messageBuffer</code>, рассылка клиентам по WebSocket. Отличия заключаются во внешнем транспорте, правилах аутентификации и составе типов событий.</p>
+
+  <h3>6.1. Twitch</h3>
+  <p><strong>Назначение.</strong> Приём чата по IRC; дополнительно — события баллов канала и Hype Train через EventSub WebSocket и при необходимости нормализация наград через Helix REST (poller); доступ к API Twitch по OAuth.</p>
+  <p><strong>Компоненты ПО.</strong></p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл (каталог <code>src/providers/twitch/</code>)</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>TwitchIrcSource</td><td><code>twitch-irc-source.js</code></td><td>Подключение к IRC, PRIVMSG, теги, реконнект.</td></tr>
+      <tr><td>TwitchChannelPointsEventSub, TwitchHypeTrainEventSub, TwitchChannelPointsPoller</td><td><code>twitch-eventsub-channel-points.js</code></td><td>EventSub уведомления; поллер Helix при отсутствии EventSub для баллов.</td></tr>
+      <tr><td>TwitchAuth (Helix)</td><td><code>twitch-auth.js</code></td><td>OAuth, хранение токена, вызовы Helix.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> IRC (Twitch); HTTPS EventSub; HTTPS Helix (<code>api.twitch.tv</code>).</p>
+  <p><strong>HTTP API изделия (фрагмент).</strong> <code>/api/auth/twitch/*</code>; <code>/api/twitch/badges</code>, <code>/api/twitch/emotes</code>, <code>/api/twitch/asset</code>, <code>/api/twitch/chatters</code>, <code>/api/twitch/clip</code> (см. реализацию <code>handleHttp</code>).</p>
+  <p><strong>Состояние в <code>state</code>.</strong> <code>twitchTransport</code> (IRC, channelPoints, hypeTrain, сетевые подсказки).</p>
+  <p class="doc-caption">Рисунок 6.1 — DFD-2: Twitch, несколько параллельных входов в слияние A2</p>
+  <div class="diagram mermaid">
+flowchart TB
+  TWIRC[Twitch IRC]
+  SUBCP[EventSub баллы]
+  SUBHY[Hype Train EventSub]
+  POLL[Helix poller стример]
+  AUTH[TwitchAuth Helix]
+  MERGE[ChatAppServer merge dedup]
+  TWIRC -->|PRIVMSG tags| MERGE
+  SUBCP -->|redemption JSON| MERGE
+  SUBHY -->|hype event| MERGE
+  POLL -->|redemption нормализ| MERGE
+  AUTH -->|токен| SUBCP
+  AUTH -->|токен| SUBHY
+  AUTH -->|токен| POLL
+  MERGE -->|chat.message| OUT[WebSocket клиенты]
+  </div>
+
+  <h3>6.2. VK Video Live</h3>
+  <p><strong>Назначение.</strong> Приём сообщений и служебных событий трансляции VK Video Live по WebSocket API.</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>Источник VK</td><td><code>src/providers/vk/vk-video-live-source.js</code></td><td>WS-клиент, парсинг событий в унифицированные сообщения.</td></tr>
+      <tr><td>VkAuth</td><td><code>src/providers/vk/vk-auth.js</code></td><td>OAuth / implicit, запись <code>vk-auth.json</code>.</td></tr>
+      <tr><td>Вспомогательные HTTPS-вызовы</td><td><code>src/providers/vk/vk-https-utils.js</code></td><td>Общие утилиты запросов к API VK.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> WebSocket и HTTPS API VK Video Live (см. актуальную документацию VK).</p>
+  <p><strong>HTTP API изделия.</strong> <code>/api/auth/vk/*</code> (в т.ч. <code>start</code>, <code>poll</code>, <code>logout</code>, <code>callback</code>, <code>implicit-token</code>); <code>GET /api/vk/catalog</code>, <code>GET /api/vk/asset</code> (каталог и прокси бинарных ресурсов).</p>
+  <p><strong>Состояние.</strong> <code>vkTransport</code> (реконнект, время последнего подключения, ошибки сети).</p>
+  <p class="doc-caption">Рисунок 6.2 — DFD-2: VK Video Live → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  VK[VK Video Live WS]
+  SRC[vk-video-live-source]
+  A2[ChatAppServer A2]
+  WS[WebSocket клиенты]
+  VK -->|события чата| SRC -->|нормализованное сообщение| A2 -->|chat.message| WS
+  </div>
+
+  <h3>6.3. Kick</h3>
+  <p><strong>Назначение.</strong> Приём сообщений чата Kick по WebSocket; отправка сообщений при наличии прав — через REST API Kick.</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>KickChatSource</td><td><code>src/providers/kick/kick-chat-source.js</code></td><td>WS чата, интеграция с ядром.</td></tr>
+      <tr><td>KickAuthController</td><td><code>src/providers/kick/kick-auth.js</code></td><td>OAuth Kick, <code>kick-auth.json</code>.</td></tr>
+      <tr><td>Kick HTTP</td><td><code>kick-http-public.js</code>, <code>kick-api.js</code></td><td>Публичные данные канала, постинг сообщений.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> WebSocket чата Kick; HTTPS OAuth и API Kick.</p>
+  <p><strong>HTTP API изделия.</strong> <code>/api/auth/kick/*</code>; <code>POST /api/settings/kick</code> (сохранение канала и перезапуск транспорта при необходимости).</p>
+  <p><strong>Состояние.</strong> <code>state.kick</code>, <code>state.kickAuth</code> (снимок авторизации в ответах API).</p>
+  <p class="doc-caption">Рисунок 6.3 — DFD-2: Kick → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  KWS[Kick chat WS]
+  KSRC[kick-chat-source]
+  A2[ChatAppServer A2]
+  UI[WebSocket клиенты]
+  KWS -->|messages| KSRC -->|events| A2 -->|chat.message| UI
+  </div>
+
+  <h3>6.4. DonationAlerts</h3>
+  <p><strong>Назначение.</strong> Получение оповещений о донатах и связанных событиях через HTTP long-polling.</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>DonationAlertsSource</td><td><code>src/providers/donation-alerts/donation-alerts-source.js</code></td><td>Long-poll цикл, преобразование в сообщения чата/алертов.</td></tr>
+      <tr><td>DonationAlertsAuth</td><td><code>src/providers/donation-alerts/donation-alerts-auth.js</code></td><td>OAuth, <code>donation-alerts-auth.json</code>.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> HTTPS API DonationAlerts (документация сервиса).</p>
+  <p><strong>HTTP API изделия.</strong> <code>/api/auth/donation-alerts/*</code> (config, start, poll, logout, callback).</p>
+  <p class="doc-caption">Рисунок 6.4 — DFD-2: DonationAlerts → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  DA[DonationAlerts HTTPS]
+  SRC[donation-alerts-source]
+  A2[ChatAppServer A2]
+  UI[WebSocket клиенты]
+  DA -->|long poll| SRC -->|events| A2 -->|chat.message| UI
+  </div>
+
+  <h3>6.5. MemeAlerts</h3>
+  <p><strong>Назначение.</strong> Приём алертов MemeAlerts в реальном времени по Socket.IO с использованием JWT (<code>obsToken</code>) из «Ссылки для OBS».</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>MemeAlertsSource</td><td><code>src/providers/meme-alerts/meme-alerts-source.js</code></td><td>Подключение к шлюзу MA, события в ядро.</td></tr>
+      <tr><td>Утилиты токена</td><td><code>src/providers/meme-alerts/meme-alerts-token.js</code></td><td>Разбор URL OBS / JWT <code>obsToken</code>, нормализация сохранённой строки.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> WebSocket MemeAlerts; пользователь вводит URL или JWT в настройках (персистится в <code>app-state</code>).</p>
+  <p><strong>HTTP API изделия.</strong> <code>POST /api/meme-alerts/connect</code>, <code>POST /api/meme-alerts/disconnect</code> — управление сессией из UI.</p>
+  <p class="doc-caption">Рисунок 6.5 — DFD-2: MemeAlerts → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  MA[MemeAlerts WS]
+  SRC[meme-alerts-source]
+  A2[ChatAppServer A2]
+  UI[WebSocket клиенты]
+  MA -->|alerts| SRC -->|events| A2 -->|chat.message| UI
+  </div>
+
+  <h3>6.6. YouTube Live</h3>
+  <p><strong>Назначение.</strong> Получение сообщений живого чата трансляции YouTube через YouTube Data API v3 с авторизацией по API key или по OAuth 2.0 (Google).</p>
+  <table class="dfd">
+    <thead><tr><th>Компонент</th><th>Файл</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>YouTubeLiveSource</td><td><code>src/providers/youtube/youtube-live-source.js</code></td><td>Опрос liveChatMessages, реконнект, дедуп по id.</td></tr>
+      <tr><td>YouTube OAuth</td><td><code>src/providers/youtube/youtube-oauth.js</code></td><td>Хранение <code>youtube-oauth.json</code>, обмен кодов.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Внешние интерфейсы.</strong> HTTPS <code>www.googleapis.com</code> (YouTube Data API).</p>
+  <p><strong>HTTP API изделия.</strong> <code>/api/auth/youtube/google</code>, <code>/api/auth/youtube/logout</code>; настройки канала и ключа — через общие маршруты настроек и <code>state.youtube</code>.</p>
+  <p><strong>Состояние.</strong> <code>state.youtube</code> (канал, ключ API, признаки OAuth).</p>
+  <p class="doc-caption">Рисунок 6.6 — DFD-2: YouTube Live → ядро</p>
+  <div class="diagram mermaid">
+flowchart LR
+  YT[YouTube Data API]
+  SRC[youtube-live-source]
+  A2[ChatAppServer A2]
+  UI[WebSocket клиенты]
+  YT -->|liveChat poll| SRC -->|messages| A2 -->|chat.message| UI
+  </div>
+
+  <h3>6.7. Смежные сервисы отображения (7TV, каталоги Twitch/VK, прокси)</h3>
+  <p><strong>Назначение.</strong> Не являются источниками текста чата, но обеспечивают каталоги эмодзи/бейджей и доставку бинарных ресурсов без CORS в браузере.</p>
+  <table class="dfd">
+    <thead><tr><th>Направление</th><th>Примеры маршрутов изделия</th><th>Примечание</th></tr></thead>
+    <tbody>
+      <tr><td>7TV</td><td><code>/api/7tv/catalog</code>, <code>/api/7tv/health</code>, <code>/api/7tv/asset</code>, prefetch</td><td>Кэш на диске, см. <code>7tv-cache</code>.</td></tr>
+      <tr><td>Twitch</td><td><code>/api/twitch/badges</code>, <code>/api/twitch/emotes</code>, <code>/api/twitch/asset</code></td><td>Совместно с чатом Twitch.</td></tr>
+      <tr><td>VK</td><td><code>/api/vk/catalog</code>, <code>/api/vk/asset</code></td><td>Совместно с VK Video Live.</td></tr>
+    </tbody>
+  </table>
+  <p class="doc-caption">Рисунок 6.7 — Вспомогательные HTTP-потоки к CDN/каталогам (логическая связь с A3)</p>
+  <div class="diagram mermaid">
+flowchart TB
+  UI[Браузер web-ui]
+  A3[handleHttp A3]
+  CDN[7TV Twitch VK CDN]
+  UI -->|GET каталог asset| A3 -->|proxy cache| CDN
+  </div>
+
+  <h3>6.8. Сводная схема источников сообщений</h3>
+  <p>На рисунке 6.8 показаны все основные источники, формирующие единый поток <code>chat.message</code> после обработки в A2 (детализация ветвления Twitch — на рисунке 6.1).</p>
+  <p class="doc-caption">Рисунок 6.8 — Сводная DFD-2: платформы чата → ChatAppServer → клиенты</p>
+  <div class="diagram mermaid">
+flowchart TB
+  TW[Twitch агрегат см. п. 6.1]
+  VSRC[vk-video-live-source]
+  KSRC[kick-chat-source]
+  DASRC[donation-alerts-source]
+  MASRC[meme-alerts-source]
+  YTSRC[youtube-live-source]
+  MERGE2[ChatAppServer A2 dedup buffer]
+  TW -->|messages events| MERGE2
+  VSRC -->|WS| MERGE2
+  KSRC -->|WS| MERGE2
+  DASRC -->|HTTP poll| MERGE2
+  MASRC -->|WS| MERGE2
+  YTSRC -->|API poll| MERGE2
+  MERGE2 -->|chat.message| OUT2[WebSocket клиенты]
+  </div>
+
+  <h2>7. Хранилища данных</h2>
+  <p class="doc-caption">Таблица 7 — Персистентные и оперативные хранилища</p>
+  <table class="dfd">
+    <thead><tr><th>Узел DFD</th><th>Типичный путь</th><th>Содержимое</th></tr></thead>
+    <tbody>
+      <tr><td>D app-state</td><td><code>CoronerChat-data/app-state.json</code> (рядом с exe или из <code>getCoronerChatDataDirectory</code>)</td><td>Каналы, настройки UI, флаги платформ, ревизии</td></tr>
+      <tr><td>D twitch-auth</td><td><code>twitch-auth.json</code> и др. в том же каталоге</td><td>OAuth Twitch, scopes, user id</td></tr>
+      <tr><td>D vk-auth</td><td><code>vk-auth.json</code></td><td>Токены VK Video Live, сессия OAuth/implicit</td></tr>
+      <tr><td>D kick-auth</td><td><code>kick-auth.json</code></td><td>OAuth Kick, refresh</td></tr>
+      <tr><td>D donation-alerts-auth</td><td><code>donation-alerts-auth.json</code></td><td>Токен DonationAlerts для long-poll</td></tr>
+      <tr><td>D youtube-oauth</td><td><code>youtube-oauth.json</code></td><td>OAuth Google для чата YouTube, если используется</td></tr>
+      <tr><td>D кэши</td><td><code>7tv-cache</code>, <code>twitch-badges-cache</code>, …</td><td>Каталоги эмодзи/бейджей, манифесты</td></tr>
+      <tr><td>D логи</td><td><code>runtime.log</code></td><td>Диагностика сервера</td></tr>
+      <tr><td>D RAM</td><td><code>messageBuffer</code>, <code>messageHistory</code> в процессе</td><td>Окно последних сообщений для snapshot и поиска</td></tr>
+    </tbody>
+  </table>
+
+  <h2>8. Описание процессов (BPMN)</h2>
+  <h3>8.1. Сводная таблица потоков OAuth и настройки доступа по платформам</h3>
+  <p class="doc-caption">Таблица 8.1 — Соответствие платформ маршрутам <code>handleHttp</code> (фрагмент)</p>
+  <table class="dfd">
+    <thead><tr><th>Платформа</th><th>Хвост пути после <code>/api/auth/</code></th><th>Файл контроллера</th><th>Персистенция токена</th></tr></thead>
+    <tbody>
+      <tr><td>Twitch</td><td><code>twitch/client-id</code>, <code>start</code>, <code>poll</code>, <code>logout</code></td><td><code>twitch-auth.js</code></td><td><code>twitch-auth.json</code></td></tr>
+      <tr><td>VK Video Live</td><td><code>vk/config</code>, <code>start</code>, <code>poll</code>, <code>logout</code>, <code>browser</code>, <code>callback</code>, <code>implicit-token</code>, <code>start-implicit</code></td><td><code>vk-auth.js</code></td><td><code>vk-auth.json</code></td></tr>
+      <tr><td>Kick</td><td><code>kick/config</code>, <code>start</code>, <code>poll</code>, <code>logout</code>, <code>callback</code></td><td><code>kick-auth.js</code></td><td><code>kick-auth.json</code></td></tr>
+      <tr><td>DonationAlerts</td><td><code>donation-alerts/config</code>, <code>start</code>, <code>poll</code>, <code>logout</code>, <code>callback</code></td><td><code>donation-alerts-auth.js</code></td><td><code>donation-alerts-auth.json</code></td></tr>
+      <tr><td>YouTube (Google)</td><td><code>youtube/google</code>, <code>youtube/logout</code></td><td><code>youtube-oauth.js</code></td><td><code>youtube-oauth.json</code></td></tr>
+      <tr><td>MemeAlerts</td><td>OAuth внешнего сервиса не используется</td><td>—</td><td>JWT в настройках приложения (<code>app-state</code>)</td></tr>
+    </tbody>
+  </table>
+  <h3>8.2. OAuth Twitch — полная цепочка (пример)</h3>
+  <p>Наиболее разветвлённый сценарий UI↔сервер; для остальных платформ сохраняется логика «start → внешний браузер или окно → poll → запись json → broadcast state».</p>
+  <p class="doc-caption">Рисунок 8.2 — BPMN: авторизация Twitch</p>
+  <div class="diagram mermaid">
+flowchart TB
+  subgraph U["Дорожка пользователь"]
+    S([Нужен вход Twitch])
+    O1[Открыть вкладку авторизации UI]
+    O2[POST twitch start]
+    O3[Браузер OAuth окно или redirect]
+    O4[POST twitch poll по таймеру]
+    E([Токен в приложении])
+    S --> O1 --> O2 --> O3 --> O4 --> E
+  end
+  subgraph SYS["Дорожка система"]
+    H1[handleHttp старт URL]
+    H2[TwitchAuth обмен]
+    H3[Запись файла токена]
+    H4[broadcast state]
+    O2 -.-> H1
+    H1 --> H2
+    O4 -.-> H2
+    H2 --> H3
+    H3 --> H4
+  end
+  </div>
+
+  <h3>8.3. Первое подключение WebSocket клиента</h3>
+  <p class="doc-caption">Рисунок 8.3 — BPMN (UML sequence): подключение к <code>/ws</code></p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant C as Клиент UI
+    participant W as WS сервер
+    participant S as ChatAppServer
+    C->>W: connect /ws
+    W->>S: connection handler
+    S-->>C: snapshot буфер и состояние
+    loop Живое
+      S-->>C: chat.message state …
+    end
+  </div>
+
+  <h3>8.4. Установка NSIS (ветвления сценария)</h3>
+  <p class="doc-caption">Рисунок 8.4 — BPMN: установщик Windows</p>
+  <div class="diagram mermaid">
+flowchart TB
+  A([Старт Setup])
+  B{Обновление поверх?}
+  C[Uninstall старой с KEEP_APP_DATA]
+  D[Копирование файлов]
+  E{Есть legacy AppData?}
+  F[needs-migration.json подсказка]
+  G[Страница заметок 2.25]
+  H{Запустить?}
+  Z([Конец])
+  A --> B
+  B -->|да| C --> D
+  B -->|нет| D
+  D --> E
+  E -->|да| F
+  E -->|нет| G
+  F --> G
+  G --> H
+  H -->|да| Z
+  H -->|нет| Z
+  </div>
+
+  <h2>9. Диаграммы последовательности взаимодействия (UML)</h2>
+  <h3>9.1. Twitch — награда баллов канала (EventSub)</h3>
+  <p class="doc-caption">Рисунок 9.1 — UML sequence: EventSub redemption → UI</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant TW as Twitch EventSub
+    participant CP as TwitchChannelPointsEventSub
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    TW->>CP: notification redemption
+    CP->>S: onRedemption ev
+    S->>S: dedup id handleChannelPointsRedemption
+    S->>W: chat.message channelPointsRedemption
+  </div>
+
+  <h3>9.2. VK Video Live — сообщение чата</h3>
+  <p class="doc-caption">Рисунок 9.2 — UML sequence: упрощённый поток</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant VK as VK WS
+    participant SRC as vk-video-live-source
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    VK->>SRC: chat service event
+    SRC->>S: emit normalized message
+    S->>W: chat.message
+  </div>
+
+  <h3>9.3. Kick — сообщение чата</h3>
+  <p class="doc-caption">Рисунок 9.3 — UML sequence: упрощённый поток</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant K as Kick WS
+    participant SRC as kick-chat-source
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    K->>SRC: chat payload
+    SRC->>S: emit message
+    S->>W: chat.message
+  </div>
+
+  <h3>9.4. DonationAlerts — событие long-poll</h3>
+  <p class="doc-caption">Рисунок 9.4 — UML sequence: упрощённый поток</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant DA as DonationAlerts HTTPS
+    participant SRC as donation-alerts-source
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    DA-->>SRC: poll response
+    SRC->>S: enqueue alert as message
+    S->>W: chat.message
+  </div>
+
+  <h3>9.5. MemeAlerts — событие WebSocket</h3>
+  <p class="doc-caption">Рисунок 9.5 — UML sequence: упрощённый поток</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant MA as MemeAlerts WS
+    participant SRC as meme-alerts-source
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    MA->>SRC: alert frame
+    SRC->>S: emit message
+    S->>W: chat.message
+  </div>
+
+  <h3>9.6. YouTube Live — сообщение чата (опрос API)</h3>
+  <p class="doc-caption">Рисунок 9.6 — UML sequence: упрощённый поток</p>
+  <div class="diagram mermaid">
+sequenceDiagram
+    participant YT as YouTube Data API
+    participant SRC as youtube-live-source
+    participant S as ChatAppServer
+    participant W as WS клиенты
+    YT-->>SRC: liveChatMessages list
+    SRC->>S: emit new items
+    S->>W: chat.message
+  </div>
+
+  <h2>10. Компоненты и развёртывание</h2>
+  <div class="diagram mermaid">
+flowchart TB
+  subgraph Desk["Desktop"]
+    E[Electron main]
+    R[Renderer Chromium]
+    E -->|127.0.0.1| N
+    R -->|HTTP WS| N
+  end
+  subgraph Web["Сервер только web"]
+    I[index.js]
+    I --> N
+  end
+  N[ChatAppServer Node]
+  subgraph Prov["Провайдеры"]
+    T[Twitch]
+    V[VK]
+    K[Kick]
+    D[Donations MemeAlerts]
+  end
+  N --> Prov
+  </div>
+  <p class="meta">На desktop при занятом порту Electron может подключиться к уже запущенному экземпляру сервера (<code>startOrReuseDesktopServer</code>) — два окна, один процесс Node с бэкендом.</p>
+
+  <h2>11. События по WebSocket (типы <code>type</code>)</h2>
+  <p class="doc-caption">Таблица 11 — Перечень типов сообщений WebSocket</p>
+  <table class="dfd">
+    <thead><tr><th>type</th><th>Назначение</th></tr></thead>
+    <tbody>
+      <tr><td><code>snapshot</code></td><td>Первичная выдача при подключении: буфер сообщений и актуальное состояние</td></tr>
+      <tr><td><code>state</code></td><td>Полный или частичный снимок <code>state</code>: каналы, транспорты twitch/vk, OAuth, revision UI</td></tr>
+      <tr><td><code>chat.message</code></td><td>Одно сообщение чата или системное оформленное событие</td></tr>
+      <tr><td><code>chat.moderation</code></td><td>Удаление, скрытие, таймаут и др. модерация</td></tr>
+      <tr><td><code>chat.annotation</code></td><td>Доп. метки к сообщению</td></tr>
+      <tr><td><code>chat.clear-local</code></td><td>Сброс локального отображения</td></tr>
+      <tr><td><code>eventBus.append</code></td><td>Центр событий: заголовок и деталь</td></tr>
+      <tr><td><code>obs.telemetry</code></td><td>Снимок с OBS WebSocket</td></tr>
+      <tr><td><code>now-playing</code></td><td>Трек now playing relay</td></tr>
+      <tr><td><code>debug</code></td><td>Отладочное состояние при включённой диагностике</td></tr>
+    </tbody>
+  </table>
+
+  <h2>12. Группы HTTP API (фрагмент)</h2>
+  <p class="doc-caption">Таблица 12 — Группы маршрутов <code>handleHttp</code></p>
+  <table class="dfd">
+    <thead><tr><th>Группа</th><th>Примеры путей</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td>Состояние</td><td><code>GET /api/state</code>, <code>GET /api/qr</code></td><td>Снимок для UI, QR при необходимости</td></tr>
+      <tr><td>OAuth</td><td><code>/api/auth/twitch/*</code>, <code>vk/*</code>, <code>kick/*</code>, <code>donation-alerts/*</code>, <code>youtube/*</code></td><td>Старт, poll, logout, callback где есть</td></tr>
+      <tr><td>Каталоги</td><td><code>/api/7tv/*</code>, <code>/api/twitch/badges</code>, <code>/api/twitch/emotes</code>, <code>/api/vk/catalog</code></td><td>Кэшируемые справочники</td></tr>
+      <tr><td>Прокси бинарей</td><td><code>/api/twitch/asset</code>, <code>/api/vk/asset</code></td><td>Обход CORS, единый Referrer</td></tr>
+      <tr><td>Настройки и действия</td><td><code>/api/settings/*</code>, модерация, debug</td><td>Персистенция и служебные операции</td></tr>
+    </tbody>
+  </table>
+
+  <h2>13. Нефункциональные требования</h2>
+  <ul class="compact">
+    <li><strong>Один экземпляр desktop:</strong> <code>app.requestSingleInstanceLock</code> в Electron; при втором запуске — сообщение пользователю.</li>
+    <li><strong>Память и CPU:</strong> ограничение буфера сообщений, метрики в state, опциональное давление по памяти.</li>
+    <li><strong>Безопасность:</strong> contextIsolation в Electron, токены на диске в каталоге данных, HTTPS в продакшене по конфигу хоста; HTTP-сервер по умолчанию привязан к <code>127.0.0.1</code>; чувствительные маршруты (debug, экспорт/импорт настроек, OBS, <code>/api/deck/*</code>) с недоверенных адресов сети требуют заголовок <code>X-CoronerChat-Deck-Token</code>, сверяемый с <code>CORONERCHAT_DECK_TOKEN</code> (см. руководство оператора, §5.14, 8.6).</li>
+    <li><strong>Zapret:</strong> только desktop, отдельный процесс/профили под протоколы DPI.</li>
+  </ul>
+
+  <h2>14. Словарь данных (потоки и поля)</h2>
+  <ul class="compact">
+    <li><strong>Сообщение чата</strong> (в <code>chat.message</code>): <code>id</code>, <code>source</code>, <code>channel</code>, <code>author</code>, <code>text</code>, <code>timestamp</code>, <code>raw</code> (IRC tags / redemption / hype payload), флаги <code>channelPointsRedemption</code>, <code>deleted</code>, <code>pinned</code> и др.</li>
+    <li><strong>state.twitchTransport</strong>: статусы IRC, channelPoints (EventSub / poller / irc-only), hypeTrain, ошибки detail для диагностики.</li>
+    <li><strong>state.vkTransport</strong>: реконнект и сеть VK WS (аналогично по смыслу полям «последний разрыв», ETA и т.д., без EventSub).</li>
+    <li><strong>state.kick</strong>: выбранный канал и поля состояния клиента Kick (OAuth в <code>state.kickAuth</code> / ответах <code>/api/auth/kick/*</code>).</li>
+    <li><strong>state.youtube</strong>: канал, API key, флаги OAuth для YouTube Live.</li>
+    <li><strong>state.memeAlerts</strong>, <strong>persistedState.memeAlertsToken</strong>: JWT/URL MemeAlerts, признак соединения, минимальная сумма фильтра.</li>
+    <li><strong>persistedState.donationAlertsMinAmount</strong> (и связанные поля DA): фильтрация сумм донатов на стороне клиента настроек.</li>
+    <li><strong>Redemption EventSub</strong>: поля <code>id</code>, <code>reward</code>, <code>user_input</code>, плоские <code>user_id</code> / <code>user_login</code> или вложенный <code>user</code> после poller.</li>
+    <li><strong>Hype Train EventSub</strong>: фазы begin / progress / end, в сообщении <code>raw.hypeTrain</code> с <code>level</code>, <code>goal</code>, <code>total</code>.</li>
+    <li><strong>DonationAlerts / MemeAlerts</strong>: события оформляются как сообщения с источником <code>source</code>, отражающим платформу; детали в <code>raw</code> по схеме соответствующего провайдера.</li>
+  </ul>
+
+  <h2>14a. Обновления изделия и локализация UI (сводка)</h2>
+  <p><strong>Канал обновлений.</strong> Десктопная сборка с версии 2.7.4+ использует публичный репозиторий GitHub <code>dorimeryt-alt/CoronerChat</code>. Проверка при запуске обращается к <code>GET /repos/…/releases/latest</code> (релиз, помеченный GitHub как Latest), а не к «максимальной» semver-метке среди архивных тегов (в т.ч. исторические 2.25–2.35). Установка: скачивание Setup.exe и запуск NSIS; каталог <code>CoronerChat-data</code> сохраняется. Оператор может пропустить конкретную версию (<code>dismissedUpdateVersions</code> в app-state).</p>
+  <p><strong>Локализация.</strong> Интерфейс поддерживает языки <code>ru</code>, <code>en</code>, <code>ro</code>, <code>de</code>, <code>fi</code> (словари <code>src/server/i18n/locales</code>, персист <code>uiLocale</code>). Подробнее: <code>docs/updates-and-releases.md</code>, <code>docs/i18n.md</code>.</p>
+
+  <h2>15. Заключение</h2>
+  <p>В документе приведена архитектура ПО «CoronerChat» в нотациях IDEF0, DFD, BPMN и UML sequence; в п. 1.5 зафиксирован перечень реализованного функционала изделия; выполнены требования к документу «Описание программы» по ГОСТ 19.402-78 в части аннотации (включая аннотацию к программе и к документу), ключевых слов, ссылок на нормативные документы, терминов и основного технического текста; вид документа согласован с перечнем по ГОСТ 19.101-77. Эксплуатация изделия оператором описана в отдельном руководстве оператора (ГОСТ 19.505-79, файл <code>docs/coronerchat-operation-print.html</code>). При изменении кода необходимо синхронно обновлять обозначения маршрутов, имён файлов и диаграммы.</p>
+
+  <p class="meta" style="margin-top:1.5em;">Версия изделия: см. <code>package.json</code>. Печать: формат A4, поля согласовать с требованиями к печатным программным документам (ГОСТ 19.106-78).</p>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "neutral",
+      securityLevel: "loose",
+      flowchart: { htmlLabels: true, curve: "basis" },
+      sequence: { mirrorActors: false },
+    });
+    await mermaid.run({ querySelector: ".mermaid" });
+  </script>
+</body>
+</html>
