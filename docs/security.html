@@ -4,13 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Information Security — CoronerChat</title>
-  <meta name="description" content="Информационная безопасность CoronerChat: соответствие нормам РФ и международным стандартам ISO/IEC, GDPR, NIST." />
+  <meta name="description" content="Подход CoronerChat к информационной безопасности, сформированный с учётом ISO/IEC, GDPR, NIST и норм РФ." />
+  <link rel="canonical" href="https://dorimeryt-alt.github.io/CoronerChat/security.html" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Information Security — CoronerChat" />
+  <meta property="og:description" content="Подход к безопасности, сформированный с учётом международных практик и норм РФ." />
+  <meta property="og:url" content="https://dorimeryt-alt.github.io/CoronerChat/security.html" />
+  <meta property="og:image" content="https://dorimeryt-alt.github.io/CoronerChat/assets/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">К основному содержанию</a>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="horizon" aria-hidden="true"></div>
   <div class="wrap">
@@ -20,33 +28,36 @@
         <a href="install.html">Install</a>
         <a href="update.html">Update</a>
         <a href="platforms.html">Platforms</a>
+        <a href="compare.html">Compare</a>
         <a href="guide.html">Guide</a>
+        <a href="testers.html">Testers</a>
         <a href="security.html" aria-current="page">Security</a>
         <a href="tech/index.html">Tech</a>
         <a href="faq.html">FAQ</a>
       </nav>
     </header>
 
+    <main id="main-content">
     <header class="page-hero">
       <p class="section-label">Secure by design</p>
       <h1>Information Security</h1>
-      <p>Архитектура и эксплуатационная модель CoronerChat выстроены так, чтобы соответствовать ожиданиям регуляторов РФ и международным практикам ИБ — без компромиссов по умолчанию.</p>
+      <p>Архитектура и эксплуатационная модель CoronerChat сформированы с учётом норм РФ и международных практик ИБ. Это описание подхода, а не заявление о сертификации или юридическая консультация.</p>
       <div class="badge-row">
         <span class="badge ok">Local-first · 127.0.0.1</span>
         <span class="badge ok">OAuth 2.0 / TLS</span>
-        <span class="badge ok">ISO/IEC 27001 aligned</span>
-        <span class="badge ok">152-ФЗ ready posture</span>
-        <span class="badge ok">GDPR / ISO 29100</span>
+        <span class="badge ok">Informed by ISO/IEC 27001</span>
+        <span class="badge ok">152-ФЗ considerations</span>
+        <span class="badge ok">GDPR / ISO 29100 informed</span>
       </div>
     </header>
 
     <section class="section" style="padding-top:0">
       <p class="section-label">Verdict</p>
       <h2>Позиция изделия</h2>
-      <p class="lead">CoronerChat — локальный операторский клиент: секреты и состояние остаются на машине стримера, внешние вызовы идут только по HTTPS к официальным API площадок, а чувствительные HTTP-эндпоинты по умолчанию недоступны из сети.</p>
+      <p class="lead">CoronerChat — локальный операторский клиент: секреты и состояние остаются на машине стримера, внешние вызовы идут к API подключённых площадок и выбранных пользователем TTS-провайдеров, а чувствительные HTTP-эндпоинты по умолчанию недоступны из сети.</p>
       <div class="secure-grid">
         <article class="secure-card">
-          <h3>Zero trust LAN default</h3>
+          <h3>Localhost-first network default</h3>
           <p>HTTP-сервер привязан к <code>127.0.0.1</code>. Расширение до LAN — осознанное действие оператора с токеном deck.</p>
         </article>
         <article class="secure-card">
@@ -70,12 +81,12 @@
       <div class="feature-strip">
         <div class="feature-cell"><strong>ISO/IEC 27001 / 27002</strong><span>Контроли CIA, управление доступом, инциденты, непрерывность — заложены в модель развёртывания</span></div>
         <div class="feature-cell"><strong>ISO/IEC 29100</strong><span>Privacy framework: минимизация, прозрачность целей, контроль субъекта данных</span></div>
-        <div class="feature-cell"><strong>GDPR (EU)</strong><span>Локальная обработка, право на удаление (каталог данных), ограничение передачи</span></div>
+        <div class="feature-cell"><strong>GDPR (EU)</strong><span>Локальная обработка и удаление данных помогают оператору выполнять требования, но оператор сам определяет роли controller/processor, правовое основание, сроки хранения и ответы субъектам данных</span></div>
         <div class="feature-cell"><strong>NIST CSF / SP 800-53</strong><span>Identify → Protect → Detect → Respond → Recover в операторских процедурах</span></div>
         <div class="feature-cell"><strong>OWASP ASVS</strong><span>Защита сессий, отсутствие хранения секретов в UI-кэше, безопасные дефолты</span></div>
         <div class="feature-cell"><strong>ISO/IEC 25010</strong><span>Security &amp; reliability как атрибуты качества ПО</span></div>
       </div>
-      <div class="panel tip">Комплект документации и жизненный цикл сопровождения согласованы с <strong>ISO/IEC/IEEE 15289</strong> и <strong>ISO/IEC 26514</strong> (см. <a href="tech/index.html">Tech docs</a>). Архитектурное описание — в духе <strong>ISO/IEC/IEEE 42010</strong>.</div>
+      <div class="panel tip">Структура документации и жизненный цикл сопровождения сформированы с учётом <strong>ISO/IEC/IEEE 15289</strong> и <strong>ISO/IEC 26514</strong> (см. <a href="tech/index.html">Tech docs</a>). Архитектурное описание опирается на идеи <strong>ISO/IEC/IEEE 42010</strong>. Это не подтверждение соответствия или сертификации.</div>
     </section>
 
     <section class="section">
@@ -84,7 +95,7 @@
       <div class="secure-grid">
         <article class="secure-card">
           <h3>152-ФЗ · ПДн</h3>
-          <p>Изделие поддерживает минимизацию (отключение лишних площадок), локальное хранение, удаление данных при деинсталляции и отзыв OAuth у провайдеров.</p>
+          <p>Изделие поддерживает минимизацию (отключение лишних площадок), локальное хранение и отзыв OAuth у провайдеров. Каталог <code>CoronerChat-data</code> может сохраняться после деинсталляции; для полного локального удаления оператор удаляет его вручную.</p>
         </article>
         <article class="secure-card">
           <h3>149-ФЗ · информация</h3>
@@ -99,7 +110,7 @@
           <p>НСД локально и по сети, вредоносное ПО, утечка через поддержку — закрыты чеклистом мер в руководстве оператора.</p>
         </article>
       </div>
-      <p class="lead" style="margin-top:8px">Национальная гармонизация: ориентир <strong>ГОСТ Р ИСО/МЭК 27001</strong> как адаптация ISO/IEC 27001 — без опоры на устаревший ЕСПД как основной стандарт документации.</p>
+      <p class="lead" style="margin-top:8px">В качестве ориентира также учитывается <strong>ГОСТ Р ИСО/МЭК 27001</strong> как национальная адаптация ISO/IEC 27001. Применимость 152-ФЗ, 149-ФЗ, ПП РФ № 1119 и требований ФСТЭК определяет оператор с учётом своей системы, данных и модели угроз.</p>
     </section>
 
     <section class="section">
@@ -139,9 +150,12 @@
         <div class="feature-cell"><strong>Support</strong><span>Не слать сырой экспорт/логи с секретами</span></div>
       </div>
       <div class="panel">
+        <strong>Ответственность оператора.</strong> CoronerChat предоставляет технические настройки, но оператор отвечает за уведомления и согласия, законность обработки, договоры с платформами, права субъектов, сроки хранения, защиту рабочего места и оценку трансграничной передачи. При необходимости обратитесь к профильному юристу или специалисту по ИБ.<br />
         Подробная таблица активов, угроз и мер — в печатном руководстве оператора
-        (<a href="coronerchat-operation-print.html">coronerchat-operation-print.html</a> (раздел Information Security).
-        Сообщения об уязвимостях: см. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SECURITY.md">SECURITY.md</a>.
+        (<a href="coronerchat-operation-print.html">HTML-версия для печати</a>, раздел Information Security;
+        <a href="coronerchat-operation-print.pdf" data-link-optional>PDF после локального экспорта</a>).
+        Сообщения об уязвимостях: см. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SECURITY.md">политику безопасности</a>;
+        обработка локальных данных описана в <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/PRIVACY.md">privacy notice</a>.
       </div>
       <div class="cta-row">
         <a class="btn btn-primary" href="tech/index.html">Tech docs</a>
@@ -149,8 +163,9 @@
       </div>
     </section>
 
+    </main>
     <footer class="site-footer">
-      <a href="index.html">← На главную</a> · © C0R0N3R · security posture statement
+      © C0R0N3R · CoronerChat · <a href="index.html">Главная</a> · <a href="compare.html">Сравнение</a> · <a href="guide.html">Руководство</a> · <a href="security.html">Безопасность</a>
     </footer>
   </div>
   <script src="site.js"></script>
