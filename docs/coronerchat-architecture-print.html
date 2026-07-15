@@ -209,17 +209,17 @@
   </svg>
 
   <div class="doc-front">
-    <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
+    <p class="doc-logo-wrap"><img class="doc-logo" src="assets/icon.svg" alt="Логотип CoronerChat" width="64" height="64" /></p>
     <p class="doc-kind">Software Architecture Description</p>
-    <p class="doc-gost-note">Information item: <strong>Software Architecture Description</strong>. Content and viewpoints aligned with <strong>ISO/IEC/IEEE 42010</strong> (architecture description) and <strong>ISO/IEC/IEEE 15289</strong> (life-cycle information items). User/operator documentation is published separately per <strong>ISO/IEC 26514</strong>. Print layout targets A4 for reproducible distribution.</p>
-    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.5</strong> (<code>package.json</code> / GitHub Latest)</span></p>
+    <p class="doc-gost-note">Information item: <strong>Software Architecture Description</strong>. Content and viewpoints are informed by <strong>ISO/IEC/IEEE 42010</strong> (architecture description) and <strong>ISO/IEC/IEEE 15289</strong> (life-cycle information items). User/operator documentation is published separately with reference to <strong>ISO/IEC 26514</strong>. This wording does not claim certification or verified conformity. Print layout targets A4 for reproducible distribution.</p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.10</strong> (<code>package.json</code> / GitHub Latest)</span></p>
 
     <h2 class="doc-block-title">Аннотация</h2>
     <p class="doc-abstract-label">К программе (изделию)</p>
-    <p class="doc-abstract"><strong>CoronerChat 2.7.5</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея OBS; авторизация OAuth 2.0 (где применимо); каталоги эмодзи/бейджей (в т.ч. 7TV); OBS WebSocket; UX-пакет эфира (пресеты, алерты, goal/vote); локальная статистика сессий и достижения; локализация UI (ru/en/ro/de/fi); автообновление с GitHub Latest (<code>dorimeryt-alt/CoronerChat</code>); релей «now playing»; desktop Electron и опциональный zapret. Поставка: NSIS Setup / portable, каталог данных <code>CoronerChat-data</code>.</p>
+    <p class="doc-abstract"><strong>CoronerChat 2.7.10</strong> — прикладное программное обеспечение для стримеров и модераторов: объединение чатов Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts в единую ленту с нормализацией формата сообщений, буфером и поиском; отображение во встроенном веб-интерфейсе и в режиме оверлея OBS; авторизация OAuth 2.0 (где применимо); каталоги эмодзи/бейджей (в т.ч. 7TV); OBS WebSocket; UX-пакет эфира (пресеты, алерты, goal/vote); локальная статистика сессий и достижения; локализация UI (ru/en/ro/de/fi); автообновление с GitHub Latest (<code>dorimeryt-alt/CoronerChat</code>); релей «now playing»; desktop Electron и опциональный zapret. Поставка: NSIS Setup / portable, каталог данных <code>CoronerChat-data</code>.</p>
     <p class="doc-abstract-label">К настоящему документу</p>
     <p class="doc-abstract">Настоящее техническое описание содержит сведения об архитектуре ПО «CoronerChat»: структурную модель в нотации IDEF0, контекстные и декомпозированные диаграммы потоков данных (DFD), описание взаимодействия с каждой внешней платформой и смежными HTTP-сервисами, перечень хранилищ данных, диаграммы процессов (BPMN) и последовательностей (UML), состав программных модулей, группы маршрутов HTTP и типы сообщений WebSocket, нефункциональные требования и словарь данных; в разделе 1 приведён <strong>перечень реализованных функций изделия</strong> (п. 1.5). Диаграммы, выполняемые средствами Mermaid в среде браузера, приведены для наглядности и сопровождения кода. Документ предназначен для разработчиков, системных аналитиков и лиц, ответственных за сопровождение комплекта программной документации. Эксплуатационная документация для оператора изложена в <code>docs/coronerchat-operation-print.html</code> и на сайте (<code>docs/guide.html</code>) в соответствии с ISO/IEC 26514.</p>
-    <p class="doc-keywords"><strong>Ключевые слова:</strong> Software Architecture Description; ISO/IEC/IEEE 42010; CoronerChat 2.7.5; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK; Kick; YouTube; Rutube; DonationAlerts; MemeAlerts; i18n; auto-update; Electron; Node.js.</p>
+    <p class="doc-keywords"><strong>Ключевые слова:</strong> Software Architecture Description; ISO/IEC/IEEE 42010; CoronerChat 2.7.10; IDEF0; DFD; BPMN; UML; WebSocket; OAuth 2.0; Twitch; VK; Kick; YouTube; Rutube; DonationAlerts; MemeAlerts; i18n; auto-update; Electron; Node.js.</p>
 
     <h2 class="doc-block-title">Нормативные и справочные ссылки</h2>
     <ul class="compact">
@@ -251,7 +251,7 @@
     </table>
   </div>
 
-  <h1>CoronerChat — Software Architecture Description (v2.7.5)</h1>
+  <h1>CoronerChat — Software Architecture Description (v2.7.10)</h1>
   <div class="hint no-print">
     Открыть в браузере с сетью (Mermaid с CDN). Печать в PDF: Ctrl+P → «Сохранить как PDF». При обрезании диаграмм уменьшите масштаб страницы в предпросмотре.
   </div>
@@ -1090,7 +1090,7 @@ flowchart TB
     </tbody>
   </table>
 
-  <h2>12. Группы HTTP API (фрагмент, актуально для 2.7.5)</h2>
+  <h2>12. Группы HTTP API (фрагмент, актуально для 2.7.10)</h2>
   <p class="doc-caption">Таблица 12 — Группы маршрутов <code>handleHttp</code> / <code>handleApiRequest</code></p>
   <table class="dfd">
     <thead><tr><th>Группа</th><th>Примеры путей</th><th>Роль</th></tr></thead>
@@ -1135,9 +1135,9 @@ flowchart TB
   <p><strong>Локализация (2.7.5).</strong> Языки <code>ru</code>, <code>en</code>, <code>ro</code>, <code>de</code>, <code>fi</code> — словари <code>src/server/i18n/locales</code>, персист <code>uiLocale</code>, <code>POST /api/settings/locale</code>. Клиентский <code>applyI18nDom</code> не затирает узлы с вложенными контролами (фикс смены языка в 2.7.5). См. <code>docs/updates-and-releases.md</code>, <code>docs/i18n.md</code>, <code>docs/security.html</code>.</p>
 
   <h2>15. Заключение</h2>
-  <p>Документ описывает архитектуру CoronerChat <strong>2.7.5</strong> (IDEF0, DFD, BPMN, UML); п. 1.5 фиксирует реализованный функционал, включая Rutube, UX-пакет, статистику/достижения, i18n и автообновление. Information item: Software Architecture Description (ISO/IEC/IEEE 42010, 15289). Эксплуатация — <code>docs/coronerchat-operation-print.html</code>, <code>docs/guide.html</code> (ISO/IEC 26514). При изменении кода синхронно обновляйте маршруты, имена модулей и диаграммы.</p>
+  <p>Документ описывает архитектуру CoronerChat <strong>2.7.10</strong> (IDEF0, DFD, BPMN, UML); п. 1.5 фиксирует реализованный функционал, включая Rutube, UX-пакет, статистику/достижения, i18n и автообновление. Information item: Software Architecture Description (ISO/IEC/IEEE 42010, 15289). Эксплуатация — <code>docs/coronerchat-operation-print.html</code>, <code>docs/guide.html</code> (ISO/IEC 26514). При изменении кода синхронно обновляйте маршруты, имена модулей и диаграммы.</p>
 
-  <p class="meta" style="margin-top:1.5em;">Версия изделия: <strong>2.7.5</strong> (<code>package.json</code>). Печать: A4. Публикация: GitHub Pages <code>docs/</code>.</p>
+  <p class="meta" style="margin-top:1.5em;">Версия изделия: <strong>2.7.10</strong> (<code>package.json</code>). Печать: A4. Публикация: GitHub Pages <code>docs/</code>.</p>
 
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
