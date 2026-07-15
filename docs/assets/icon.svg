@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" role="img" aria-labelledby="title">
+  <title id="title">CoronerChat</title>
+  <rect width="144" height="144" rx="24" fill="#1e293b"/>
+  <path fill="#94a3b8" d="M36 44h72v16H36zm0 28h54v16H36zm0 28h66v16H36z"/>
+  <circle cx="104" cy="56" r="10" fill="#38bdf8"/>
+</svg>
