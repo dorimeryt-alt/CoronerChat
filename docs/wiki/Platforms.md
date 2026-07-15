@@ -1,12 +1,12 @@
 # Площадки
 
-| Площадка | Роль |
+| Площадка | Чат |
 |----------|------|
-| Twitch | Чат, мод, рейды |
-| VK Video Live | Чат |
-| Kick | Чат |
-| YouTube Live | Чат |
-| Rutube | Чат |
-| DonationAlerts | Донаты (OAuth) |
-| MemeAlerts | Донаты/стикеры (`?obsToken=` из OBS-ссылки) |
+| Twitch | да, send, рейды |
+| VK Video Live | да |
+| Kick | да |
+| YouTube Live | да |
+| Rutube | да |
+| DonationAlerts | донаты (OAuth) |
+| MemeAlerts | донаты/стики (`?obsToken=` из OBS-ссылки) |
 | OBS | Browser Source, telemetry |
