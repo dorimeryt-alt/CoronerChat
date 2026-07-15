@@ -29,7 +29,7 @@
 npm run pack:win:installer
 npm run release:github
 # или
-node scripts/publish-github-release.mjs --version 2.7.5
+node scripts/publish-github-release.mjs --version 2.7.10
 ```
 
 Notes берутся из блока `=== x.y.z ===` в `build/installer.nsh`.
