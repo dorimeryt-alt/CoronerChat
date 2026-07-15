@@ -1,6 +1,6 @@
 # Установка
 
-1. Открой [Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest).
+1. Открой [Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) (**v2.7.10**).
 2. Скачай `CoronerChat.Setup.x.y.z.exe`.
 3. Запусти NSIS-установщик.
 
