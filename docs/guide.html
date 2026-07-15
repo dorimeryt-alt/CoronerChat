@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>User Guide — CoronerChat</title>
   <meta name="description" content="Полное руководство пользователя CoronerChat: интерфейс, площадки, донаты, OBS, модерация, эфир, сеть." />
+  <link rel="canonical" href="https://dorimeryt-alt.github.io/CoronerChat/guide.html" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="User Guide — CoronerChat" />
+  <meta property="og:description" content="Полное руководство пользователя CoronerChat." />
+  <meta property="og:url" content="https://dorimeryt-alt.github.io/CoronerChat/guide.html" />
+  <meta property="og:image" content="https://dorimeryt-alt.github.io/CoronerChat/assets/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">К основному содержанию</a>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="horizon" aria-hidden="true"></div>
   <div class="wrap">
@@ -20,20 +28,23 @@
         <a href="install.html">Install</a>
         <a href="update.html">Update</a>
         <a href="platforms.html">Platforms</a>
+        <a href="compare.html">Compare</a>
         <a href="guide.html" aria-current="page">Guide</a>
+        <a href="testers.html">Testers</a>
         <a href="security.html">Security</a>
         <a href="tech/index.html">Tech</a>
         <a href="faq.html">FAQ</a>
       </nav>
     </header>
 
+    <main id="main-content">
     <header class="page-hero">
       <p class="section-label">Operator manual</p>
       <h1>User Guide</h1>
       <p>Расширенная версия руководства из приложения (⚙ → О приложении). Для печати и корпоративного комплекта — см. <a href="tech/index.html">Tech docs</a>.</p>
       <div class="badge-row">
-        <span class="badge">CoronerChat 2.7+</span>
-        <span class="badge ok">ISO/IEC 26514 aligned</span>
+        <span class="badge ok">CoronerChat 2.7.10</span>
+        <span class="badge ok">Informed by ISO/IEC 26514</span>
         <span class="badge">in-app + web</span>
       </div>
     </header>
@@ -121,6 +132,7 @@
             <li><code>?modview=1</code> — LAN-режим для модеров</li>
           </ul>
           <p class="guide-tip">Кнопка «Копировать все OBS URL» в UX-пакете копирует chat + music + alerts + goal + vote одной пачкой.</p>
+          <p><strong>Фильтры чат-оверлея.</strong> Уведомления → «OBS overlay: события и команды»: можно отключить траты баллов, команды <code>!song</code> и другие системные события только в OBS, не затрагивая основную ленту оператора.</p>
         </section>
 
         <section class="ug-section" id="g-messages">
@@ -144,7 +156,10 @@
             <li><strong>Resend</strong> — ретрансляция входящих в другие чаты.</li>
             <li><strong>Song request</strong> — !sr / !song, очередь, Skip.</li>
             <li><strong>Safe mode / Always on top</strong> — сброс темы и окно поверх.</li>
+            <li><strong>Чеклист готовности</strong> — скрывается отдельно, не затрагивая статус эфира, OBS telemetry, reconnect и пресеты.</li>
+            <li><strong>Озвучка сообщений</strong> — последовательная очередь, системные голоса или OpenAI-compatible / ElevenLabs / Google Cloud / Azure, шаблон автора и сообщения, громкость, скорость, pitch, фильтры платформ и ролей, Pause / Resume / Skip / Clear.</li>
           </ul>
+          <div class="panel tip"><strong>TTS privacy/cost notice.</strong> Системный голос и локальный OpenAI-compatible endpoint могут работать без передачи текста в облако. При выборе облачного провайдера подготовленный текст отправляется его API и может тарифицироваться. API-ключи пользователь получает самостоятельно; CoronerChat их не поставляет и показывает в UI только факт настройки.</div>
         </section>
 
         <section class="ug-section" id="g-mod">
@@ -180,7 +195,7 @@
 
         <section class="ug-section" id="g-secure">
           <h2>15. Безопасность оператора</h2>
-          <p>По умолчанию HTTP только на <code>127.0.0.1</code>. Токены в <code>CoronerChat-data</code> — не шарьте экспорт настроек. Не включайте <code>0.0.0.0</code> без deck-токена и сегментации сети. Полный compliance-раздел: <a href="security.html">Security</a>.</p>
+          <p>По умолчанию HTTP только на <code>127.0.0.1</code>. Токены в <code>CoronerChat-data</code> — не передавайте экспорт настроек другим людям. Не включайте <code>0.0.0.0</code> без deck-токена и сегментации сети. Подробности подхода: <a href="security.html">Security</a>.</p>
         </section>
 
         <section class="ug-section" id="g-faq">
@@ -203,8 +218,9 @@
       </div>
     </div>
 
+    </main>
     <footer class="site-footer">
-      <a href="index.html">← На главную</a> · то же руководство доступно в приложении · © C0R0N3R
+      © C0R0N3R · CoronerChat · <a href="index.html">Главная</a> · <a href="compare.html">Сравнение</a> · <a href="guide.html">Руководство</a> · <a href="security.html">Безопасность</a>
     </footer>
   </div>
   <script src="site.js"></script>
