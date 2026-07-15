@@ -5,12 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FAQ — CoronerChat</title>
   <meta name="description" content="Частые вопросы: скачивание, версии, данные, исходники, языки." />
+  <link rel="canonical" href="https://dorimeryt-alt.github.io/CoronerChat/faq.html" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="FAQ — CoronerChat" />
+  <meta property="og:description" content="Ответы о скачивании, версиях, данных и языках CoronerChat." />
+  <meta property="og:url" content="https://dorimeryt-alt.github.io/CoronerChat/faq.html" />
+  <meta property="og:image" content="https://dorimeryt-alt.github.io/CoronerChat/assets/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">К основному содержанию</a>
   <div class="scanlines" aria-hidden="true"></div>
   <div class="horizon" aria-hidden="true"></div>
   <div class="wrap">
@@ -20,13 +28,16 @@
         <a href="install.html">Install</a>
         <a href="update.html">Update</a>
         <a href="platforms.html">Platforms</a>
+        <a href="compare.html">Compare</a>
         <a href="guide.html">Guide</a>
+        <a href="testers.html">Testers</a>
         <a href="security.html">Security</a>
         <a href="tech/index.html">Tech</a>
         <a href="faq.html" aria-current="page">FAQ</a>
       </nav>
     </header>
 
+    <main id="main-content">
     <header class="page-hero">
       <p class="section-label">Help desk</p>
       <h1>FAQ</h1>
@@ -44,7 +55,7 @@
         <summary>Почему предлагали 2.35.x вместо 2.7.x?</summary>
         <div class="faq-body">
           <p>В Releases лежит архив со старой нумерацией (2.25–2.35). Они выглядят «больше» по semver, но это не актуальная линия.</p>
-          <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Если сидишь на 2.7.4 — один раз поставь 2.7.5 вручную.</p>
+          <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Актуальная сборка — <strong>2.7.10</strong>. Если сидишь на 2.7.4 — один раз поставь Latest вручную.</p>
         </div>
       </details>
       <details class="faq-item">
@@ -68,7 +79,7 @@
       <details class="faq-item">
         <summary>Где исходный код?</summary>
         <div class="faq-body">
-          <p>В этом репозитории — только установщики и документация. См. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SOURCE.md">SOURCE.md</a>.</p>
+          <p>В этом репозитории — только установщики и документация. См. <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/SOURCE.md">описание модели распространения</a>.</p>
         </div>
       </details>
       <details class="faq-item">
@@ -91,8 +102,9 @@
       <a class="btn btn-ghost" href="https://github.com/dorimeryt-alt/CoronerChat/wiki">Wiki</a>
     </div>
 
+    </main>
     <footer class="site-footer">
-      <a href="index.html">← На главную</a> · © C0R0N3R
+      © C0R0N3R · CoronerChat · <a href="index.html">Главная</a> · <a href="compare.html">Сравнение</a> · <a href="guide.html">Руководство</a> · <a href="security.html">Безопасность</a>
     </footer>
   </div>
   <script src="site.js"></script>
