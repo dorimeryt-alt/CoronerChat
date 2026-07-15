@@ -139,14 +139,14 @@
 <body>
 
   <div class="doc-front">
-    <p class="doc-logo-wrap"><img class="doc-logo" src="../build/icon.ico" alt="Логотип CoronerChat" width="64" height="64" /></p>
+    <p class="doc-logo-wrap"><img class="doc-logo" src="assets/icon.svg" alt="Логотип CoronerChat" width="64" height="64" /></p>
     <p class="doc-kind">Operator / User Documentation</p>
-    <p class="doc-gost-note">Information item: <strong>User / Operator Documentation</strong>. Structure and content aligned with <strong>ISO/IEC 26514</strong> and <strong>ISO/IEC/IEEE 15289</strong>. Life-cycle placement: operation and maintenance processes per <strong>ISO/IEC 12207</strong>. Information security controls mapped to <strong>ISO/IEC 27001/27002</strong>, privacy framework <strong>ISO/IEC 29100</strong>, and applicable Russian Federation law (152-FZ, 149-FZ). Print layout targets A4.</p>
-    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.5</strong></span></p>
+    <p class="doc-gost-note">Information item: <strong>User / Operator Documentation</strong>. Structure and content are informed by <strong>ISO/IEC 26514</strong> and <strong>ISO/IEC/IEEE 15289</strong>. Life-cycle placement draws on operation and maintenance processes in <strong>ISO/IEC 12207</strong>. Security guidance is informed by <strong>ISO/IEC 27001/27002</strong>, <strong>ISO/IEC 29100</strong>, and potentially applicable Russian Federation law (152-FZ, 149-FZ). This is not certification or legal advice. Print layout targets A4.</p>
+    <p class="doc-name">на программное обеспечение<br /><strong>«CoronerChat»</strong><br /><span style="font-size:0.95rem;font-weight:600;">Версия изделия: <strong>2.7.10</strong></span></p>
 
     <h2 class="doc-block-title">Аннотация</h2>
     <p class="doc-abstract-label">К программе (изделию)</p>
-    <p class="doc-abstract"><strong>CoronerChat 2.7.5</strong> — прикладное ПО для стримеров и модераторов: единая лента Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts; веб-UI и OBS overlay; UX-пакет эфира; статистика и достижения; локализация ru/en/ro/de/fi; автообновление с GitHub Latest; desktop Electron (Windows). Настоящее руководство описывает установку, настройку, штатную эксплуатацию и первичную диагностику без доступа к исходному коду. Расширенный web User Guide: <code>docs/guide.html</code>.</p>
+    <p class="doc-abstract"><strong>CoronerChat 2.7.10</strong> — прикладное ПО для стримеров и модераторов: единая лента Twitch, VK Video Live, Kick, YouTube Live, Rutube, DonationAlerts и MemeAlerts; веб-UI и OBS overlay; UX-пакет эфира; статистика и достижения; локализация ru/en/ro/de/fi; автообновление с GitHub Latest; desktop Electron (Windows). Настоящее руководство описывает установку, настройку, штатную эксплуатацию и первичную диагностику без доступа к исходному коду. Расширенный web User Guide: <code>docs/guide.html</code>.</p>
     <p class="doc-abstract-label">К настоящему документу</p>
     <p class="doc-abstract">Документ содержит требования к среде исполнения, порядок установки и запуска, описание операций по платформам, <strong>полный перечень функций изделия, HTTP API и сохраняемых настроек интерфейса</strong> (п. 6), типовые неисправности (п. 7), <strong>информационную безопасность: международные стандарты и законодательство РФ</strong> (п. 8), обслуживание и резервное копирование (п. 9). Архитектура и протоколы — в Software Architecture Description (<code>docs/coronerchat-architecture-print.html</code>). Публичная web-версия руководства: <code>docs/guide.html</code>.</p>
     <p class="doc-keywords"><strong>Ключевые слова:</strong> user documentation; operator guide; CoronerChat; information security; personal data; 152-FZ; GDPR; ISO/IEC 27001; OAuth 2.0; Electron; OBS; Twitch; VK Video Live; Kick; YouTube Live; DonationAlerts; MemeAlerts.</p>
@@ -182,8 +182,8 @@
     </table>
   </div>
 
-  <h1>CoronerChat — руководство оператора (v2.7.5)</h1>
-  <p class="meta">Печатная форма A4. Версия изделия: <strong>2.7.5</strong> (<code>package.json</code> / GitHub Latest). ISO/IEC 26514.</p>
+  <h1>CoronerChat — руководство оператора (v2.7.10)</h1>
+  <p class="meta">Печатная форма A4. Версия изделия: <strong>2.7.10</strong> (<code>package.json</code> / GitHub Latest). ISO/IEC 26514.</p>
 
   <h2>Содержание</h2>
   <ol class="toc compact">
@@ -361,7 +361,7 @@
   <h2>6. Полный перечень функций изделия, программных интерфейсов и настроек</h2>
   <p>Ниже зафиксированы пользовательские возможности и программные интерфейсы по коду сервера (<code>src/server/chat-app-server.js</code>) и UI (<code>src/server/web-ui.js</code>). Точные тела запросов и побочные эффекты см. в исходных текстах и в техническом описании архитектуры.</p>
 
-  <h3>6.1. Вкладки панели настроек (Drawer) — 2.7.5</h3>
+  <h3>6.1. Вкладки панели настроек (Drawer) — 2.7.10</h3>
   <ul class="compact">
     <li><strong>Общие:</strong> язык UI (i18n); подключение каналов; блок Zapret; правила подсветки; авто-ответы; уведомления; экспорт/импорт настроек.</li>
     <li><strong>Twitch, VK, YouTube, Kick, Rutube:</strong> OAuth/сессии, каналы/URL эфира, статусы.</li>
@@ -459,7 +459,7 @@
   <p>Расширенная диагностика — в файле <code>runtime.log</code> в каталоге данных изделия; чувствительные поля в журнале маскируются.</p>
 
   <h2>8. Информационная безопасность и защита данных</h2>
-  <p class="meta"><strong>Security posture:</strong> CoronerChat спроектирован как <strong>local-first</strong> операторский клиент с безопасными значениями по умолчанию. Архитектура и эксплуатационная модель согласованы с контролами <strong>ISO/IEC 27001/27002</strong>, privacy framework <strong>ISO/IEC 29100</strong>, практиками <strong>NIST CSF</strong> / <strong>OWASP ASVS</strong>, требованиями <strong>GDPR</strong> (при обработке данных субъектов ЕС) и законодательством РФ (<strong>152-ФЗ</strong>, <strong>149-ФЗ</strong>, ориентиры ПП № 1119 / ФСТЭК). Публичная выжимка: <code>docs/security.html</code>. Раздел не заменяет юридическую консультацию организации-оператора.</p>
+  <p class="meta"><strong>Security posture:</strong> CoronerChat спроектирован как <strong>local-first</strong> операторский клиент с безопасными значениями по умолчанию. Архитектура и эксплуатационная модель сформированы с учётом контролей <strong>ISO/IEC 27001/27002</strong>, privacy framework <strong>ISO/IEC 29100</strong>, практик <strong>NIST CSF</strong> / <strong>OWASP ASVS</strong>, а также потенциально применимых требований <strong>GDPR</strong> и законодательства РФ. Оператор самостоятельно определяет применимость требований, роли controller/processor, правовые основания и сроки хранения. Публичная выжимка: <code>docs/security.html</code>. Раздел не является сертификацией и не заменяет юридическую консультацию.</p>
 
   <h3>8.0. Итог соответствия (summary)</h3>
   <ul class="compact">
