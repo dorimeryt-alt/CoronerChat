@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Сравнение решений для стримера — CoronerChat</title>
+  <meta name="description" content="Фактическое сравнение CoronerChat с Restream Chat, Social Stream Ninja, Streamlabs Cloudbot, StreamElements и другими инструментами." />
+  <link rel="canonical" href="https://dorimeryt-alt.github.io/CoronerChat/compare.html" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Сравнение решений для стримера — CoronerChat" />
+  <meta property="og:description" content="Платформы, relay, OBS, модерация, автоматизация, TTS, API, AI, приватность и цены." />
+  <meta property="og:url" content="https://dorimeryt-alt.github.io/CoronerChat/compare.html" />
+  <meta property="og:image" content="https://dorimeryt-alt.github.io/CoronerChat/assets/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">К основному содержанию</a>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="horizon" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="topnav">
+      <a class="brand-mark" href="index.html">Coroner<span>Chat</span></a>
+      <nav class="nav-links" aria-label="Разделы">
+        <a href="install.html">Install</a>
+        <a href="update.html">Update</a>
+        <a href="platforms.html">Platforms</a>
+        <a href="compare.html" aria-current="page">Compare</a>
+        <a href="guide.html">Guide</a>
+        <a href="testers.html">Testers</a>
+        <a href="security.html">Security</a>
+        <a href="tech/index.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <header class="page-hero">
+        <p class="section-label">Market scan · checked 2026-07-14</p>
+        <h1>Сравнение решений</h1>
+        <p>Проверяемые возможности по официальным страницам продуктов. Это не рейтинг: инструменты решают разные задачи.</p>
+      </header>
+
+      <section class="section" style="padding-top:0">
+        <p class="section-label">Scope</p>
+        <h2>Как читать сравнение</h2>
+        <div class="panel">
+          <p><strong>Встроено</strong> — возможность прямо заявлена разработчиком. <strong>Интеграция</strong> — достигается через связанный продукт, расширение или внешний движок. <strong>Не заявлено</strong> — такой возможности нет в просмотренных официальных материалах; это не доказательство её полного отсутствия.</p>
+          <p>Цены и состав тарифов меняются. Ниже зафиксировано состояние официальных страниц на <time datetime="2026-07-14">14 июля 2026 года</time>. «Двусторонний чат» означает чтение и отправку, а «relay» — автоматическую пересылку сообщений между площадками.</p>
+        </div>
+        <ul class="chip-row">
+          <li>12 продуктов</li><li>13 критериев</li><li>официальные источники</li><li>checked 2026-07-14</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <p class="section-label">CoronerChat position</p>
+        <h2>Где уже сильнее и что развивать дальше</h2>
+        <div class="feature-strip">
+          <div class="feature-cell"><strong>Local-first operator console</strong><span>Чат, OBS, модерация, донаты, статистика и TTS работают вокруг локального приложения, без обязательной подписки.</span></div>
+          <div class="feature-cell"><strong>Региональный охват</strong><span>Связка Twitch + VK Video Live + Kick + YouTube + Rutube закрывает сценарии, которые редко встречаются вместе у международных конкурентов.</span></div>
+          <div class="feature-cell"><strong>Queued TTS</strong><span>Системные и четыре семейства cloud API, роли, платформы, шаблон, blacklist, fallback и единая очередь с alert TTS.</span></div>
+          <div class="feature-cell"><strong>Проверяемость</strong><span>Открытые технические документы, security posture, privacy notice, runtime diagnostics и локальные dry-run проверки.</span></div>
+        </div>
+        <figure class="panel">
+          <img src="assets/chat-tts-settings.png" alt="Настройки последовательной озвучки сообщений CoronerChat" style="display:block;max-width:430px;width:100%;margin:0 auto" />
+          <figcaption>Реальный интерфейс TTS: голос, очередь, платформы, роли и фильтры. Снимок локальной версии, 2026-07-14.</figcaption>
+        </figure>
+        <div class="platform-grid">
+          <article class="plat-card"><h3>Приоритет 1 · Automation graph</h3><p>Условия, очереди, OBS actions и reusable presets приблизят гибкость к Streamer.bot и SAMMI без отказа от простого режима.</p></article>
+          <article class="plat-card"><h3>Приоритет 2 · Plugin SDK</h3><p>Версионированные события, permissions и подписанные пакеты позволят наращивать площадки и устройства без раздувания core.</p></article>
+          <article class="plat-card"><h3>Приоритет 3 · Loyalty</h3><p>Points, rewards, viewer queue и лёгкие игры закроют разрыв со StreamElements, Streamlabs и BotRix.</p></article>
+          <article class="plat-card"><h3>Приоритет 4 · TikTok</h3><p>Коннектор стоит добавлять только после проверки официального API, правил платформы и стабильного способа авторизации.</p></article>
+        </div>
+        <div class="panel tip">
+          Для представительного GitHub уже добавлены <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/STATUS.md">status</a>,
+          <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/ROADMAP.md">roadmap</a>,
+          <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/CHANGELOG.md">changelog</a>,
+          <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/CONTRIBUTING.md">contributing guide</a>,
+          issue templates и <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/BRAND.md">brand kit</a>.
+          Следующий медиашаг — короткий 60-секундный GIF: подключение площадок → единая лента → TTS → OBS.
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Product map</p>
+        <h2>Основная роль продукта</h2>
+        <div class="platform-grid">
+          <article class="plat-card"><h3>Агрегаторы чата</h3><p>CoronerChat, Restream Chat и Social Stream Ninja собирают несколько источников в одной операторской ленте.</p></article>
+          <article class="plat-card"><h3>Облачные боты</h3><p>Streamlabs Cloudbot, StreamElements и BotRix сосредоточены на командах, модерации и удержании аудитории.</p></article>
+          <article class="plat-card"><h3>Локальная автоматизация</h3><p>Streamer.bot и SAMMI связывают события, OBS, команды и внешние сервисы в настраиваемые сценарии.</p></article>
+          <article class="plat-card"><h3>Специализированные инструменты</h3><p>Speaker.bot и SpeechChat — TTS; Lumia Stream — устройства и шоу; TikFinity — интерактив TikTok LIVE.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Capability matrix</p>
+        <h2>Платформы и функции</h2>
+        <p class="lead">Короткие формулировки намеренно отражают только то, что можно подтвердить источниками ниже.</p>
+        <div class="table-scroll" tabindex="0" aria-label="Прокручиваемая таблица сравнения возможностей">
+          <table class="data compare-table">
+            <thead>
+              <tr>
+                <th>Продукт</th><th>Платформы / двусторонний чат</th><th>Relay</th><th>OBS / desktop</th><th>Модерация</th><th>Автоматизация</th><th>Loyalty / игры</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>CoronerChat</th><td>Twitch, VK, Kick, YouTube: чтение/отправка; Rutube: чтение и отправка через cookie-сессию</td><td>Resend: ретрансляция входящих сообщений в другие чаты</td><td>Windows desktop, локальный web UI, OBS Browser Source и OBS WebSocket</td><td>Действия модератора Twitch</td><td>Пресеты эфира, WebSocket, Ulanzi Deck</td><td>Достижения; полноценная loyalty-система не заявлена</td></tr>
+              <tr><th>Restream Chat</th><td>Twitch, YouTube, DLive, Discord, Kick: read/reply; часть источников только read</td><td>Встроено для поддерживаемых источников</td><td>Browser, desktop; overlay через Browser Source</td><td>Фильтрация комментариев и скрытие пользователей в overlay</td><td>Reply-команды; API событий чата</td><td>Не заявлено</td></tr>
+              <tr><th>Social Stream Ninja</th><td>100+ сервисов; two-way для многих, включая Twitch, YouTube и Facebook</td><td>Встроено</td><td>Browser extension или desktop; dock и overlays для OBS</td><td>Фильтры; AI-модерация</td><td>Команды, webhooks, API, OBS remote, plugins</td><td>Мини-игры, giveaway и очередь</td></tr>
+              <tr><th>Streamlabs Cloudbot</th><td>Бот для Twitch, YouTube, Kick и Trovo; не единый операторский чат</td><td>Не заявлено</td><td>Облачный; файлы не устанавливаются</td><td>Фильтры caps, emotes, links, symbols, words и др.</td><td>Команды, timers, polls, media share</td><td>Points, rewards, giveaways, minigames</td></tr>
+              <tr><th>StreamElements</th><td>Chatbot для Twitch и YouTube; справка также описывает Kick</td><td>Не заявлено</td><td>Облачные widgets; SE.Live для OBS существует отдельно</td><td>Spam filters, mod commands, user levels</td><td>Commands, timers, counters, chat alerts</td><td>Points, store, giveaways, contests и 11+ модулей/игр</td></tr>
+              <tr><th>Streamer.bot</th><td>Встроенный мультичат Twitch, YouTube, Kick; отправка и mod tools</td><td>Не заявлено как готовый relay</td><td>Локальное Windows-приложение; OBS dock и управление OBS</td><td>Slash commands и mod tools; платформенные действия</td><td>Triggers, actions, C#, WebSocket/API, интеграции</td><td>Реализуется actions/интеграциями; готовая loyalty не заявлена</td></tr>
+              <tr><th>SAMMI</th><td>Twitch и YouTube: события, чтение/отправка; несколько аккаунтов</td><td>Через community extension для Discord</td><td>Windows; прямое управление OBS WebSocket</td><td>Через собственные сценарии/расширения</td><td>Визуальная логика, local API, JS extensions, web/UDP/files</td><td>Community extensions: points, slot machine и др.</td></tr>
+              <tr><th>Speaker.bot</th><td>Twitch chat/events; Streamlabs donations и StreamElements tips/merch</td><td>Не заявлено</td><td>Portable Windows desktop; LAN WebSocket со Streamer.bot</td><td>Не заявлено</td><td>Интеграция со Streamer.bot</td><td>Не заявлено</td></tr>
+              <tr><th>Lumia Stream</th><td>Twitch, YouTube, Kick, TikTok и другие интеграции; команды, а не единый чат</td><td>Не заявлено</td><td>Windows/macOS/Linux; OBS, Meld и Streamlabs actions/alerts</td><td>Mod tools и filtered words</td><td>Triggers, conditions, API, plugins, JS, smart devices</td><td>Loyalty leaderboard, achievements, raffles, wheels, polls</td></tr>
+              <tr><th>SpeechChat</th><td>Web-клиент Twitch и YouTube; поле отправки сообщений</td><td>Не заявлено</td><td>Browser; отдельная установка не требуется</td><td>Mute user/group и keyword filtering</td><td>Форматы сообщений и event responses</td><td>Не заявлено</td></tr>
+              <tr><th>BotRix</th><td>Облачный bot для Trovo, Twitch, YouTube, Kick и Discord</td><td>Не заявлено</td><td>Cloud; alerts/widgets добавляются в streaming software</td><td>Настраиваемое удаление spam и links</td><td>Custom commands, timers, stream/Discord notifications</td><td>Points, levels и giveaways</td></tr>
+              <tr><th>TikFinity</th><td>TikTok LIVE; chatbot отвечает на пользовательские команды</td><td>Не заявлено</td><td>Desktop; widgets для TikTok LIVE Studio, OBS и Streamlabs</td><td>Не заявлено в просмотренных страницах</td><td>Actions/events, IFTTT, WebSocket endpoint</td><td>Игровые интеграции; rewards через Team Member Levels</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Extensions and economics</p>
+        <h2>Алерты, TTS, API, AI, приватность и цена</h2>
+        <div class="table-scroll" tabindex="0" aria-label="Прокручиваемая таблица сравнения расширений и цены">
+          <table class="data compare-table">
+            <thead>
+              <tr>
+                <th>Продукт</th><th>Алерты</th><th>TTS</th><th>API / plugins</th><th>AI</th><th>Local-first / privacy</th><th>Цена на дату проверки</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>CoronerChat</th><td>DonationAlerts, MemeAlerts и OBS alert overlay</td><td>Последовательная очередь; системные голоса, OpenAI-compatible, ElevenLabs, Google Cloud и Azure; фильтры, шаблон, Pause/Skip/Clear</td><td>Локальные HTTP/WebSocket endpoints, Ulanzi plugin</td><td>Не заявлено</td><td>Runtime и ключи сохраняются локально; облачный TTS получает текст только при явном выборе провайдера</td><td>Готовые Windows-сборки доступны в GitHub Releases; отдельный платный тариф не заявлен, облачные TTS имеют собственную тарификацию</td></tr>
+              <tr><th>Restream Chat</th><td>TTS-уведомления о сообщениях в desktop app</td><td>В desktop app</td><td>Chat API</td><td>Не заявлено для Chat</td><td>Облачный аккаунт; есть desktop client</td><td>Free: $0; Restream Standard $19/мес., Professional $49/мес. при помесячной оплате</td></tr>
+              <tr><th>Social Stream Ninja</th><td>Donations и featured-chat overlays</td><td>System/local и cloud providers</td><td>Open API, webhooks, scriptable plugins</td><td>Ollama и hosted providers; moderation/co-host</td><td>Open source; browser/desktop; local AI/TTS доступны, transport может использовать hosted session API</td><td>Бесплатно и open source</td></tr>
+              <tr><th>Streamlabs Cloudbot</th><td>Chat alerts; Alertbox/media share в экосистеме</td><td>Не заявлено на странице Cloudbot</td><td>Custom commands; публичный plugin API не заявлен</td><td>Не заявлено для Cloudbot</td><td>Полностью облачный, работает 24/7</td><td>Cloudbot бесплатен; Ultra нужен для custom bot name ($27/мес. или $189/год)</td></tr>
+              <tr><th>StreamElements</th><td>Chat alerts; бесплатные overlays/widgets</td><td>Возможен reward в loyalty store; отдельный штатный TTS не заявлен</td><td>Custom commands и экосистема widgets</td><td>Не заявлено для chatbot</td><td>Облачный dashboard/chatbot</td><td>StreamElements заявляет инструменты бесплатными</td></tr>
+              <tr><th>Streamer.bot</th><td>Actions создают alerts; интеграции с alert-сервисами</td><td>Через Speaker.bot</td><td>C#, internal WebSocket, clients и integrations</td><td>Не заявлено как штатная функция</td><td>Прямо заявлены Local First и Privacy Focused</td><td>Core бесплатен; часть новых функций — Patreon Supporter Perks</td></tr>
+              <tr><th>SAMMI</th><td>Custom alerts через buttons/actions</td><td>Community extension</td><td>Local API и community JavaScript extensions</td><td>ChatGPT — community extension</td><td>Локальный Windows Core; Panel может работать по LAN</td><td>Core/Bridge/Deck/Voice бесплатны; отдельные extensions могут быть платными</td></tr>
+              <tr><th>Speaker.bot</th><td>Озвучивает chat и events</td><td>Основная функция; SAPI5 и несколько cloud engines</td><td>WebSocket integration со Streamer.bot</td><td>AI-голоса зависят от выбранного внешнего движка</td><td>Portable local app; SAPI5 локален, cloud engines передают текст провайдеру</td><td>Приложение скачивается без тарифа; SAPI5 free, внешние engines имеют собственные цены</td></tr>
+              <tr><th>Lumia Stream</th><td>Custom alerts и overlay alert box</td><td>Встроено</td><td>API, plugins, JavaScript и hardware protocols</td><td>AI Assistant в premium-функциях</td><td>Desktop app; часть устройств поддерживает local control, сервисы/интеграции могут быть облачными</td><td>Free; Premium $5.99/мес., $32.99/6 мес. или $59.99/год</td></tr>
+              <tr><th>SpeechChat</th><td>Event messages и sound effects</td><td>Основная функция браузерного клиента</td><td>Не заявлено</td><td>Не заявлено</td><td>Web service; конфигурация сохраняется через Google Drive</td><td>Доступен web-клиент; пожертвования и stars, фиксированный тариф не опубликован</td></tr>
+              <tr><th>BotRix</th><td>Stream/Discord alerts и widgets</td><td>Не подтверждено официальной главной страницей</td><td>Custom command variables; публичный API не заявлен</td><td>Не заявлено</td><td>Полностью облачный; установка не нужна</td><td>Есть premium membership, но публичная цена на просмотренных официальных страницах не указана</td></tr>
+              <tr><th>TikFinity</th><td>Sound alerts и interactive widgets</td><td>Встроено</td><td>Локальный WebSocket endpoint; IFTTT</td><td>Не заявлено</td><td>Desktop app должен работать на том же ПК для WebSocket API; TikTok-события приходят извне</td><td>Официальная страница заявляет широкий набор функций бесплатным; отдельная цена desktop premium не показана</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Evidence</p>
+        <h2>Официальные источники</h2>
+        <p class="lead">Все ссылки проверены 2026-07-14. Для CoronerChat источником служат документация и README этого репозитория.</p>
+        <div class="source-list">
+          <article><h3>CoronerChat</h3><p><a href="platforms.html">Площадки</a> · <a href="guide.html">User Guide</a> · <a href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/README.md">README</a></p></article>
+          <article><h3>Restream Chat</h3><p><a href="https://restream.io/chat">Chat</a> · <a href="https://developers.restream.io/chat/event-sources">Event sources</a> · <a href="https://restream.io/pricing">Pricing</a></p></article>
+          <article><h3>Social Stream Ninja</h3><p><a href="https://socialstream.ninja/docs/features.html">Features</a> · <a href="https://socialstream.ninja/docs/commands.html">Commands &amp; API</a> · <a href="https://github.com/steveseguin/social_stream">Source repository</a></p></article>
+          <article><h3>Streamlabs Cloudbot</h3><p><a href="https://streamlabs.com/cloudbot/">Cloudbot</a> · <a href="https://streamlabs.com/faq">Pricing FAQ</a></p></article>
+          <article><h3>StreamElements</h3><p><a href="https://streamelements.com/features/chatBot">Chatbot</a> · <a href="https://support.streamelements.com/hc/en-us/articles/10474478470290-Loyalty-System-Overview">Loyalty</a> · <a href="https://streamelements.com/">Platform/pricing statement</a></p></article>
+          <article><h3>Streamer.bot</h3><p><a href="https://streamer.bot/">Overview &amp; integrations</a> · <a href="https://streamer.bot/features">Features</a> · <a href="https://streamer.bot/blog/releases/v1.0.0">Pricing/supporter perks</a></p></article>
+          <article><h3>SAMMI</h3><p><a href="https://sammi.solutions/">Overview &amp; pricing</a> · <a href="https://sammi.solutions/docs/getting-started/introduction">Introduction</a> · <a href="https://sammi.solutions/extensions">Extensions</a></p></article>
+          <article><h3>Speaker.bot</h3><p><a href="https://speaker.bot/">Speech engines</a> · <a href="https://speaker.bot/get-started/installation">Installation</a> · <a href="https://speaker.bot/get-started/accounts">Accounts &amp; events</a></p></article>
+          <article><h3>Lumia Stream</h3><p><a href="https://lumiastream.com/">Integrations</a> · <a href="https://lumiastream.com/pricing">Features &amp; pricing</a> · <a href="https://dev.lumiastream.com/docs/intro">Developer docs</a></p></article>
+          <article><h3>SpeechChat</h3><p><a href="https://www.speechchat.com/">Web client</a> · <a href="https://www.speechchat.com/tos.html">Privacy policy</a></p></article>
+          <article><h3>BotRix</h3><p><a href="https://botrix.live/">Overview</a> · <a href="https://botrix.live/docs/">Documentation</a></p></article>
+          <article><h3>TikFinity</h3><p><a href="https://www.tikfinity.app/">Overview</a> · <a href="https://tikfinity.zerody.one/tiktok/chatbot">Chatbot</a> · <a href="https://tikfinity.zerody.one/tiktok/dapi">WebSocket API</a></p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      © C0R0N3R · CoronerChat · <a href="index.html">Главная</a> · <a href="compare.html">Сравнение</a> · <a href="guide.html">Руководство</a> · <a href="security.html">Безопасность</a>
+    </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
