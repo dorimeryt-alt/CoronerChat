@@ -8,6 +8,8 @@
 |----------|-----------------|------------|
 | [index.html](index.html) | Product site | Neon Arcade лендинг |
 | [guide.html](guide.html) | ISO/IEC 26514 | User Guide (расширенный) |
+| [compare.html](compare.html) | Competitor research | Сравнение 12 решений по официальным источникам, проверено 2026-07-14 |
+| [testers.html](testers.html) | Field testing | Стримеры-апробанты и ссылки на их каналы |
 | [security.html](security.html) | ISO/IEC 27001 · 29100 · РФ | Information security statement |
 | [tech/index.html](tech/index.html) | ISO/IEC/IEEE 15289 | Реестр техкомплекта |
 | [coronerchat-architecture-print.html](coronerchat-architecture-print.html) | ISO/IEC/IEEE 42010 | Architecture description |
@@ -17,6 +19,10 @@
 | [i18n.md](i18n.md) | Product support | Локализации UI |
 
 ```bash
+npm run docs:check
+npm run docs:links:dry-run
 npm run export:doc:architecture-pdf
 npm run export:doc:operation-pdf
 ```
+
+`docs:check` проверяет локальные ссылки и базовую мета-разметку. `docs:links:dry-run` только выводит внешние URL и не выполняет сетевые запросы. PDF-ссылки на сайте становятся активными после локального экспорта соответствующих файлов.
