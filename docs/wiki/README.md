@@ -1,12 +1,5 @@
-# CoronerChat Wiki
+# Wiki mirror
 
-Документация update-feed репозитория. Полный исходный код приложения здесь не публикуется.
+Зеркало коротких страниц для сайта/репо. Полный сайт: https://dorimeryt-alt.github.io/CoronerChat/
 
-## Страницы
-
-- [Home](Home.md) — что это
-- [Install](Install.md) — установка
-- [Update](Update.md) — обновление из приложения
-- [Platforms](Platforms.md) — площадки
-- [FAQ](FAQ.md) — частые вопросы
-- [Releases](Releases.md) — версии и архив
+Актуальная версия: **v2.7.10**.
