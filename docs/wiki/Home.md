@@ -2,6 +2,8 @@
 
 Мультиплатформенный чат стримера (Twitch, VK, Kick, YouTube, Rutube) + донаты, OBS overlay.
 
+Актуальная версия: **v2.7.10** ([Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest)).
+
 ## Ссылки
 
 - [Скачать Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest)
