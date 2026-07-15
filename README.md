@@ -4,7 +4,7 @@ Desktop-приложение для стримеров: **единый чат** 
 
 ## Скачать
 
-[Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — актуальная **v2.7.10**
+[Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — актуальная **v2.7.10** (стабильная). TikTok — в prerelease **v2.7.11**.
 
 ## Документация
 
