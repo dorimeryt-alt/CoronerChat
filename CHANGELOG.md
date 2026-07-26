@@ -1,11 +1,14 @@
 # Changelog
 
+## 2.7.13
+
+- Chat TTS: локальные движки Piper / Silero / RHVoice / Supertonic / XTTS-v2 (sidecar + prefetch в `CoronerChat-data`); кнопка ▶ у выбора голоса; команда по умолчанию `!say` (в режиме команды префикс срезается); эмоуты Twitch/7TV не читаются вслух.
+- Документация TTS: https://dorimeryt-alt.github.io/CoronerChat/tts.html
+
 ## 2.7.12
 
 - VK Video Live: удалённые в чате ВКВЛ сообщения сразу пропадают в CoronerChat (разбор `chat_message.id`/глубокой вложенности Centrifugo, legacy `channel-chat`, poll fallback).
 - Kick: в событие удаления сообщения добавлены `source`/`channel` для корректного сопоставления.
-- Chat TTS: локальные движки Piper / Silero / RHVoice / Supertonic / XTTS-v2 (sidecar + prefetch в `CoronerChat-data`); кнопка ▶ у выбора голоса; команда по умолчанию `!say` (в режиме команды префикс срезается); эмоуты Twitch/7TV не читаются вслух.
-- Документация TTS: https://dorimeryt-alt.github.io/CoronerChat/tts.html
 
 ## 2.7.11
 
