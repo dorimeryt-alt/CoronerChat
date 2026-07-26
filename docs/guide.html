@@ -30,6 +30,7 @@
         <a href="platforms.html">Platforms</a>
         <a href="compare.html">Compare</a>
         <a href="guide.html" aria-current="page">Guide</a>
+        <a href="tts.html">TTS</a>
         <a href="testers.html">Testers</a>
         <a href="security.html">Security</a>
         <a href="tech/index.html">Tech</a>
@@ -157,9 +158,9 @@
             <li><strong>Song request</strong> — !sr / !song, очередь, Skip.</li>
             <li><strong>Safe mode / Always on top</strong> — сброс темы и окно поверх.</li>
             <li><strong>Чеклист готовности</strong> — скрывается отдельно, не затрагивая статус эфира, OBS telemetry, reconnect и пресеты.</li>
-            <li><strong>Озвучка сообщений</strong> — последовательная очередь, системные голоса или OpenAI-compatible / ElevenLabs / Google Cloud / Azure, шаблон автора и сообщения, громкость, скорость, pitch, фильтры платформ и ролей, Pause / Resume / Skip / Clear.</li>
+            <li><strong>Озвучка сообщений</strong> — последовательная очередь: system; cloud (OpenAI-compatible / ElevenLabs / Google Cloud / Azure); локальные Piper / Silero / RHVoice / Supertonic / XTTS-v2. Шаблон, громкость, скорость, pitch, фильтры, Pause / Resume / Skip / Clear. Подробности и ссылки на движки: <a href="tts.html">страница TTS</a>.</li>
           </ul>
-          <div class="panel tip"><strong>TTS privacy/cost notice.</strong> Системный голос и локальный OpenAI-compatible endpoint могут работать без передачи текста в облако. При выборе облачного провайдера подготовленный текст отправляется его API и может тарифицироваться. API-ключи пользователь получает самостоятельно; CoronerChat их не поставляет и показывает в UI только факт настройки.</div>
+          <div class="panel tip"><strong>TTS privacy/cost notice.</strong> System и локальные движки (после prefetch в <code>CoronerChat-data</code>) не отправляют текст в cloud TTS. Cloud API получают текст только при явном выборе провайдера и тарифицируются у него. Ключи пользователь получает сам. Встроенный TTS DonationAlerts через их OAuth API <strong>не отдаёт</strong> URL/движок синтеза — озвучивайте текст доната своей очередью Chat TTS.</div>
         </section>
 
         <section class="ug-section" id="g-mod">
