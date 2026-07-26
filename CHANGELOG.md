@@ -3,6 +3,8 @@
 ## 2.7.13
 
 - Chat TTS: локальные движки Piper / Silero / RHVoice / Supertonic / XTTS-v2 (sidecar + prefetch в `CoronerChat-data`); кнопка ▶ у выбора голоса; команда по умолчанию `!say` (в режиме команды префикс срезается); эмоуты Twitch/7TV не читаются вслух.
+- Chat TTS hotfixes: sidecar материализуется из `app.asar` на диск (pip/Python больше не падают на asar); лёгкий пакет Piper голосов вшит в установщик (`resources/tts-bundle-light`); кнопка «Сохранить настройки озвучки»; в режиме `!say` свои команды читаются; латинские ники для Silero/Piper транслитом; прогресс prefetch; soft-fail Silero SSL / Supertonic.
+- 7TV: paints на никах, scale/spacing эмоутов, effect-префиксы и zero-width stacking.
 - Документация TTS: https://dorimeryt-alt.github.io/CoronerChat/tts.html
 
 ## 2.7.12
