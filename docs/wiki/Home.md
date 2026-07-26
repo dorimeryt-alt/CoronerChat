@@ -9,6 +9,7 @@
 - [Скачать Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest)
 - [Документация (сайт)](https://dorimeryt-alt.github.io/CoronerChat/)
 - [Озвучка / TTS](https://dorimeryt-alt.github.io/CoronerChat/tts.html)
+- [Discussions](https://github.com/dorimeryt-alt/CoronerChat/discussions) · [Автор / ПК](https://github.com/dorimeryt-alt/CoronerChat/blob/main/docs/wiki/Author.md)
 - [Установка](Install) · [Обновления](Update) · [Площадки](Platforms) · [FAQ](FAQ)
 - [Поддержать автора](https://www.donationalerts.com/r/coroner_of_autopsy)
 
