@@ -1,38 +1,62 @@
 # CoronerChat
 
-Desktop-приложение для стримеров: **единый чат** Twitch, VK Video Live, Kick, YouTube, Rutube, TikTok LIVE + донаты (DonationAlerts / MemeAlerts), OBS overlay и очередь озвучки.
+Десктоп-приложение для стримеров: **один чат** с Twitch, VK Video Live, Kick, YouTube, Rutube, TikTok LIVE + донаты (DonationAlerts / MemeAlerts), OBS overlay, алерты и очередь озвучки (Chat TTS).
+
+## Этот репозиторий
+
+Публичный **feed обновлений** и архив установщиков (GitHub Releases).
+
+| Что здесь | Чего нет |
+|-----------|----------|
+| `CoronerChat Setup x.y.z.exe` в Releases | Исходный код приложения |
+| Changelog в notes релиза | Issues по разработке (по желанию) |
+| Wiki и сайт-документация | Полная OSS-лицензия на код |
+
+Исходники **не публикуются** в этом репо (приложение private). Репо нужно приложению для кнопки «Проверить обновления».
 
 ## Скачать
 
-[Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — актуальная **v2.7.13**.
+Актуальная сборка: [Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — **v2.7.13**.
+
+Файл вида `CoronerChat.Setup.x.y.z.exe` (или с пробелами в имени) — обычный NSIS-установщик. Папка данных **`CoronerChat-data`** при обновлении сохраняется.
 
 ## Озвучка (Chat TTS)
 
-| Тип | Движки |
-|-----|--------|
-| System | Голоса Windows / Chromium |
-| Cloud | [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech) · [ElevenLabs](https://elevenlabs.io/) · [Google Cloud TTS](https://cloud.google.com/text-to-speech) · [Azure Speech](https://learn.microsoft.com/azure/ai-services/speech-service/) |
-| Local | [Piper](https://github.com/OHF-Voice/piper1-gpl) · [Silero](https://github.com/snakers4/silero-models) · [RHVoice](https://github.com/RHVoice/RHVoice) · [Supertonic](https://github.com/supertone-inc/supertonic) · [Coqui XTTS-v2](https://github.com/coqui-ai/TTS) |
+- System (Windows) · cloud: [OpenAI](https://platform.openai.com/docs/guides/text-to-speech), [ElevenLabs](https://elevenlabs.io/), [Google](https://cloud.google.com/text-to-speech), [Azure](https://learn.microsoft.com/azure/ai-services/speech-service/)
+- Local: [Piper](https://github.com/OHF-Voice/piper1-gpl), [Silero](https://github.com/snakers4/silero-models), [RHVoice](https://github.com/RHVoice/RHVoice), [Supertonic](https://github.com/supertone-inc/supertonic), [XTTS-v2](https://github.com/coqui-ai/TTS)
 
-Подробности, prefetch и ответ про TTS DonationAlerts: **[TTS на сайте](https://dorimeryt-alt.github.io/CoronerChat/tts.html)**.
+Страница со ссылками и prefetch: https://dorimeryt-alt.github.io/CoronerChat/tts.html
+
+Встроенный TTS алертов DonationAlerts **нельзя** вытащить через их публичный API (отдаётся текст доната, не URL движка).
+
+## Обновление из приложения
+
+1. Настройки → Обновления  
+2. Репозиторий по умолчанию: `dorimeryt-alt/CoronerChat`  
+3. «Проверить» → «Скачать и установить»
+
+## Платформы
+
+- Twitch (чат, мод, рейды, категория/тайтл)
+- VK Video Live
+- Kick
+- YouTube Live
+- Rutube
+- TikTok LIVE (чат и события; отправка пока нет)
+- DonationAlerts / MemeAlerts (донаты в ленту)
+- OBS Browser Source (`?overlay=1`, `?recap=1`, alerts/goal/vote)
 
 ## Документация
 
-- **Сайт:** https://dorimeryt-alt.github.io/CoronerChat/
-- **User Guide:** https://dorimeryt-alt.github.io/CoronerChat/guide.html
-- **TTS:** https://dorimeryt-alt.github.io/CoronerChat/tts.html
-- **Security:** https://dorimeryt-alt.github.io/CoronerChat/security.html
-- **Tech docs (ISO/IEC):** https://dorimeryt-alt.github.io/CoronerChat/tech/
-- **Wiki:** https://github.com/dorimeryt-alt/CoronerChat/wiki
+- Сайт: https://dorimeryt-alt.github.io/CoronerChat/
+- Wiki: https://github.com/dorimeryt-alt/CoronerChat/wiki
 
-## Обновления из приложения
+## Ветки
 
-Канал зашит: `dorimeryt-alt/CoronerChat`. Проверка при запуске читает GitHub **Latest** (не архивные теги 2.35.x).
+- `main` — описание feed
+- `releases/update-feed` — зеркало для update-канала
 
-## Поддержать автора
+## Лицензия / код
 
-[DonationAlerts · coroner_of_autopsy](https://www.donationalerts.com/r/coroner_of_autopsy)
-
-## Правовая информация
-
-[COPYRIGHT](COPYRIGHT.md) · [ATTRIBUTION](ATTRIBUTION.md) · [SOURCE](SOURCE.md) · [SECURITY](SECURITY.md)
+Бинарные релизы распространяются для установки CoronerChat.  
+**Исходный код в этот репозиторий не выкладывается.** Если понадобится отдельный OSS-репозиторий — это отдельное решение автора.
