@@ -30,6 +30,7 @@
         <a href="platforms.html">Platforms</a>
         <a href="compare.html" aria-current="page">Compare</a>
         <a href="guide.html">Guide</a>
+        <a href="tts.html">TTS</a>
         <a href="testers.html">Testers</a>
         <a href="security.html">Security</a>
         <a href="tech/index.html">Tech</a>
@@ -62,7 +63,7 @@
         <div class="feature-strip">
           <div class="feature-cell"><strong>Local-first operator console</strong><span>Чат, OBS, модерация, донаты, статистика и TTS работают вокруг локального приложения, без обязательной подписки.</span></div>
           <div class="feature-cell"><strong>Региональный охват</strong><span>Связка Twitch + VK Video Live + Kick + YouTube + Rutube закрывает сценарии, которые редко встречаются вместе у международных конкурентов.</span></div>
-          <div class="feature-cell"><strong>Queued TTS</strong><span>Системные и четыре семейства cloud API, роли, платформы, шаблон, blacklist, fallback и единая очередь с alert TTS.</span></div>
+          <div class="feature-cell"><strong>Queued TTS</strong><span>System + cloud (OpenAI / ElevenLabs / Google / Azure) + локальные Piper, Silero, RHVoice, Supertonic, XTTS-v2; роли, шаблон, prefetch моделей.</span></div>
           <div class="feature-cell"><strong>Проверяемость</strong><span>Открытые технические документы, security posture, privacy notice, runtime diagnostics и локальные dry-run проверки.</span></div>
         </div>
         <figure class="panel">
@@ -136,7 +137,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr><th>CoronerChat</th><td>DonationAlerts, MemeAlerts и OBS alert overlay</td><td>Последовательная очередь; системные голоса, OpenAI-compatible, ElevenLabs, Google Cloud и Azure; фильтры, шаблон, Pause/Skip/Clear</td><td>Локальные HTTP/WebSocket endpoints, Ulanzi plugin</td><td>Не заявлено</td><td>Runtime и ключи сохраняются локально; облачный TTS получает текст только при явном выборе провайдера</td><td>Готовые Windows-сборки доступны в GitHub Releases; отдельный платный тариф не заявлен, облачные TTS имеют собственную тарификацию</td></tr>
+              <tr><th>CoronerChat</th><td>DonationAlerts, MemeAlerts и OBS alert overlay</td><td>Очередь Chat TTS: system; OpenAI-compatible, ElevenLabs, Google Cloud, Azure; локальные <a href="tts.html">Piper, Silero, RHVoice, Supertonic, XTTS-v2</a>; фильтры, шаблон, Pause/Skip/Clear</td><td>Локальные HTTP/WebSocket endpoints, Ulanzi plugin</td><td>Не заявлено</td><td>Runtime и ключи локально; локальный TTS в CoronerChat-data; cloud получает текст только при выборе провайдера</td><td>Готовые Windows-сборки в GitHub Releases; отдельный платный тариф не заявлен, облачные TTS — своя тарификация</td></tr>
               <tr><th>Restream Chat</th><td>TTS-уведомления о сообщениях в desktop app</td><td>В desktop app</td><td>Chat API</td><td>Не заявлено для Chat</td><td>Облачный аккаунт; есть desktop client</td><td>Free: $0; Restream Standard $19/мес., Professional $49/мес. при помесячной оплате</td></tr>
               <tr><th>Social Stream Ninja</th><td>Donations и featured-chat overlays</td><td>System/local и cloud providers</td><td>Open API, webhooks, scriptable plugins</td><td>Ollama и hosted providers; moderation/co-host</td><td>Open source; browser/desktop; local AI/TTS доступны, transport может использовать hosted session API</td><td>Бесплатно и open source</td></tr>
               <tr><th>Streamlabs Cloudbot</th><td>Chat alerts; Alertbox/media share в экосистеме</td><td>Не заявлено на странице Cloudbot</td><td>Custom commands; публичный plugin API не заявлен</td><td>Не заявлено для Cloudbot</td><td>Полностью облачный, работает 24/7</td><td>Cloudbot бесплатен; Ultra нужен для custom bot name ($27/мес. или $189/год)</td></tr>
