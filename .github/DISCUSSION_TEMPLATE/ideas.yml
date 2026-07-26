@@ -1,0 +1,41 @@
+name: Предложение / фича
+description: Идея, что добавить или улучшить
+title: "[Идея]: "
+labels: ["предложение"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Кратко и по делу — так быстрее обсудить.
+  - type: input
+    id: summary
+    attributes:
+      label: Суть идеи одним предложением
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Зачем это стримеру / модеру
+    validations:
+      required: true
+  - type: textarea
+    id: ux
+    attributes:
+      label: Как видите UX
+      description: Где кнопка, какой экран, пример текста
+    validations:
+      required: false
+  - type: dropdown
+    id: area
+    attributes:
+      label: Область
+      options:
+        - Chat TTS / озвучка
+        - Чат / UX
+        - OBS / оверлеи
+        - Платформы
+        - Модерация / loyalty
+        - Другое
+    validations:
+      required: true
