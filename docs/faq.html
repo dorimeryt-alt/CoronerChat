@@ -30,6 +30,7 @@
         <a href="platforms.html">Platforms</a>
         <a href="compare.html">Compare</a>
         <a href="guide.html">Guide</a>
+        <a href="tts.html">TTS</a>
         <a href="testers.html">Testers</a>
         <a href="security.html">Security</a>
         <a href="tech/index.html">Tech</a>
@@ -55,7 +56,14 @@
         <summary>Почему предлагали 2.35.x вместо 2.7.x?</summary>
         <div class="faq-body">
           <p>В Releases лежит архив со старой нумерацией (2.25–2.35). Они выглядят «больше» по semver, но это не актуальная линия.</p>
-          <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Актуальная сборка — <strong>2.7.10</strong>. Если сидишь на 2.7.4 — один раз поставь Latest вручную.</p>
+          <p>С <strong>2.7.5</strong> приложение читает GitHub <strong>Latest</strong> и игнорирует legacy-теги. Актуальная сборка — <strong>2.7.12</strong>. Если сидишь на 2.7.4 — один раз поставь Latest вручную.</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Какие движки озвучки (TTS)?</summary>
+        <div class="faq-body">
+          <p>System (Windows), cloud: OpenAI-compatible, ElevenLabs, Google Cloud, Azure. Локально: Piper, Silero, RHVoice, Supertonic, Coqui XTTS-v2 — со ссылками на проекты на <a href="tts.html">странице TTS</a>.</p>
+          <p>Голос алертов DonationAlerts через их API <strong>не вытащить</strong>: публичный API отдаёт текст доната, а не URL/движок их TTS. Озвучивайте сообщение своей очередью Chat TTS.</p>
         </div>
       </details>
       <details class="faq-item">
