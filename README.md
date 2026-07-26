@@ -51,6 +51,7 @@
 - Сайт: https://dorimeryt-alt.github.io/CoronerChat/
 - Wiki: https://github.com/dorimeryt-alt/CoronerChat/wiki
 - Discussions (баги / идеи / вопросы): https://github.com/dorimeryt-alt/CoronerChat/discussions
+- Автор: [C0R0N3R (Eugene)](docs/wiki/Author.md) · Telegram [@coroner_of_autopsy](https://t.me/coroner_of_autopsy) · [DonationAlerts](https://www.donationalerts.com/r/coroner_of_autopsy)
 
 ### Discussions — куда писать
 
