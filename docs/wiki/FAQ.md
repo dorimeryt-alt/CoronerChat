@@ -2,7 +2,7 @@
 
 ## Где скачать?
 
-[Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — **v2.7.12**.
+[Releases → Latest](https://github.com/dorimeryt-alt/CoronerChat/releases/latest) — **v2.7.13**.
 
 ## Почему раньше предлагали 2.35.x?
 
