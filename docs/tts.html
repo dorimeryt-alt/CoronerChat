@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Озвучка (TTS) — CoronerChat</title>
+  <meta name="description" content="Движки озвучки CoronerChat: системные голоса, cloud API и локальные Piper, Silero, RHVoice, Supertonic, XTTS-v2." />
+  <link rel="canonical" href="https://dorimeryt-alt.github.io/CoronerChat/tts.html" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Озвучка (TTS) — CoronerChat" />
+  <meta property="og:description" content="Cloud и локальные TTS-движки Chat TTS: ссылки, prefetch, privacy." />
+  <meta property="og:url" content="https://dorimeryt-alt.github.io/CoronerChat/tts.html" />
+  <meta property="og:image" content="https://dorimeryt-alt.github.io/CoronerChat/assets/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">К основному содержанию</a>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="horizon" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="topnav">
+      <a class="brand-mark" href="index.html">Coroner<span>Chat</span></a>
+      <nav class="nav-links" aria-label="Разделы">
+        <a href="install.html">Install</a>
+        <a href="update.html">Update</a>
+        <a href="platforms.html">Platforms</a>
+        <a href="compare.html">Compare</a>
+        <a href="guide.html">Guide</a>
+        <a href="tts.html" aria-current="page">TTS</a>
+        <a href="testers.html">Testers</a>
+        <a href="security.html">Security</a>
+        <a href="tech/index.html">Tech</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+    <header class="page-hero">
+      <p class="section-label">Voice queue</p>
+      <h1>Озвучка сообщений</h1>
+      <p>Последовательная очередь Chat TTS: системный голос Windows, облачные API и пять локальных движков с prefetch моделей в <code>CoronerChat-data</code>.</p>
+      <p class="lead" style="margin-top:10px">В <strong>Latest 2.7.12</strong> доступны system + cloud. Локальные Piper / Silero / RHVoice / Supertonic / XTTS-v2 — в линии сборки (см. Unreleased в changelog); документация и ссылки на upstream уже здесь.</p>
+    </header>
+
+    <section class="section" style="padding-top:0">
+      <p class="section-label">Where</p>
+      <h2>Где включить</h2>
+      <p class="lead">Эфир → <strong>Озвучка сообщений</strong> (Chat TTS): провайдер, голос, шаблон, фильтры платформ/ролей, Pause / Skip / Clear.</p>
+      <ul class="chip-row">
+        <li>Очередь не блокирует чат</li>
+        <li>Fallback на system при ошибке локального синтеза</li>
+        <li>Ключи cloud API — только ваши</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <p class="section-label">System &amp; cloud</p>
+      <h2>Системный и облачные провайдеры</h2>
+      <div class="platform-grid">
+        <article class="plat-card">
+          <h3>System (Windows)</h3>
+          <p>Голоса ОС / Chromium Speech Synthesis. Текст не уходит во внешний TTS-сервис.</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://platform.openai.com/docs/guides/text-to-speech" target="_blank" rel="noopener noreferrer">OpenAI-compatible</a></h3>
+          <p>Официальный OpenAI TTS или совместимый endpoint (в т.ч. локальный).</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">ElevenLabs</a></h3>
+          <p>Cloud API; нужен ваш API key.</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://cloud.google.com/text-to-speech" target="_blank" rel="noopener noreferrer">Google Cloud TTS</a></h3>
+          <p>Cloud Text-to-Speech API.</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://learn.microsoft.com/azure/ai-services/speech-service/" target="_blank" rel="noopener noreferrer">Azure Speech</a></h3>
+          <p>Microsoft Azure AI Speech.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="section-label">Local engines</p>
+      <h2>Локальные движки</h2>
+      <p class="lead">Один Python sidecar на loopback; модели и venv только в <code>CoronerChat-data/tts-cache</code> и <code>tts-runtime</code> (вне asar). Нужен системный <strong>Python 3.10+</strong>.</p>
+      <div class="platform-grid">
+        <article class="plat-card">
+          <h3><a href="https://github.com/OHF-Voice/piper1-gpl" target="_blank" rel="noopener noreferrer">Piper</a></h3>
+          <p>Лёгкий ONNX TTS. Prefetch: голоса <code>ru</code> + <code>en</code> (medium). Лицензия текущей линии — GPL (<a href="https://github.com/OHF-Voice/piper1-gpl" target="_blank" rel="noopener noreferrer">OHF-Voice/piper1-gpl</a>).</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://github.com/snakers4/silero-models" target="_blank" rel="noopener noreferrer">Silero</a></h3>
+          <p>Neural TTS (torch.hub). Prefetch: <code>v5_ru</code> + EN.</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://github.com/RHVoice/RHVoice" target="_blank" rel="noopener noreferrer">RHVoice</a></h3>
+          <p>Локальный CLI/движок. Нужна системная установка RHVoice; prefetch проверяет голоса RU/EN (например Aleksandr).</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://github.com/supertone-inc/supertonic" target="_blank" rel="noopener noreferrer">Supertonic</a></h3>
+          <p>Тяжёлый пакет — скачивание при первом выборе движка (1+ GB), с прогрессом в UI. На CPU может быть медленно.</p>
+        </article>
+        <article class="plat-card">
+          <h3><a href="https://github.com/coqui-ai/TTS" target="_blank" rel="noopener noreferrer">Coqui XTTS-v2</a></h3>
+          <p>Тяжёлый пакет через Coqui TTS; on-demand prefetch. В v1 — дефолтный/один reference из кэша, без произвольного клонирования в UI.</p>
+        </article>
+      </div>
+      <p class="lead" style="margin-top:18px">Лёгкий пакет (Piper + Silero + проверка RHVoice) — при первом включении локального TTS. Тяжёлый (Supertonic / XTTS) — кнопкой «Скачать тяжёлый пакет» или при первом выборе движка. Повторный старт сверяет <code>manifest.json</code> + sha256, без лишней перекачки.</p>
+    </section>
+
+    <section class="section">
+      <p class="section-label">DonationAlerts</p>
+      <h2>Можно ли вытащить голос из DonationAlerts?</h2>
+      <p class="lead"><strong>Нет</strong> — встроенный TTS алертов DA не отдаёт движок и URL синтеза через публичный OAuth API.</p>
+      <ul>
+        <li>В кабинете DA настраиваются пол, скорость, порог суммы — синтез играет внутри <em>их</em> alert-виджета (<a href="https://www.donationalerts.com/help/text-to-speech-setup" target="_blank" rel="noopener noreferrer">справка DA</a>).</li>
+        <li><a href="https://www.donationalerts.com/apidoc" target="_blank" rel="noopener noreferrer">API donations</a> даёт текст (<code>message</code>) и тип <code>text</code> / <code>audio</code>. Для <code>audio</code> это голосовое сообщение донатера, а не ссылка на движок TTS алертов.</li>
+        <li><code>sound_url</code> есть у <em>custom alerts</em>, которые вы сами отправляете — это ваш файл, не «голос DA».</li>
+      </ul>
+      <p>Практичный путь в CoronerChat: текст доната → своя очередь Chat TTS (system / cloud / локальные движки выше).</p>
+    </section>
+
+    <section class="section">
+      <p class="section-label">Privacy</p>
+      <h2>Приватность и стоимость</h2>
+      <p class="lead">System и локальные движки держат синтез на машине (после prefetch моделей). Cloud API получают подготовленный текст и тарифицируются у провайдера. Ключи CoronerChat не поставляет.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="guide.html#g-stream">User Guide · эфир</a>
+        <a class="btn btn-ghost" href="compare.html">Сравнение TTS</a>
+        <a class="btn btn-ghost" href="https://github.com/dorimeryt-alt/CoronerChat/blob/main/ATTRIBUTION.md">Attribution</a>
+      </div>
+    </section>
+
+    </main>
+    <footer class="site-footer">
+      © C0R0N3R · CoronerChat ·
+      <a href="index.html">Главная</a> ·
+      <a href="tts.html">TTS</a> ·
+      <a href="guide.html">Руководство</a> ·
+      <a href="security.html">Безопасность</a>
+    </footer>
+  </div>
+  <script src="site.js"></script>
+</body>
+</html>
