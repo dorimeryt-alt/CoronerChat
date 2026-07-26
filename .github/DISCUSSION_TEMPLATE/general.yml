@@ -6,13 +6,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        Спасибо за репорт. Без токенов и паролей в логах.
+        Спасибо за репорт. **Не прикладывайте** токены, cookies, API-ключи и пароли.
         Документация: https://dorimeryt-alt.github.io/CoronerChat/
   - type: input
     id: version
     attributes:
       label: Версия CoronerChat
-      description: Например 2.7.13 (Настройки → Обновления или окно О программе)
+      description: Например 2.7.13 (Настройки → Обновления)
       placeholder: "2.7.13"
     validations:
       required: true
@@ -57,11 +57,36 @@ body:
       label: Что произошло
     validations:
       required: true
+  - type: markdown
+    attributes:
+      value: |
+        ### Как взять лог (`runtime.log`)
+
+        Обычная установка (Setup.exe):
+
+        1. Закройте CoronerChat (чтобы лог дописался на диск).
+        2. Нажмите **Win + R**, вставьте путь и Enter:
+
+        ```
+        %LOCALAPPDATA%\Programs\CoronerChat\CoronerChat-data
+        ```
+
+        3. Откройте файл **`runtime.log`** в Блокноте.
+        4. Скопируйте **хвост** — последние ~50–200 строк вокруг момента бага (не весь файл, если он огромный).
+        5. Перед отправкой вырежьте строки с токенами / `oauth` / `apiKey` / cookies, если вдруг попали.
+
+        Полный путь обычно такой:
+
+        `C:\Users\<Ваш_пользователь>\AppData\Local\Programs\CoronerChat\CoronerChat-data\runtime.log`
+
+        Portable-сборка: папка **`CoronerChat-data`** лежит **рядом с `CoronerChat.exe`**, внутри тот же `runtime.log`.
+
+        Альтернатива: в проводнике вставьте в адресную строку `%LOCALAPPDATA%\Programs\CoronerChat\CoronerChat-data` и Enter.
   - type: textarea
     id: logs
     attributes:
-      label: Лог (runtime.log)
-      description: Фрагмент из папки CoronerChat-data. Вырежьте токены и ключи.
+      label: Фрагмент runtime.log
+      description: Вставьте сюда хвост лога (см. инструкцию выше). Не весь гигабайтный файл.
       render: shell
     validations:
       required: false
