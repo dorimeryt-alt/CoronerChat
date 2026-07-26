@@ -75,3 +75,5 @@
 
 Бинарные релизы распространяются для установки CoronerChat.  
 **Исходный код в этот репозиторий не выкладывается.** Если понадобится отдельный OSS-репозиторий — это отдельное решение автора.
+
+См. также: [CONTRIBUTING](CONTRIBUTING.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Security](SECURITY.md) · [Copyright](COPYRIGHT.md)

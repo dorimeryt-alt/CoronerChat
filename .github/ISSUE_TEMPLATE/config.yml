@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🐛 Сообщить о баге
+    url: https://github.com/dorimeryt-alt/CoronerChat/discussions/new?category=general
+    about: Форма бага в Discussions (версия, шаги, runtime.log)
+  - name: 💡 Предложение / фича
+    url: https://github.com/dorimeryt-alt/CoronerChat/discussions/new?category=ideas
+    about: Идеи по улучшению CoronerChat
+  - name: ❓ Вопрос / помощь
+    url: https://github.com/dorimeryt-alt/CoronerChat/discussions/new?category=q-a
+    about: Настройка, подключение площадок, TTS
+  - name: 📚 Документация
+    url: https://dorimeryt-alt.github.io/CoronerChat/
+    about: Сайт с установкой, FAQ и TTS
+  - name: 🔒 Уязвимость (приватно)
+    url: https://t.me/coroner_of_autopsy
+    about: Не публикуйте эксплойты в Issues — пишите в Telegram
