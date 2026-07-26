@@ -1,6 +1,6 @@
 # Product status
 
-CoronerChat **2.7.12** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; default speak command is `!say` (prefix stripped in command mode); Twitch/7TV emotes are not read aloud.
+CoronerChat **2.7.13** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; default speak command is `!say` (prefix stripped in command mode); Twitch/7TV emotes are not read aloud.
 
 Public site: https://dorimeryt-alt.github.io/CoronerChat/  
 Latest release: https://github.com/dorimeryt-alt/CoronerChat/releases/latest
