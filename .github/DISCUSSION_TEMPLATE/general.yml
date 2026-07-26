@@ -1,0 +1,67 @@
+name: Сообщить о баге
+description: Что-то сломалось в CoronerChat — версия, шаги, лог
+title: "[Баг]: "
+labels: ["баг"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Спасибо за репорт. Без токенов и паролей в логах.
+        Документация: https://dorimeryt-alt.github.io/CoronerChat/
+  - type: input
+    id: version
+    attributes:
+      label: Версия CoronerChat
+      description: Например 2.7.13 (Настройки → Обновления или окно О программе)
+      placeholder: "2.7.13"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Область
+      multiple: true
+      options:
+        - Twitch
+        - VK Video Live
+        - Kick
+        - YouTube
+        - Rutube
+        - TikTok
+        - Chat TTS / озвучка
+        - OBS / оверлеи
+        - Донаты (DA / MemeAlerts)
+        - Обновление / установщик
+        - UI / другое
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги воспроизведения
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидание
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Что произошло
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Лог (runtime.log)
+      description: Фрагмент из папки CoronerChat-data. Вырежьте токены и ключи.
+      render: shell
+    validations:
+      required: false

@@ -1,0 +1,14 @@
+name: Сетап / Show and tell
+description: Покажите свой сетап, оверлей или сценарий использования
+title: "[Сетап]: "
+body:
+  - type: markdown
+    attributes:
+      value: Не публикуйте токены, cookies и ключи API.
+  - type: textarea
+    id: story
+    attributes:
+      label: Что показываете
+      description: Площадки, OBS, TTS, фишки
+    validations:
+      required: true

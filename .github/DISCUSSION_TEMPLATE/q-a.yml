@@ -1,0 +1,43 @@
+name: Вопрос / помощь
+description: Не подключается, не понятна настройка, нужна подсказка
+title: "[Вопрос]: "
+labels: ["помощь"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Полезные страницы:
+        - https://dorimeryt-alt.github.io/CoronerChat/install.html
+        - https://dorimeryt-alt.github.io/CoronerChat/tts.html
+        - https://dorimeryt-alt.github.io/CoronerChat/faq.html
+  - type: input
+    id: version
+    attributes:
+      label: Версия CoronerChat
+      placeholder: "2.7.13"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Площадка / тема
+      options:
+        - Twitch
+        - VK Video Live
+        - Kick
+        - YouTube
+        - Rutube
+        - TikTok
+        - Chat TTS
+        - OBS
+        - Обновление
+        - Другое
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Вопрос
+      description: Что уже пробовали?
+    validations:
+      required: true

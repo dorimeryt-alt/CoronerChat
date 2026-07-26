@@ -50,6 +50,20 @@
 
 - Сайт: https://dorimeryt-alt.github.io/CoronerChat/
 - Wiki: https://github.com/dorimeryt-alt/CoronerChat/wiki
+- Discussions (баги / идеи / вопросы): https://github.com/dorimeryt-alt/CoronerChat/discussions
+
+### Discussions — куда писать
+
+| Тема | Категория | Форма |
+|------|-----------|--------|
+| Баг | **General** | «Сообщить о баге» |
+| Идея / фича | **Ideas** | «Предложение / фича» |
+| Помощь / настройка | **Q&A** | «Вопрос / помощь» |
+| Сетап / скрин | **Show and tell** | «Сетап / Show and tell» |
+| Новости | **Announcements** | — |
+| Голосование | **Polls** | — |
+
+Стартовые посты: [#1](https://github.com/dorimeryt-alt/CoronerChat/discussions/1), [#2](https://github.com/dorimeryt-alt/CoronerChat/discussions/2), [#3](https://github.com/dorimeryt-alt/CoronerChat/discussions/3), [#4](https://github.com/dorimeryt-alt/CoronerChat/discussions/4).
 
 ## Ветки
 
