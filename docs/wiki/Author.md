@@ -1,8 +1,8 @@
-# Автор / Author / Tekijä
+# Автор / Author / Tekijä / Autor
 
 **Евгений (C0R0N3R)** — автор [CoronerChat](https://dorimeryt-alt.github.io/CoronerChat/).
 
-## Образование / Education / Koulutus
+## Образование / Education / Koulutus / Educație
 
 ### 🇷🇺 Русский
 
@@ -22,7 +22,13 @@
 **Kandidaatin tutkinto** tietojenkäsittelytieteessä ja tietokonetekniikassa (**Informatics and Computer Engineering**) — erikoistuminen **tietoturvaan sekä tietojärjestelmien luotettavuuteen ja laatuun**.  
 **Maisterin tutkinto** samalla alalla / **automaattisissa tietojärjestelmissä (AIS)** — erikoistuminen **polttoaine- ja energiakompleksin (energia-alan) automaatioon**.
 
-## Контакты / Contacts / Yhteystiedot
+### 🇷🇴 Română
+
+**Evgheni.**  
+**Licență** în **Informatică și Ingineria Calculatoarelor** — specializare în **securitatea informației și fiabilitatea / calitatea sistemelor informaționale**.  
+**Master** în **Informatică și Ingineria Calculatoarelor / Sisteme Informaționale Automatizate (SIA)** — specializare în **automatizarea complexului combustibil-energetic (sectorul energetic)**.
+
+## Контакты / Contacts / Yhteystiedot / Contacte
 
 | | |
 |--|--|
@@ -32,7 +38,7 @@
 | GitHub | [@dorimeryt-alt](https://github.com/dorimeryt-alt) |
 | CoronerChat | https://dorimeryt-alt.github.io/CoronerChat/ |
 
-## Тестовый ПК / Dev PC / Kehityskone
+## Тестовый ПК / Dev PC / Kehityskone / PC de dezvoltare
 
 | | |
 |--|--|
