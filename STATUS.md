@@ -1,6 +1,6 @@
 # Product status
 
-CoronerChat **2.7.13** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; default speak command is `!say` (prefix stripped in command mode); Twitch/7TV emotes are not read aloud.
+CoronerChat **2.7.13** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; light Piper voices ship in the installer; default speak command is `!say` (own commands are voiced; Latin nicks transliterated for Silero/Piper); Twitch/7TV emotes are not read aloud.
 
 Public site: https://dorimeryt-alt.github.io/CoronerChat/  
 Latest release: https://github.com/dorimeryt-alt/CoronerChat/releases/latest
@@ -26,7 +26,7 @@ Queued message TTS in **Эфир → Озвучка сообщений**:
 | Cloud | [OpenAI TTS](https://platform.openai.com/docs/guides/text-to-speech), [ElevenLabs](https://elevenlabs.io/), [Google Cloud TTS](https://cloud.google.com/text-to-speech), [Azure Speech](https://learn.microsoft.com/azure/ai-services/speech-service/) |
 | Local | [Piper](https://github.com/OHF-Voice/piper1-gpl), [Silero](https://github.com/snakers4/silero-models), [RHVoice](https://github.com/RHVoice/RHVoice), [Supertonic](https://github.com/supertone-inc/supertonic), [Coqui XTTS-v2](https://github.com/coqui-ai/TTS) |
 
-Local runtime: Python sidecar + models under `CoronerChat-data/tts-runtime` and `tts-cache` (sha256 manifest). Details: [TTS page](https://dorimeryt-alt.github.io/CoronerChat/tts.html).
+Local runtime: Python sidecar (copied out of asar on first use) + models under `CoronerChat-data/tts-runtime` and `tts-cache`; light Piper ONNX bundle ships in `resources/tts-bundle-light`. Details: [TTS page](https://dorimeryt-alt.github.io/CoronerChat/tts.html).
 
 ## Known constraints
 
