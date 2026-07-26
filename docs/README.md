@@ -14,6 +14,7 @@
 | [tech/index.html](tech/index.html) | ISO/IEC/IEEE 15289 | Реестр техкомплекта |
 | [coronerchat-architecture-print.html](coronerchat-architecture-print.html) | ISO/IEC/IEEE 42010 | Architecture description |
 | [coronerchat-operation-print.html](coronerchat-operation-print.html) | ISO/IEC 26514 | Operator documentation |
+| [tts.html](tts.html) | Product / TTS | Движки озвучки со ссылками (system, cloud, local) |
 | [install.html](install.html) · [update.html](update.html) · [platforms.html](platforms.html) · [faq.html](faq.html) | Support pages | Быстрые гайды сайта |
 | [updates-and-releases.md](updates-and-releases.md) | ISO/IEC 12207 maintenance | Политика обновлений |
 | [i18n.md](i18n.md) | Product support | Локализации UI |
