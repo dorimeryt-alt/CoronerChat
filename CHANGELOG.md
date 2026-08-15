@@ -2,6 +2,7 @@
 
 ## 2.7.15
 
+- 7TV: отдельное поле прокси (API + CDN + prefetch), формат как у YouTube.
 - YouTube browser-чат: опрос `live_chat` через прокси (`ytInitialData`) — чат больше не «подключён, но пуст».
 - YouTube эмодзи: картинки через локальный `/api/youtube/emote-asset` (ggpht через прокси приложения).
 - YouTube зрители: `updated_metadata` / `originalViewCount`.
