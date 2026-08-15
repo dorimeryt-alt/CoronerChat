@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.7.15
+
+- YouTube browser-чат: опрос `live_chat` через прокси (`ytInitialData`) — чат больше не «подключён, но пуст».
+- YouTube эмодзи: картинки через локальный `/api/youtube/emote-asset` (ggpht через прокси приложения).
+- YouTube зрители: `updated_metadata` / `originalViewCount`.
+- YouTube: в ленту только сообщения не раньше старта приложения.
+- Прокси Electron: кнопка «Применить прокси», автоперебор HTTP/SOCKS при ошибке -111.
+
+## 2.7.14
+
+- Иконка медведя снова вшита в exe / ярлык / Setup.
+- Планшет: touch-UI + превью стрима под чатом; LAN `0.0.0.0` + `*.sslip.io` для Twitch-embed.
+- Ачивки: прогресс из `CoronerChat-data` не обнуляется при смене папки.
+- Windows Media Session / Twitch mod logs / офлайн Light TTS.
+
 ## 2.7.13
 
 - Chat TTS: локальные движки Piper / Silero / RHVoice / Supertonic / XTTS-v2 (sidecar + prefetch в `CoronerChat-data`); кнопка ▶ у выбора голоса; команда по умолчанию `!say` (в режиме команды префикс срезается); эмоуты Twitch/7TV не читаются вслух.
