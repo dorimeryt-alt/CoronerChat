@@ -1,6 +1,6 @@
 # Product status
 
-CoronerChat **2.7.15** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; light Piper voices ship in the installer; default speak command is `!say` (own commands are voiced; Latin nicks transliterated for Silero/Piper); Twitch/7TV emotes are not read aloud.
+CoronerChat **2.7.16** is a Windows-focused Electron application with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; light Piper voices ship in the installer; default speak command is `!say` (own commands are voiced; Latin nicks transliterated for Silero/Piper); Twitch/7TV emotes are not read aloud.
 
 Public site: https://dorimeryt-alt.github.io/CoronerChat/  
 Latest release: https://github.com/dorimeryt-alt/CoronerChat/releases/latest
@@ -10,7 +10,7 @@ Latest release: https://github.com/dorimeryt-alt/CoronerChat/releases/latest
 - Twitch: chat read/send, stream metadata, viewer count, moderation and supported channel actions; format constructor for event lines (points, streak, sub, gift, bits, raid, follow, hype).
 - VK Video Live: chat read/send, stream state and reconnect recovery; delete sync (WS + poll); channel points / follow / sub event ingest where Centrifugo emits them.
 - Kick: chat read/send and stream state where the configured API/browser session permits it; delete events with source/channel.
-- YouTube Live: chat via browser/`live_chat` HTML poll (proxy) or authenticated Data API / Google; viewer count via `updated_metadata`.
+- YouTube Live: chat via browser/`get_live_chat` (proxy) or authenticated Data API / Google; viewer count is concurrent/live, not total views.
 - Rutube: chat read/send through a user-provided cookie session.
 - TikTok LIVE: chat + gifts/follow/share/join/like/sub (send not available).
 - DonationAlerts and MemeAlerts: donation/event sources in the unified feed (DA built-in alert TTS is not exposed via their OAuth API).
