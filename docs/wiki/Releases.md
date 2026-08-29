@@ -1,6 +1,6 @@
 # Releases
 
-Актуальная линия: **2.7.16** (статистика, достижения, auto-update с этого репо).
+Стабильный Latest: **2.7.16** (Electron). Prederelease: **2.7.18** (WebView2) — не Latest.
 
 История в GitHub Releases включает:
 
