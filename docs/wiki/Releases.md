@@ -2,6 +2,8 @@
 
 Стабильный Latest: **2.7.19** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
 
+Тот же тег **v2.7.19** перезалит: VK browser-auth читает Bearer с сетевых запросов, без минутного зависания после логина.
+
 История в GitHub Releases включает:
 
 - **1.x** — portable exe
