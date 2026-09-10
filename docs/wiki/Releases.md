@@ -1,6 +1,6 @@
 # Releases
 
-Стабильный Latest: **2.7.16** (Electron). Prederelease: **2.7.18** (WebView2) — не Latest.
+Стабильный Latest: **2.7.19** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
 
 История в GitHub Releases включает:
 
