@@ -1,8 +1,8 @@
 # Releases
 
-Стабильный Latest: **2.7.19** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
+Стабильный Latest: **2.7.20** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
 
-Тот же тег **v2.7.19** перезалит: VK browser-auth читает Bearer с сетевых запросов, без минутного зависания после логина.
+**2.7.20:** Twitch GIF Keyboard в чате; смайлы и значки Twitch снова грузятся, если прокси CDN не ответил.
 
 История в GitHub Releases включает:
 
