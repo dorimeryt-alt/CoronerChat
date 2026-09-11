@@ -1,8 +1,6 @@
 # Обновления
 
-Источник канала: `dorimeryt-alt/CoronerChat`. Стабильный Latest: **2.7.19** (WebView2). Prederelease: **2.7.18**.
-
-Setup **2.7.19** на Latest обновлён тем же номером: VK-вход ловит Bearer с сети WebView2. Если 2.7.19 уже стоит — скачай Setup с Latest ещё раз, in-app апдейт сам не придёт.
+Источник канала: `dorimeryt-alt/CoronerChat`. Стабильный Latest: **2.7.20** (WebView2). Prederelease: **2.7.18**.
 
 1. Настройки → Обновления (или баннер при запуске).
 2. Автопроверка по желанию.
