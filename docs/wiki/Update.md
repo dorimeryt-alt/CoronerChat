@@ -1,6 +1,6 @@
 # Обновления
 
-Источник канала: `dorimeryt-alt/CoronerChat`. Стабильный Latest: **2.7.20** (WebView2). Prederelease: **2.7.18**.
+Источник канала: `dorimeryt-alt/CoronerChat`. Стабильный Latest: **2.7.21** (WebView2). Prederelease: **2.7.18**.
 
 1. Настройки → Обновления (или баннер при запуске).
 2. Автопроверка по желанию.
