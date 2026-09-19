@@ -1,8 +1,8 @@
 # Releases
 
-Стабильный Latest: **2.7.20** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
+Стабильный Latest: **2.7.21** (WebView2). Prederelease: **2.7.18** (WebView2). Electron 2.7.16 остаётся в архиве.
 
-**2.7.20:** Twitch GIF Keyboard в чате; смайлы и значки Twitch снова грузятся, если прокси CDN не ответил.
+**2.7.21:** команды `/*` со своего аккаунта; в чате стримера короткое `admin: …` вместо сырого `/*`; кастомные VIP/саб значки Twitch.
 
 История в GitHub Releases включает:
 

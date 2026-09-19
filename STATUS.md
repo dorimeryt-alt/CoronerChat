@@ -1,6 +1,6 @@
 # Product status
 
-CoronerChat **2.7.20** is a Windows-focused desktop application (WebView2 shell, same Node chat server) with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; light Piper voices ship in the installer; default speak command is `!say` (own commands are voiced; Latin nicks transliterated for Silero/Piper); Twitch/7TV emotes are not read aloud.
+CoronerChat **2.7.21** is a Windows-focused desktop application (WebView2 shell, same Node chat server) with a local web UI and OBS Browser Source endpoints. Chat TTS includes system/cloud/local engines; light Piper voices ship in the installer; default speak command is `!say` (own commands are voiced; Latin nicks transliterated for Silero/Piper); Twitch/7TV emotes are not read aloud.
 
 Public site: https://dorimeryt-alt.github.io/CoronerChat/  
 Latest release: https://github.com/dorimeryt-alt/CoronerChat/releases/latest
