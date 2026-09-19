@@ -1,6 +1,6 @@
 # Автор / Author / Tekijä / Autor
 
-**Евгений (C0R0N3R)** — автор [CoronerChat](https://dorimeryt-alt.github.io/CoronerChat/).
+**C0R0N3R** — автор [CoronerChat](https://dorimeryt-alt.github.io/CoronerChat/).
 
 ## Образование / Education / Koulutus / Educație
 
@@ -49,4 +49,4 @@
 | ОС / OS | Windows 11 Pro 64-bit (build 22631) |
 | Python (TTS) | 3.11.9 |
 
-© 2024–2026 C0R0N3R (Евгений).
+© 2024–2026 C0R0N3R.

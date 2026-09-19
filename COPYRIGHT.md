@@ -1,6 +1,6 @@
 # Copyright
 
-© 2024–2026 **C0R0N3R** (Eugene). All rights reserved.
+© 2024–2026 **C0R0N3R**. All rights reserved.
 
 **CoronerChat** desktop application and this update-feed repository.
 
